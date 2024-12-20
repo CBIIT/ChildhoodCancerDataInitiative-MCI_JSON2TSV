@@ -48,6 +48,15 @@ def refresh_date():
     today = today.strftime("%Y%m%d_%H%M%S")
     return today
 
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ('yes', 'true', 't', 'y', '1'):
+        return True
+    elif v.lower() in ('no', 'false', 'f', 'n', '0'):
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
 
 def read_cog_jsons(dir_path: str):
     """Reads in COG JSON files and return concatenated DataFrame.
@@ -348,9 +357,10 @@ def main():
     optional_arg.add_argument(
         "-f",
         "--form_parsing",
-        type=bool,
+        type=str2bool,
         help="Boolean indicating if parsing out TSVs by form should occur",
-        required=False,
+        nargs='?',
+        const=False,
         default=False,
     )
 

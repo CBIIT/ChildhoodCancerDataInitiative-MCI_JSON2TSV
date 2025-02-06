@@ -58,7 +58,27 @@ def str2bool(v):
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
 
-def read_cog_jsons(dir_path: str):
+def distinguish(dir_path: str):
+    """Function to distinguish between file types (COG JSON, IGM JSON or other)
+
+    Args:
+        dir_path (str): Inout path containing files to convert
+
+    Returns:
+        list: Three lists of file names for files by type (COG JSON, IGM JSON or other file)
+    """
+
+    cog_jsons, igm_jsons, other = [], [], []
+
+    if os.path.exists()
+    
+    # get list of files in directory
+    # filter out those that have suffix json
+    # attempt to read them in and check if they have IGM or COG key identifiers
+    # segregate into 3 lists and return these
+    return cog_jsons, igm_jsons, other 
+
+def read_cog_jsons(dir_path: str, cog_jsons: list):
     """Reads in COG JSON files and return concatenated DataFrame.
 
     Args:
@@ -82,7 +102,7 @@ def read_cog_jsons(dir_path: str):
     success_count = 0  # count of JSON files successfully processed
     error_count = 0  # count of JSON files not processed
 
-    for filename in os.listdir(dir_path):
+    for filename in os.listdir(cog_jsons):
         if filename.endswith(".json"):
             file_path = os.path.join(dir_path, filename)
             try:
@@ -247,12 +267,14 @@ def expand_cog_df(df: pd.DataFrame):
     return df_expanded, df_saslabels
 
 
-def cog_to_tsv(dir_path: str):
+def cog_to_tsv(dir_path: str, cog_jsons: list, cog_op: str):
     """
     Function to call the reading in and transformation of JSON files
 
     Args:
-        dir_path (str): Path to directory containing JSON files
+        dir_path (str): Path to directory containing COG JSON files
+        cog_jsons (list): List of COG JSON filenames located in dir_path
+        cog_op (str): Path to directory to output transformed COG JSON files
 
     Returns:
         pd.DataFrame: dataframe of transformed and aggregated JSON files
@@ -262,28 +284,30 @@ def cog_to_tsv(dir_path: str):
     """
 
     # read in JSONs
-    df_ingest, success_count, error_count = read_cog_jsons(dir_path)
+    df_ingest, success_count, error_count = read_cog_jsons(dir_path, cog_jsons)
 
     # transform JSONs and generate column name reference file
     df_reshape, df_saslabels = expand_cog_df(df_ingest)
 
-    # FIX BACK AFTER TESTING
-    # df_reshape.to_csv(f"JSON_table_conversion_{get_time}.tsv", sep="\t", index=False)
-    # df_saslabels.to_csv(f"saslabels_{get_time}.tsv", sep="\t", index=False)
+    # TODO FIX BACK AFTER TESTING
+    # df_reshape.to_csv(f"{cog_op}/COG_JSON_table_conversion_{get_time}.tsv", sep="\t", index=False)
+    # df_saslabels.to_csv(f"{cog_op}/COG_saslabels_{get_time}.tsv", sep="\t", index=False)
 
-    # REMOVE AFTER TESTING
-    df_reshape.to_csv(f"JSON_table_conversion.tsv", sep="\t", index=False)
-    df_saslabels.to_csv(f"saslabels.tsv", sep="\t", index=False)
+    #TODO REMOVE AFTER TESTING
+    df_reshape.to_csv(f"{cog_op}/JSON_table_conversion.tsv", sep="\t", index=False)
+    df_saslabels.to_csv(f"{cog_op}/saslabels.tsv", sep="\t", index=False)
 
     return df_reshape, df_saslabels, success_count, error_count
 
 
 ##FP
-def form_parser(df: pd.DataFrame, get_time: str) -> pd.DataFrame:
+def form_parser(df: pd.DataFrame, get_time: str, cog_op: str) -> pd.DataFrame:
     """Split transformed JSON data into TSVs for each form type
 
     Args:
         df (pd.DataFrame): transformed form values from JSON to pd.DataFrame with updated field names reflecting the form the field is derived from (e.g. DEMOGRAPHY.DM_BRTHDAT)
+        get_time (str): current time 
+        cog_op (str): Path to output directory for COG files
 
     Returns:
         pd.DataFrame: parsed columns by form type written to separate tsv files
@@ -293,8 +317,10 @@ def form_parser(df: pd.DataFrame, get_time: str) -> pd.DataFrame:
     if type(df) == pd.core.frame.DataFrame:
 
         # make directory to store split TSVs
-        directory_path = "Form_TSVs_" + get_time
-        os.mkdir(directory_path)
+        directory_path = f"{cog_op}/COG_form_level_TSVs/"
+        
+        if not os.path.exists(directory_path):
+            os.mkdir(directory_path)
 
         # grab indexing columns
         index_cols = list(df.columns[:2])
@@ -306,7 +332,7 @@ def form_parser(df: pd.DataFrame, get_time: str) -> pd.DataFrame:
         for form in forms:
             subset = [col for col in df.columns if form in col]
             temp_df = df[index_cols + subset]
-            temp_df.to_csv(directory_path + "/" + form + ".tsv", sep="\t", index=False)
+            temp_df.to_csv(f"{directory_path}/{form}.tsv", sep="\t", index=False)
 
     else:
         logger.error(
@@ -353,6 +379,14 @@ def main():
         required=True,
     )
 
+    required_arg.add_argument(
+        "-o",
+        "--output_path",
+        type=str,
+        help="Path to output directory to direct file outputs.",
+        required=True,
+    )
+
     ##FP
     optional_arg.add_argument(
         "-f",
@@ -368,21 +402,43 @@ def main():
 
     # pull in args as variables
     json_dir_path = args.directory
+    output_path = args.output_path
     form_parse = args.form_parsing  ##FP
 
-    # call cog_to_tsv function to read in and transform JSON files to TSV
-    df_reshape, df_saslabels, success_count, error_count = cog_to_tsv(json_dir_path)
+    ## function called here to distinguish between COG, IGM and non JSON in input path
+    cog_jsons, igm_jsons, non_json = distinguish(json_dir_path)
 
-    ##FP
-    # if option to parse by form, run form_parser
-    if form_parse:
-        form_parser(df_reshape, get_time)
+    ## TODO: if len(cog_jsons) AND len(igm_json) == 0, call error and sysexit
+    ## else: create output dir and continue
+    if len(cog_jsons) == 0 and len(igm_jsons) == 0:
+        sys.exit(f"\n\t>>> No files to covert in input directory {json_dir_path}, check and try again.")
+    else:
+        pass
+    
+    if not os.path.exists(output_path):
+        os.mkdir(output_path)
+
+    # call cog_to_tsv function to read in and transform JSON files to TSV
+    if len(cog_jsons) > 0:
+        # make cog output dir path
+        cog_op = f"{output_path}/COG"
+        os.mkdir(cog_op)
+        df_reshape, cog_success_count, cog_error_count = cog_to_tsv(json_dir_path, cog_jsons, cog_op)
+
+        ##FP
+        # if option to parse by form, run form_parser
+        ## TODO: the below should be specified for COG only
+        if form_parse:
+            form_parser(df_reshape, get_time, cog_op)
+    
+    if len(igm_jsons) > 0:
+        pass
 
     end_time = datetime.now()
     time_diff = end_time - start_time
     print("\n\t>>> Time to Completion: " + str(time_diff))
-    print("\n\t>>> # Files Successfully Transformed: " + str(success_count))
-    print("\n\t>>> # Files NOT Transformed (Errors): " + str(error_count) + "\n")
+    print("\n\t>>> # COG JSON Files Successfully Transformed: " + str(cog_success_count))
+    print("\n\t>>> # COG JSON Files NOT Transformed (Errors): " + str(cog_error_count) + "\n")
 
 
 if __name__ == "__main__":

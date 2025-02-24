@@ -82,7 +82,7 @@ def distinguish(dir_path: str):
         dir_path (str): Inout path containing files to convert
 
     Returns:
-        list: Three lists of file names for files by type (COG JSON, IGM JSON or other file)
+        dict: Sorting of file names for files by type (COG JSON, IGM JSON, other file or error file)
     """
 
     # initialize dict of files by type
@@ -117,7 +117,7 @@ def distinguish(dir_path: str):
         )
 
     # attempt to read them in and check if they have IGM or COG key identifiers
-    # segregate into 3 lists and return these
+    # segregate into dict of lists and return dict
     return sorted_dict
 
 

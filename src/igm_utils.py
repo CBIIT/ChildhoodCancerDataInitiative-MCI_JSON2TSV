@@ -189,18 +189,12 @@ def igm_to_tsv(dir_path: str, igm_jsons: list, assay_type: str, igm_op: str, tim
                     
                     for key in parsed_results.keys():
                         wxs[key].append(parsed_results[key])
-                    """somatic_results.append(parsed_results[0])
-                    germline_results.append(parsed_results[1])
-                    somatic_cnv_results.append(parsed_results[2])"""
 
                 except Exception as e:
                     logger.error(f"Could not parse results sections from file {file_path}, please check and try again: {e}")
             # output 
             for result_type in wxs.keys():
                 pd.concat(wxs[result_type]).to_csv(f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_{result_type}_variant_data_{timestamp}.tsv", sep="\t", index=False)
-            """pd.concat(somatic_results).to_csv(f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_somatic_results_specific_data.tsv", sep="\t", index=False)
-            pd.concat(germline_results).to_csv(f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_germline_results_specific_data.tsv", sep="\t", index=False)
-            pd.concat(somatic_cnv_results).to_csv(f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_somatic_cnv_results_specific_data.tsv", sep="\t", index=False)"""
 
     # concat all processed JSONs together
     if len(df_list) > 0:

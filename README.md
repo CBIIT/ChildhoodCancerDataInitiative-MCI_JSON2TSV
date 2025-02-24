@@ -50,7 +50,7 @@ Required arguments:
 
 `-d/--directory` : Path to directory containing JSON files to aggregate and transform.
 
--o/--output_path` : Path to output directory to direct file outputs.
+`-o/--output_path` : Path to output directory to direct file outputs.
 
 Optional arguments:
 

@@ -177,7 +177,7 @@ def expand_cog_df(df: pd.DataFrame):
 
                             # Collect SASLabel and column_name pair
                             saslabel_data.append(
-                                {"column_name": column_name, "SASLabel": SASLabel}
+                                {"column_name": column_name, "SASLabel": SASLabel.strip()}
                             )
                 form_rows.append(form_row)
 

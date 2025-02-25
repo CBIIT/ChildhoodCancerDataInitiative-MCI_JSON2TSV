@@ -85,7 +85,7 @@ Returns:
 Function to distinguish between file types (COG JSON, IGM JSON or other)
 
 Args:
-- dir_path (str): Inout path containing files to convert
+- dir_path (str): Input path containing files to convert
 
 Returns:
 - list: Three lists of file names for files by type (COG JSON, IGM JSON or other file)

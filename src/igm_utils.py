@@ -273,7 +273,7 @@ def igm_results_variants_parsing(
         ValueError: If assay_type is not acceptable value
 
     Returns:
-        list: list of dataframes of parsed and formatted results section(s)
+        dict: dict of dataframes of parsed and formatted results section(s)
     """
 
     # valid types check

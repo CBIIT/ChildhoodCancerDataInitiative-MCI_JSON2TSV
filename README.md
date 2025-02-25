@@ -210,7 +210,7 @@ Returns:
 - int: The count of JSON files successfully processed
 - int: The count of JSON files unsuccessfully processed
 
-### igm_utils.igm_results_variants_parsing(form: dict, form_name: str, assay_type: str)
+### igm_utils.igm_results_variants_parsing(form: dict, form_name: str, assay_type: str, results_types: list)
 
 Results section specific parsing (long format)
 
@@ -218,12 +218,13 @@ Args:
 - form (dict): JSON form loaded in 
 - form_name (str): File name of form data is sourced from
 - assay_type (str): Molecular assay type of IGM JSONs (i.e. Archer Fusion, WXS or methylation)
+- results_types (list): Potential results sections that may appear in form to parse
 
 Raises:
 - ValueError: If assay_type is not acceptable value
 
 Returns:
-- pd.DataFrame: dataframe of parsed and formatted results section(s)
+- dict: dict of dataframes of parsed and formatted results section(s)
 
 ## Questions or Contributions
 

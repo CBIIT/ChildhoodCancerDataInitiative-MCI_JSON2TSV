@@ -44,7 +44,7 @@ git clone https://github.com/CBIIT/ChildhoodCancerDataInitiative-MCI_JSON2TSV.gi
 
 ## Usage
 
-`python MCI_JSON2TSV.py -d <DIR> (-f <Bool>)`
+`python MCI_JSON2TSV.py -d <input DIR> -o <output DIR> (-f -r)`
 
 Required arguments:
 

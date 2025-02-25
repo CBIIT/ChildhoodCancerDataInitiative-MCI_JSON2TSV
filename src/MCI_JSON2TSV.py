@@ -25,15 +25,6 @@ from igm_utils import igm_to_tsv
 #
 ##############
 
-logger = logging.getLogger("MCI_JSON2TSV")
-logging.basicConfig(
-    filename=f"JSON2TSV.log",
-    encoding="utf-8",
-    filemode="w",
-    level=logging.INFO,
-    format="%(name)s - %(levelname)s - %(message)s",
-)
-
 
 def refresh_date():
     """Gets and returns current date and time"""
@@ -185,6 +176,17 @@ def main():
     form_parse = args.form_parse  ##FP
     results_parse = args.results_variants_section_parse
 
+    # init logging
+    logger = logging.getLogger("MCI_JSON2TSV")
+
+    # logging config
+    logging.basicConfig(
+        filename=f"JSON2TSV.log",
+        encoding="utf-8",
+        filemode="w",
+        level=logging.INFO,
+        format="%(name)s - %(levelname)s - %(message)s",
+)
 
     # make output_dir path if needed
     if not os.path.exists(output_path):
@@ -297,4 +299,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()

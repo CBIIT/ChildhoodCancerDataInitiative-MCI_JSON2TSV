@@ -113,9 +113,7 @@ def flatten_igm(json_obj: dict, parent_key="", flatten_dict=None, parse_type=Non
         else:  # empty list variables
             flatten_dict.update({parent_key: ""})
 
-    else:  # TODO make sure this is correct behavior here
-        # keys.append(parent_key)  # Base case: Add key when it's a leaf node (not dict or list)
-        # print(parent_key, "LEAF NODE")
+    else:
         pass
 
     return flatten_dict
@@ -286,7 +284,7 @@ def igm_results_variants_parsing(
     if not isinstance(form, dict):
         raise ValueError(f"Form is not of type dict.")
 
-    all_output = {}  # init list of dfs of each results section
+    all_output = {}  # init dict of dfs of each results section
     core_header = ["form_name"] + [field for field in CORE_FIELDS]
     core_fields = [form_name] + [form[field] for field in CORE_FIELDS]
     for results_type in results_types:

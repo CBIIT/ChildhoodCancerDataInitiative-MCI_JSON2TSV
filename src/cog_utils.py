@@ -168,6 +168,7 @@ def expand_cog_df(df: pd.DataFrame):
                         form_field_id = field.get("form_field_id")
                         SASLabel = field.get("SASLabel")
                         value = field.get("value")
+                        cde_id = field.get("cde_id")
 
                         # Ensure form_field_id exists
                         if form_field_id:
@@ -175,9 +176,9 @@ def expand_cog_df(df: pd.DataFrame):
                             column_name = f"{form_name}.{form_field_id}"
                             form_row[column_name] = value
 
-                            # Collect SASLabel and column_name pair
+                            # Collect SASLabel, column_name, and cde_id for reference
                             saslabel_data.append(
-                                {"column_name": column_name, "SASLabel": SASLabel.strip()}
+                                {"column_name": column_name, "SASLabel": SASLabel.strip(), "cde_id" : str(cde_id)}
                             )
                 form_rows.append(form_row)
 

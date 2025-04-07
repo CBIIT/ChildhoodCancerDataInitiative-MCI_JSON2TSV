@@ -134,8 +134,7 @@ def main():
         format="%(name)s - %(levelname)s - %(message)s",
 )
 
-    logger.info("Running cog_igm_transformer.py ....")
-
+    logger.info("Running MCI_JSON2TSV.py ....")
     get_time = refresh_date()
 
     parser = argparse.ArgumentParser(

@@ -134,7 +134,7 @@ def main():
         format="%(name)s - %(levelname)s - %(message)s",
 )
 
-    logger.info(">>> Running cog_igm_transformer.py ....")
+    logger.info("Running cog_igm_transformer.py ....")
 
     get_time = refresh_date()
 
@@ -195,6 +195,15 @@ def main():
     # make output_dir path if needed
     if not os.path.exists(output_path):
         os.mkdir(output_path)
+    elif os.path.exists(output_path):
+        # check if output path is empty
+        if len(os.listdir(output_path)) > 0:
+            logger.error(
+                f"Output path {output_path} is not empty, please provide a new output path."
+            )
+            sys.exit(
+                f"Process exited: Output path {output_path} is not empty, please provide a new output path."
+            )
 
     ## function called here to distinguish between COG, IGM and non JSON in input path
     json_sorted = distinguish(json_dir_path, logger)
@@ -279,7 +288,7 @@ def main():
     end_time = datetime.now()
     time_diff = end_time - start_time
     print(f"\n\t>>> Time to Completion: {time_diff}")
-    logger.info(f">>> Time to Completion: {time_diff}")
+    logger.info(f"Time to Completion: {time_diff}")
     print(f"\t>>> # COG JSON Files Successfully Transformed: {cog_success_count}")
     if cog_error_count > 0:
         print(

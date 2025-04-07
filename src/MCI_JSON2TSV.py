@@ -14,6 +14,7 @@ import os
 import argparse
 import logging
 from datetime import datetime
+import shutil
 
 # utils
 from cog_utils import cog_to_tsv, form_parser
@@ -34,7 +35,7 @@ def refresh_date():
     return today
 
 
-def distinguisher(f_path: str):
+def distinguisher(f_path: str, logger):
     """Attempt to load json and determine type
 
     Args:
@@ -66,7 +67,7 @@ def distinguisher(f_path: str):
         return "error"
 
 
-def distinguish(dir_path: str):
+def distinguish(dir_path: str, logger):
     """Function to distinguish between file types (COG JSON, IGM JSON or other)
 
     Args:
@@ -100,7 +101,7 @@ def distinguish(dir_path: str):
             )
         else:
             for f in json_files:
-                sorted_dict[distinguisher(f"{dir_path}/{f}")].append(f)
+                sorted_dict[distinguisher(f"{dir_path}/{f}", logger)].append(f)
     else:
         logger.error(f"Input path {dir_path} does not exist.")
         sys.exit(
@@ -120,6 +121,20 @@ def main():
 
     print("\n\t>>> Running MCI_JSON2TSV.py ....")
 
+    # init logging
+    logger = logging.getLogger("MCI_JSON2TSV")
+    
+
+    # logging config
+    logging.basicConfig(
+        filename=f"JSON2TSV.log",
+        encoding="utf-8",
+        filemode="w",
+        level=logging.INFO,
+        format="%(name)s - %(levelname)s - %(message)s",
+)
+
+    logger.info("Running MCI_JSON2TSV.py ....")
     get_time = refresh_date()
 
     parser = argparse.ArgumentParser(
@@ -176,24 +191,21 @@ def main():
     form_parse = args.form_parse  ##FP
     results_parse = args.results_variants_section_parse
 
-    # init logging
-    logger = logging.getLogger("MCI_JSON2TSV")
-
-    # logging config
-    logging.basicConfig(
-        filename=f"JSON2TSV.log",
-        encoding="utf-8",
-        filemode="w",
-        level=logging.INFO,
-        format="%(name)s - %(levelname)s - %(message)s",
-)
-
     # make output_dir path if needed
     if not os.path.exists(output_path):
         os.mkdir(output_path)
+    elif os.path.exists(output_path):
+        # check if output path is empty
+        if len(os.listdir(output_path)) > 0:
+            logger.error(
+                f"Output path {output_path} is not empty, please provide a new output path."
+            )
+            sys.exit(
+                f"Process exited: Output path {output_path} is not empty, please provide a new output path."
+            )
 
     ## function called here to distinguish between COG, IGM and non JSON in input path
-    json_sorted = distinguish(json_dir_path)
+    json_sorted = distinguish(json_dir_path, logger)
 
     ## if len(cog_jsons) AND len(igm_json) == 0, call error and sysexit
     #if len(json_sorted["cog"]) == 0 and len(json_sorted["igm"]) == 0:
@@ -275,6 +287,7 @@ def main():
     end_time = datetime.now()
     time_diff = end_time - start_time
     print(f"\n\t>>> Time to Completion: {time_diff}")
+    logger.info(f"Time to Completion: {time_diff}")
     print(f"\t>>> # COG JSON Files Successfully Transformed: {cog_success_count}")
     if cog_error_count > 0:
         print(
@@ -290,12 +303,13 @@ def main():
     else:
         print(f"\t>>> # IGM JSON Files NOT Transformed (Errors): {igm_error_count}")
     print(
-        f"\t>>> Check log file {output_path}/JSON2TSV_{get_time}.log for additional information\n"
+        f"\t>>> Check log file JSON2TSV_{get_time}.log for additional information\n"
     )
 
     # move log file to output dir and shutdown logging
-    os.rename("JSON2TSV.log", f"{output_path}/JSON2TSV_{get_time}.log")
     logging.shutdown()
+    shutil.move("JSON2TSV.log", f"{output_path}/JSON2TSV_{get_time}.log")
+
 
 
 if __name__ == "__main__":

@@ -114,9 +114,7 @@ def distinguish(dir_path: str, logger):
 
 
 # main function
-
-
-def main():
+def json2tsv(json_dir_path, output_path):
     start_time = datetime.now()
 
     print("\n\t>>> Running MCI_JSON2TSV.py ....")
@@ -136,60 +134,6 @@ def main():
 
     logger.info("Running MCI_JSON2TSV.py ....")
     get_time = refresh_date()
-
-    parser = argparse.ArgumentParser(
-        prog="MCI_JSON2TSV.py",
-        description="This script will take a folder of JSON files, \
-        both COG and IGM, for the MCI project and return a TSV data file \
-        and data dictionary. JSON files MUST have suffix .json to be included in conversion.",
-    )
-
-    # remove built in argument group
-    parser._action_groups.pop()
-
-    # create a required arguments group
-    required_arg = parser.add_argument_group("required arguments")
-    optional_arg = parser.add_argument_group("optional arguments")  ##FP
-
-    required_arg.add_argument(
-        "-d",
-        "--directory",
-        type=str,
-        help="A directory of MCI JSON files, COG and/or IGM.",
-        required=True,
-    )
-
-    required_arg.add_argument(
-        "-o",
-        "--output_path",
-        type=str,
-        help="Path to output directory to direct file outputs.",
-        required=True,
-    )
-
-    optional_arg.add_argument(
-        "-f",
-        "--form_parse",
-        help="Flag to indicate if parsing out COG TSVs by form should occur.",
-        default=False,
-        action="store_true",
-    )
-
-    optional_arg.add_argument(
-        "-r",
-        "--results_variants_section_parse",
-        help="Flag to indicate if parsing out IGM variant results sections should occur.",
-        default=False,
-        action="store_true",
-    )
-
-    args = parser.parse_args()
-
-    # pull in args as variables
-    json_dir_path = args.directory
-    output_path = args.output_path
-    form_parse = args.form_parse  ##FP
-    results_parse = args.results_variants_section_parse
 
     # make output_dir path if needed
     if not os.path.exists(output_path):
@@ -226,14 +170,13 @@ def main():
             json_dir_path, json_sorted["cog"], cog_op, get_time
         )
 
-        # if -f option to parse by form, run form_parser
-        if form_parse:
-            if len(df_reshape) > 0:
-                form_parser(df_reshape, get_time, cog_op)
-            else:
-                logger.error(
-                    "Cannot perform COG form-level parsing, no valid COG JSONs read in."
-                )
+        # perform form-level parsing for COG JSONs
+        if len(df_reshape) > 0:
+            form_parser(df_reshape, get_time, cog_op)
+        else:
+            logger.error(
+                "Cannot perform COG form-level parsing, no valid COG JSONs read in."
+            )
     else:
         cog_success_count = 0
         cog_error_count = 0
@@ -259,7 +202,7 @@ def main():
         for assay_type in ["igm.tumor_normal", "igm.archer_fusion", "igm.methylation"]:
             if len(json_sorted[assay_type]) > 0:
                 df_reshape, temp_success_count, temp_error_count = igm_to_tsv(
-                    json_dir_path, json_sorted[assay_type], assay_type, igm_op, get_time, results_parse
+                    json_dir_path, json_sorted[assay_type], assay_type, igm_op, get_time
                 )
 
                 igm_success_count += temp_success_count
@@ -313,5 +256,40 @@ def main():
 
 
 if __name__ == "__main__":
+    
+    parser = argparse.ArgumentParser(
+        prog="MCI_JSON2TSV.py",
+        description="This script will take a folder of JSON files, \
+        both COG and IGM, for the MCI project and return a TSV data file \
+        and data dictionary. JSON files MUST have suffix .json to be included in conversion.",
+    )
 
-    main()
+    # remove built in argument group
+    parser._action_groups.pop()
+
+    # create a required arguments group
+    required_arg = parser.add_argument_group("required arguments")
+
+    required_arg.add_argument(
+        "-d",
+        "--directory",
+        type=str,
+        help="A directory of MCI JSON files, COG and/or IGM.",
+        required=True,
+    )
+
+    required_arg.add_argument(
+        "-o",
+        "--output_path",
+        type=str,
+        help="Path to output directory to direct file outputs.",
+        required=True,
+    )
+
+    args = parser.parse_args()
+
+    # pull in args as variables
+    json_dir_path = args.directory
+    output_path = args.output_path
+
+    json2tsv(json_dir_path, output_path)

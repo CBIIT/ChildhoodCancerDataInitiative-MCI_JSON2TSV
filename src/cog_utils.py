@@ -97,6 +97,57 @@ def custom_json_parser(pairs: dict):
 
     return result
 
+def pv_checks_convert(df: pd.DataFrame, sas_labels: pd.DataFrame):
+    """Function to convert checked/unchecked groups of fields into one field that is ; delimited set of checked values
+
+    Args:
+        df (pd.DataFrame): DataFrame containing the fields to check
+        sas_labels (pd.DataFrame): DataFrame containing the SAS labels for the fields
+
+    Returns:
+        pd.DataFrame: Updated dataframe with converted checked values
+    """
+    
+    # find all columns in df that have checked or unchecked values in rows
+    checked_cols = df.columns[df.isin(["checked", "unchecked"]).any()]
+
+    # find all rows in sas_labels that are in checked_cols 
+    matching_rows = sas_labels[sas_labels["column_name"].isin(checked_cols)]
+
+    # convert cols column_name and SASLabel to dict
+    col_sas_dict = dict(zip(matching_rows["column_name"], matching_rows["SASLabel"]))
+
+    # Create a copy of the original DataFrame to avoid modifying it directly
+    df_checked = df.copy()
+
+    # Iterate through each column in the DataFrame
+    for col in df.columns:
+        if col in col_sas_dict:
+            # For values in column that are equal to checked,
+            # replace checked with corresponding value in col_sas_dict
+            df_checked[col] = df_checked[col].replace("checked", col_sas_dict[col])
+            # else if value is unchecked, replace with empty string
+            df_checked[col] = df_checked[col].replace("unchecked", "")
+
+    # create new col in matching_rows where the last "_" delimited substring/part is removed
+    matching_rows["group_column_name"] = matching_rows["column_name"].apply(lambda x: "_".join(x.split("_")[:-1]) if "_" in x else x)
+
+    # create new dict to map group_column_name to original column names
+    group_col_dict = matching_rows.groupby("group_column_name")["column_name"].apply(list).to_dict()
+
+    # for each key in group_col_dict, create a new column in df_checked
+    # and the values for new column are ';' delimited concats of the original columns
+    for group_name, col_names in group_col_dict.items():
+        df_checked[group_name] = df_checked[col_names].apply(lambda x: ';'.join(x.dropna().astype(str)), axis=1)
+
+        # strip leading and trailing ';' as well as replace any consecutive ';' instances with ''
+        df_checked[group_name] = df_checked[group_name].str.strip(';').str.replace(';;+', ';', regex=True)
+
+        # then drop original columns from matching_rows column_name column
+        df_checked = df_checked.drop(columns=col_names, errors='ignore')
+    
+
+    return df_checked
 
 def expand_cog_df(df: pd.DataFrame):
     """Function to parse participant JSON and output TSV of values and column header reference
@@ -228,14 +279,40 @@ def cog_to_tsv(dir_path: str, cog_jsons: list, cog_op: str, timestamp: str):
         df_reshape, df_saslabels = expand_cog_df(df_ingest)
 
         # save data files to output COG directory
-        df_reshape.to_csv(
-            f"{cog_op}/COG_JSON_table_conversion_{timestamp}.tsv", sep="\t", index=False
-        )
+        
         df_saslabels.to_csv(
             f"{cog_op}/COG_saslabels_{timestamp}.tsv", sep="\t", index=False
         )
+        
+        # transpose df_saslabels and then concat to annotated 
+        
+        df_saslabels_T = df_saslabels.T.reset_index().drop('index', axis=1)
+        # header is first row
+        df_saslabels_T.columns = df_saslabels_T.iloc[0]
+        df_saslabels_T = df_saslabels_T[1:].reset_index(drop=True)
+        
+        # concat and keep all cols unique to dataframes
+        df_reshape_A = pd.concat([df_saslabels_T, df_reshape.reset_index()])
+        
+        # drop index col and put upi and index_date_type at the front
+        df_reshape_A = df_reshape_A[['upi', 'index_date_type'] + df_reshape_A.columns.tolist()[:-3]]
 
-        return df_reshape, success_count, error_count
+        df_reshape_A.to_csv(
+            f"{cog_op}/COG_JSON_table_conversion_raw_{timestamp}.tsv", sep="\t", index=False
+        )
+
+        cleaned_df = pv_checks_convert(df_reshape_A, df_saslabels).reset_index(drop=True)
+        
+        # add cadsr and saslabel
+        cleaned_df.loc[0,'index_date_type'] = 'SAS Label Description'
+        cleaned_df.loc[1,'index_date_type'] = 'caDSR Code'
+        
+
+        cleaned_df.to_csv(
+            f"{cog_op}/COG_JSON_table_conversion_cleaned_{timestamp}.tsv", sep="\t", index=False
+        )
+
+        return cleaned_df, success_count, error_count
     
     else:
         # return empty dataframe since no files to process

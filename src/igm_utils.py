@@ -142,7 +142,6 @@ def igm_to_tsv(
     assay_type: str,
     igm_op: str,
     timestamp: str,
-    results_parse: bool,
 ):
     """Function to call the reading in and transformation of IGM JSON files
 
@@ -152,7 +151,6 @@ def igm_to_tsv(
         assay_type (str): Molecular assay type of IGM JSONs (i.e. Archer Fusion, WXS or methylation)
         igm_op (str): Path to directory to output transformed IGM TSV files
         timestamp (str): Date-time of when script run
-        results_parse (bool): If True, parse out results specific sections to separate form in long format TSV
 
     Returns:
         pd.DataFrame: pandas DataFrame of converted JSON data
@@ -187,56 +185,56 @@ def igm_to_tsv(
             error_count += 1
             logger.error(f" Error converting IGM JSON to TSV for file {file_path}: {e}")
 
-    if results_parse:
-        # make output dir
-        directory_path = f"{igm_op}/IGM_results_level_TSVs_{timestamp}"
+    # variant results section parse
+    # make output dir
+    directory_path = f"{igm_op}/IGM_results_level_TSVs_{timestamp}"
 
-        if not os.path.exists(directory_path):
-            os.mkdir(directory_path)
+    if not os.path.exists(directory_path):
+        os.mkdir(directory_path)
 
-        if assay_type == "igm.methylation":
-            results_types = ["predicted_classification_classifier_scores", "results"]
-        elif assay_type == "igm.archer_fusion":
-            results_types = [
-                "fusion_tier_one_or_two_result",
-                "fusion_tier_three_result",
-                "single_tier_one_or_two_result",
-                "single_tier_three_result",
-            ]
-        elif assay_type == "igm.tumor_normal":
-            results_types = [
-                "amended_germline_results",
-                "amended_somatic_cnv_results",
-                "amended_somatic_results",
-                "germline_cnv_results",
-                "germline_results",
-                "pertinent_negatives_results",
-                "somatic_cnv_results",
-                "somatic_results",
-            ]
+    if assay_type == "igm.methylation":
+        results_types = ["predicted_classification_classifier_scores", "results"]
+    elif assay_type == "igm.archer_fusion":
+        results_types = [
+            "fusion_tier_one_or_two_result",
+            "fusion_tier_three_result",
+            "single_tier_one_or_two_result",
+            "single_tier_three_result",
+        ]
+    elif assay_type == "igm.tumor_normal":
+        results_types = [
+            "amended_germline_results",
+            "amended_somatic_cnv_results",
+            "amended_somatic_results",
+            "germline_cnv_results",
+            "germline_results",
+            "pertinent_negatives_results",
+            "somatic_cnv_results",
+            "somatic_results",
+        ]
 
-        op_dict = defaultdict(list)
+    op_dict = defaultdict(list)
 
-        for filename in igm_jsons:
-            file_path = os.path.join(dir_path, filename)
-            try:
-                parsed_results = igm_results_variants_parsing(
-                    json.load(open(file_path)), filename, assay_type, results_types
-                )
-
-                for key in parsed_results.keys():
-                    op_dict[key].append(parsed_results[key])
-
-            except Exception as e:
-                logger.error(
-                    f"Could not parse results section from file {file_path}, please check and try again: {e}"
-                )
-        for result_type in op_dict.keys():
-            pd.concat(op_dict[result_type]).to_csv(
-                f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_{result_type}_variant_data_{timestamp}.tsv",
-                sep="\t",
-                index=False,
+    for filename in igm_jsons:
+        file_path = os.path.join(dir_path, filename)
+        try:
+            parsed_results = igm_results_variants_parsing(
+                json.load(open(file_path)), filename, assay_type, results_types
             )
+
+            for key in parsed_results.keys():
+                op_dict[key].append(parsed_results[key])
+
+        except Exception as e:
+            logger.error(
+                f"Could not parse results section from file {file_path}, please check and try again: {e}"
+            )
+    for result_type in op_dict.keys():
+        pd.concat(op_dict[result_type]).to_csv(
+            f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_{result_type}_variant_data_{timestamp}.tsv",
+            sep="\t",
+            index=False,
+        )
 
     # concat all processed JSONs together
     if len(df_list) > 0:

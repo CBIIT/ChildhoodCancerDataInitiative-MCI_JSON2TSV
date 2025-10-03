@@ -1,10 +1,12 @@
-"""Utility functions for transforming and parsin IGM JSON files"""
+"""Utility functions for transforming and parsing IGM JSON files"""
 
 import os
+import re
 import json
 import pandas as pd
 import logging
 from collections import defaultdict
+from cog_utils import fix_encoding_issues
 
 logger = logging.getLogger("igm_utils")
 
@@ -21,7 +23,6 @@ CORE_FIELDS = [
     "indication_for_study",
     "amendments",
 ]
-
 
 def null_n_strip(value):
     """Format strings in IGM JSONs
@@ -192,9 +193,7 @@ def igm_to_tsv(
     if not os.path.exists(directory_path):
         os.mkdir(directory_path)
 
-    if assay_type == "igm.methylation":
-        results_types = ["predicted_classification_classifier_scores", "results"]
-    elif assay_type == "igm.archer_fusion":
+    if assay_type == "igm.archer_fusion":
         results_types = [
             "fusion_tier_one_or_two_result",
             "fusion_tier_three_result",
@@ -212,6 +211,8 @@ def igm_to_tsv(
             "somatic_cnv_results",
             "somatic_results",
         ]
+    elif assay_type == "igm.methylation":
+        results_types = ['final_diagnosis']
 
     op_dict = defaultdict(list)
 
@@ -230,7 +231,9 @@ def igm_to_tsv(
                 f"Could not parse results section from file {file_path}, please check and try again: {e}"
             )
     for result_type in op_dict.keys():
-        pd.concat(op_dict[result_type]).to_csv(
+        concat_variant_result_df = pd.concat(op_dict[result_type])
+        concat_variant_result_df = concat_variant_result_df.map(fix_encoding_issues)
+        concat_variant_result_df.to_csv(
             f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_{result_type}_variant_data_{timestamp}.tsv",
             sep="\t",
             index=False,
@@ -239,6 +242,8 @@ def igm_to_tsv(
     # concat all processed JSONs together
     if len(df_list) > 0:
         concatenated_df = pd.concat(df_list, ignore_index=True)
+
+        concatenated_df = concatenated_df.map(fix_encoding_issues)
 
         concatenated_df.to_csv(
             f"{igm_op}/IGM_{assay_type.replace('igm.', '')}_JSON_table_conversion_{timestamp}.tsv",
@@ -292,16 +297,15 @@ def igm_results_variants_parsing(
             if assay_type == "igm.methylation":
                 if len(form[results_type]) > 0:
                     found = True
-                    for result in form[results_type]:
-                        temp_header = list(result.keys())
-                        temp_fields = [null_n_strip(i) for i in result.values()]
-                        output.append(
-                            dict(
-                                zip(
-                                    core_header + temp_header, core_fields + temp_fields
-                                )
+                    temp_header = list(form[results_type].keys())
+                    temp_fields = [null_n_strip(i) for i in form[results_type].values()]
+                    output.append(
+                        dict(
+                            zip(
+                                core_header + temp_header, core_fields + temp_fields
                             )
                         )
+                    )
 
             else:  # archer fusion and wxs
                 if (

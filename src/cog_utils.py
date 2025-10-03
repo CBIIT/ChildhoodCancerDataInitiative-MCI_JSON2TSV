@@ -1,6 +1,7 @@
 """Utility functions for transforming and parsin COG JSON files"""
 
 import os
+import re
 import sys
 import json
 import pandas as pd
@@ -97,6 +98,83 @@ def custom_json_parser(pairs: dict):
 
     return result
 
+def fix_encoding_issues(text):
+    """
+    Fix common encoding issues in text, particularly UTF-8 mangled characters.
+    
+    Args:
+        text (str): Text that may contain encoding issues
+        
+    Returns:
+        str: Text with encoding issues corrected
+    """
+    if not isinstance(text, str):
+        return text
+
+    # replace non-ascii or unicode characters with nothing
+    text = "".join([i if ord(i) < 128 else '' for i in text])
+
+    
+    # Apply all encoding fixes
+    encoding_fixes = {
+        'â€™': "'",  # right single quote
+        'â€œ': '"',  # left double quote
+        'â€': '"',  # right double quote
+        'â€“': '-',  # en dash
+        'â€”': '-',  # em dash
+        'â€˜': "'",  # left single quote
+        'â€¢': '-',  # bullet
+        'â€¦': '...',  # ellipsis
+        '‚Äú': '"',  # left double quote (alternative)
+        '‚Äù': '"',  # right double quote (alternative)
+        '‚Äô': "'",  # right single quote (alternative)
+        '”': '"',  # right double quote (unicode)
+        '“': '"',  # left double quote (unicode)
+        '‘': "'",  # left single quote (unicode)
+        '’': "'",  # right single quote (unicode)
+        '–': '-',  # en dash (unicode)
+        '—': '-',  # em dash (unicode)
+        '•': '-',  # bullet (unicode),
+        '\u201c': '"',  # left double quote
+        '\u201d': '"',  # right double quote
+        '\u2018': "'",  # left single quote
+        '\u2019': "'",  # right single quote
+        '\u2013': '-',  # en dash
+        '\u2014': '-',  # em dash
+        '\u2026': '...',  # ellipsis
+        '“': '"',  # left double quote (alternative)
+        '”': '"',  # right double quote (alternative)
+    }
+    
+    for mangled, correct in encoding_fixes.items():
+        text = text.replace(mangled, correct)
+
+    # also replace all html entities, i.e. <p>, </p>, <strong>, <em>, etc
+    html_entities = {
+        '<p>': '', '</p>': '', '<strong>': '', '</strong>': '', 
+        '<em>': '', '</em>': ''
+    }
+
+    for entity, replacement in html_entities.items():
+        text = text.replace(entity, replacement)
+
+    #### whitespace fixes ####
+
+    # remove carriage returns
+    text = text.replace('\r\n', ';')
+    text = text.replace('\r', ' ')
+    # replace tabs with space
+    text = text.replace('\t+', ' ')
+    
+    # replace multiple spaces with single space
+    text = re.sub(r' +', ' ', text)
+    
+    # remove any consecutive instances of newline chars with ;
+    text = re.sub(r'\n+', '; ', text)
+
+    return text
+
+
 def pv_checks_convert(df: pd.DataFrame, sas_labels: pd.DataFrame):
     """Function to convert checked/unchecked groups of fields into one field that is ; delimited set of checked values
 
@@ -112,7 +190,7 @@ def pv_checks_convert(df: pd.DataFrame, sas_labels: pd.DataFrame):
     checked_cols = df.columns[df.isin(["checked", "unchecked"]).any()]
 
     # find all rows in sas_labels that are in checked_cols 
-    matching_rows = sas_labels[sas_labels["column_name"].isin(checked_cols)]
+    matching_rows = sas_labels[sas_labels["column_name"].isin(checked_cols)].copy()
 
     # convert cols column_name and SASLabel to dict
     col_sas_dict = dict(zip(matching_rows["column_name"], matching_rows["SASLabel"]))
@@ -296,6 +374,10 @@ def cog_to_tsv(dir_path: str, cog_jsons: list, cog_op: str, timestamp: str):
         
         # drop index col and put upi and index_date_type at the front
         df_reshape_A = df_reshape_A[['upi', 'index_date_type'] + df_reshape_A.columns.tolist()[:-3]]
+        
+        # fix encoding issues in all string columns
+        for col in df_reshape_A.select_dtypes(include=['object']).columns:
+            df_reshape_A[col] = df_reshape_A[col].apply(fix_encoding_issues)
 
         df_reshape_A.to_csv(
             f"{cog_op}/COG_JSON_table_conversion_raw_{timestamp}.tsv", sep="\t", index=False
@@ -350,7 +432,7 @@ def form_parser(df: pd.DataFrame, timestamp: str, cog_op: str) -> pd.DataFrame:
         # split columns by form and write to file
         for form in forms:
             subset = [col for col in df.columns if form in col]
-            temp_df = df[index_cols + subset]
+            temp_df = df[index_cols + subset].drop_duplicates()
             temp_df.to_csv(f"{directory_path}/{form}.tsv", sep="\t", index=False)
 
     else:

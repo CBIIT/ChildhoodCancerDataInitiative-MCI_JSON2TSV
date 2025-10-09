@@ -154,8 +154,7 @@ def igm_to_tsv(
         timestamp (str): Date-time of when script run
 
     Returns:
-        pd.DataFrame: pandas DataFrame of converted JSON data
-        pd.DataFrame: pandas DataFrame of converted JSON data from results sections to long format TSV(s)
+        dict: dict of results-level parsing types and file path
         int: The count of JSON files successfully processed
         int: The count of JSON files unsuccessfully processed
     """
@@ -166,6 +165,8 @@ def igm_to_tsv(
         raise ValueError(f"assay_type {assay_type} is not one of {valid}.")
 
     df_list = []  # List to hold individual JSON DataFrames
+    
+    parsed_results = [] # List to hold result files and their types for COG IGM integration
 
     success_count = 0  # count of JSON files successfully processed
     error_count = 0  # count of JSON files not processed
@@ -207,7 +208,6 @@ def igm_to_tsv(
             "amended_somatic_results",
             "germline_cnv_results",
             "germline_results",
-            "pertinent_negatives_results",
             "somatic_cnv_results",
             "somatic_results",
         ]
@@ -233,13 +233,15 @@ def igm_to_tsv(
     for result_type in op_dict.keys():
         concat_variant_result_df = pd.concat(op_dict[result_type])
         concat_variant_result_df = concat_variant_result_df.map(fix_encoding_issues)
+        concat_variant_result_df_file_name = f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_{result_type}_variant_data_{timestamp}.tsv"
         concat_variant_result_df.to_csv(
-            f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_{result_type}_variant_data_{timestamp}.tsv",
+            concat_variant_result_df_file_name,
             sep="\t",
             index=False,
         )
-
-    # concat all processed JSONs together
+        parsed_results[result_type] = concat_variant_result_df_file_name
+    
+    # concat all raw, flattened processed JSONs together
     if len(df_list) > 0:
         concatenated_df = pd.concat(df_list, ignore_index=True)
 
@@ -250,13 +252,13 @@ def igm_to_tsv(
             sep="\t",
             index=False,
         )
-        return concatenated_df, success_count, error_count
+        return parsed_results, success_count, error_count
     else:
         logger.error(
             f" No valid IGM JSON files found and/or failed to open for assay_type {assay_type}."
         )
         # sys.exit("\n\t>>> Process Exited: No valid JSON files found.")
-        return pd.DataFrame, success_count, error_count
+        return "", success_count, error_count
 
 
 def igm_results_variants_parsing(

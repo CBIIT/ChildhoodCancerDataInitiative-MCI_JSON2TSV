@@ -344,6 +344,7 @@ def cog_to_tsv(dir_path: str, cog_jsons: list, cog_op: str, timestamp: str):
 
     Returns:
         pd.DataFrame: dataframe of transformed and aggregated JSON files
+        str: Name of the flattenend and aggreated COG forms file
         int: The count of JSON files successfully processed
         int: The count of JSON files unsuccessfully processed
     """
@@ -379,8 +380,10 @@ def cog_to_tsv(dir_path: str, cog_jsons: list, cog_op: str, timestamp: str):
         for col in df_reshape_A.select_dtypes(include=['object']).columns:
             df_reshape_A[col] = df_reshape_A[col].apply(fix_encoding_issues)
 
+        cog_flattened_file_name = f"{cog_op}/COG_JSON_table_conversion_raw_{timestamp}.tsv"
+        
         df_reshape_A.to_csv(
-            f"{cog_op}/COG_JSON_table_conversion_raw_{timestamp}.tsv", sep="\t", index=False
+            cog_flattened_file_name, sep="\t", index=False
         )
 
         cleaned_df = pv_checks_convert(df_reshape_A, df_saslabels).reset_index(drop=True)
@@ -394,11 +397,11 @@ def cog_to_tsv(dir_path: str, cog_jsons: list, cog_op: str, timestamp: str):
             f"{cog_op}/COG_JSON_table_conversion_cleaned_{timestamp}.tsv", sep="\t", index=False
         )
 
-        return cleaned_df, success_count, error_count
+        return cleaned_df, cog_flattened_file_name, success_count, error_count
     
     else:
         # return empty dataframe since no files to process
-        return pd.DataFrame(), success_count, error_count
+        return pd.DataFrame(), "", success_count, error_count
 
 
 ##FP

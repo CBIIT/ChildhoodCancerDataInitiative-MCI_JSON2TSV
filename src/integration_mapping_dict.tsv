@@ -5,101 +5,103 @@ COG	COG	DEMOGRAPHY.DM_ETHNIC	Ethnicity		3
 COG	COG	DEMOGRAPHY.DM_SEX	Sex		4
 COG	COG	DEMOGRAPHY.SC_SCORRES_CNTRYRES	Country of Residence		5
 COG	COG	DEMOGRAPHY.DM_CRACE	Race		6
-COG	COG	COG_UPR_DX.TOPO_TEXT	Primary site (TOPOGRAPHY) ICD-O TERM		7
+COG	COG	COG_UPR_DX.MORPHO_ICDO	Initial Diagnosis (MORPHOLOGY) ICD-O CODE		7
 COG	COG	COG_UPR_DX.MORPHO_TEXT	Initial Diagnosis (MORPHOLOGY) ICD-O TERM		8
-COG	COG	NCI_MCI_FUP.MCRPTRCVD	Were Molecular Characterization Reports received?		9
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHCAT_CNSDXCAT	CNS diagnosis category		10
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHCAT_CNSDXCAT	CNS diagnosis category		10
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_HGG	CNS integrated Diagnosis		11
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_LGG	CNS integrated Diagnosis		11
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_EPDMM	CNS integrated Diagnosis		11
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_MEDUBL	CNS integrated Diagnosis		11
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_ATRT	CNS integrated Diagnosis		11
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_EBYONO	CNS integrated Diagnosis		11
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_GCT	CNS integrated Diagnosis		11
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_GLNRN	CNS integrated Diagnosis		11
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CRNPRG	CNS integrated Diagnosis		11
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CPT	CNS integrated Diagnosis		11
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_SARC	CNS integrated Diagnosis		11
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CNSOTH	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_HGG	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_LGG	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_EPDMM	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_MEDUBL	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_ATRT	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_EBYONO	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_GCT	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_GLNRN	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CRNPRG	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CPT	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_SARC	CNS integrated Diagnosis		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CNSOTH	CNS integrated Diagnosis		11
+COG	COG	COG_UPR_DX.TOPO_ICDO	Primary site (TOPOGRAPHY) ICD-O CODE		9
+COG	COG	COG_UPR_DX.TOPO_TEXT	Primary site (TOPOGRAPHY) ICD-O TERM		10
+COG	COG	NCI_MCI_FUP.MCRPTRCVD	Were Molecular Characterization Reports received?		11
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHCAT_CNSDXCAT	CNS diagnosis category		12
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHCAT_CNSDXCAT	CNS diagnosis category		12
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_HGG	CNS integrated Diagnosis		13
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_LGG	CNS integrated Diagnosis		13
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_EPDMM	CNS integrated Diagnosis		13
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_MEDUBL	CNS integrated Diagnosis		13
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_ATRT	CNS integrated Diagnosis		13
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_EBYONO	CNS integrated Diagnosis		13
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_GCT	CNS integrated Diagnosis		13
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_GLNRN	CNS integrated Diagnosis		13
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CRNPRG	CNS integrated Diagnosis		13
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CPT	CNS integrated Diagnosis		13
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_SARC	CNS integrated Diagnosis		13
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CNSOTH	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_HGG	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_LGG	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_EPDMM	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_MEDUBL	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_ATRT	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_EBYONO	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_GCT	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_GLNRN	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CRNPRG	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CPT	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_SARC	CNS integrated Diagnosis		13
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CNSOTH	CNS integrated Diagnosis		13
 igm.methylation	final_diagnosis	subject_id	Subject ID		1
-igm.methylation	final_diagnosis	percent_tumor	Methylation Report Percent Tumor		18
-igm.methylation	final_diagnosis	percent_necrosis	Methylation Report Percent Necrosis		19
-igm.methylation	final_diagnosis	indication_for_study	Methylation Indication for Study Diagnosis		15
-igm.methylation	final_diagnosis	report_version	CNS Methylation Classifier		12
-igm.methylation	final_diagnosis	methylation_class	CNS Methylation Predicted Classification		13
-igm.methylation	final_diagnosis	mgmt_status	CNS MGMT Promoter Methylation Status		14
+igm.methylation	final_diagnosis	percent_tumor	Methylation Report Percent Tumor		20
+igm.methylation	final_diagnosis	percent_necrosis	Methylation Report Percent Necrosis		21
+igm.methylation	final_diagnosis	indication_for_study	Methylation Indication for Study Diagnosis		17
+igm.methylation	final_diagnosis	report_version	CNS Methylation Classifier		14
+igm.methylation	final_diagnosis	methylation_class	CNS Methylation Predicted Classification		15
+igm.methylation	final_diagnosis	mgmt_status	CNS MGMT Promoter Methylation Status		16
 igm.tumor_normal	somatic_cnv_results	subject_id	Subject ID		1
-igm.tumor_normal	somatic_cnv_results	percent_tumor	WXS Report Percent Tumor		20
-igm.tumor_normal	somatic_cnv_results	percent_necrosis	WXS Report Percent Necrosis		21
-igm.tumor_normal	somatic_cnv_results	indication_for_study	WXS Indication for Study Diagnosis		16
-igm.tumor_normal	somatic_cnv_results	interpretation.guideline	Somatic CNV Interpretation Guideline	transpose	33
-igm.tumor_normal	somatic_cnv_results	interpretation.value	Somatic CNV Interpretation Value	transpose	32
-igm.tumor_normal	somatic_cnv_results	copy_number_type	Somatic CNV Copy Number Type	transpose	31
-igm.tumor_normal	somatic_cnv_results	gene	Somatic CNV Gene	transpose	30
+igm.tumor_normal	somatic_cnv_results	percent_tumor	WXS Report Percent Tumor		22
+igm.tumor_normal	somatic_cnv_results	percent_necrosis	WXS Report Percent Necrosis		23
+igm.tumor_normal	somatic_cnv_results	indication_for_study	WXS Indication for Study Diagnosis		18
+igm.tumor_normal	somatic_cnv_results	interpretation.guideline	Somatic CNV Interpretation Guideline	transpose	35
+igm.tumor_normal	somatic_cnv_results	interpretation.value	Somatic CNV Interpretation Value	transpose	34
+igm.tumor_normal	somatic_cnv_results	copy_number_type	Somatic CNV Copy Number Type	transpose	33
+igm.tumor_normal	somatic_cnv_results	gene	Somatic CNV Gene	transpose	32
 igm.tumor_normal	germline_cnv_results	subject_id	Subject ID		1
-igm.tumor_normal	germline_cnv_results	interpretation.guideline	Germline CNV Interpretation Guideline	transpose	42
-igm.tumor_normal	germline_cnv_results	interpretation.value	Germline CNV Interpretation Value	transpose	41
-igm.tumor_normal	germline_cnv_results	copy_number_type	Germline CNV Copy Number Type	transpose	40
-igm.tumor_normal	germline_cnv_results	gene	Germline CNV Gene	transpose	39
-igm.tumor_normal	germline_cnv_results	percent_tumor	WXS Report Percent Tumor		20
-igm.tumor_normal	germline_cnv_results	percent_necrosis	WXS Report Percent Necrosis		21
-igm.tumor_normal	germline_cnv_results	indication_for_study	WXS Indication for Study Diagnosis		16
+igm.tumor_normal	germline_cnv_results	interpretation.guideline	Germline CNV Interpretation Guideline	transpose	44
+igm.tumor_normal	germline_cnv_results	interpretation.value	Germline CNV Interpretation Value	transpose	43
+igm.tumor_normal	germline_cnv_results	copy_number_type	Germline CNV Copy Number Type	transpose	42
+igm.tumor_normal	germline_cnv_results	gene	Germline CNV Gene	transpose	41
+igm.tumor_normal	germline_cnv_results	percent_tumor	WXS Report Percent Tumor		22
+igm.tumor_normal	germline_cnv_results	percent_necrosis	WXS Report Percent Necrosis		23
+igm.tumor_normal	germline_cnv_results	indication_for_study	WXS Indication for Study Diagnosis		18
 igm.tumor_normal	germline_results	subject_id	Subject ID		1
-igm.tumor_normal	germline_results	interpretation.guideline	Germline Variant Interpretation Guideline	transpose	38
-igm.tumor_normal	germline_results	interpretation.value	Germline Variant Interpretation Value	transpose	37
-igm.tumor_normal	germline_results	gene	Germline Gene	transpose	34
-igm.tumor_normal	germline_results	nucleotide_change	Germline Nucleotide Change	transpose	35
-igm.tumor_normal	germline_results	predicted_protein_change	Germline Protein Change	transpose	36
-igm.tumor_normal	germline_results	percent_tumor	WXS Report Percent Tumor		20
-igm.tumor_normal	germline_results	percent_necrosis	WXS Report Percent Necrosis		21
-igm.tumor_normal	germline_results	indication_for_study	WXS Indication for Study Diagnosis		16
+igm.tumor_normal	germline_results	interpretation.guideline	Germline Variant Interpretation Guideline	transpose	40
+igm.tumor_normal	germline_results	interpretation.value	Germline Variant Interpretation Value	transpose	39
+igm.tumor_normal	germline_results	gene	Germline Gene	transpose	36
+igm.tumor_normal	germline_results	nucleotide_change	Germline Nucleotide Change	transpose	37
+igm.tumor_normal	germline_results	predicted_protein_change	Germline Protein Change	transpose	38
+igm.tumor_normal	germline_results	percent_tumor	WXS Report Percent Tumor		22
+igm.tumor_normal	germline_results	percent_necrosis	WXS Report Percent Necrosis		23
+igm.tumor_normal	germline_results	indication_for_study	WXS Indication for Study Diagnosis		18
 igm.tumor_normal	somatic_results	subject_id	Subject ID		1
-igm.tumor_normal	somatic_results	interpretation.guideline	Somatic Variant Interpretation Guideline	transpose	28
-igm.tumor_normal	somatic_results	interpretation.value	Somatic Variant Interpretation Value	transpose	29
-igm.tumor_normal	somatic_results	gene	Somatic Gene	transpose	25
-igm.tumor_normal	somatic_results	nucleotide_change	Somatic Nucleotide Change	transpose	26
-igm.tumor_normal	somatic_results	predicted_protein_change	Somatic Protein Change	transpose	27
-igm.tumor_normal	somatic_results	percent_tumor	WXS Report Percent Tumor		20
-igm.tumor_normal	somatic_results	percent_necrosis	WXS Report Percent Necrosis		21
-igm.tumor_normal	somatic_results	indication_for_study	WXS Indication for Study Diagnosis		16
+igm.tumor_normal	somatic_results	interpretation.guideline	Somatic Variant Interpretation Guideline	transpose	30
+igm.tumor_normal	somatic_results	interpretation.value	Somatic Variant Interpretation Value	transpose	31
+igm.tumor_normal	somatic_results	gene	Somatic Gene	transpose	27
+igm.tumor_normal	somatic_results	nucleotide_change	Somatic Nucleotide Change	transpose	28
+igm.tumor_normal	somatic_results	predicted_protein_change	Somatic Protein Change	transpose	29
+igm.tumor_normal	somatic_results	percent_tumor	WXS Report Percent Tumor		22
+igm.tumor_normal	somatic_results	percent_necrosis	WXS Report Percent Necrosis		23
+igm.tumor_normal	somatic_results	indication_for_study	WXS Indication for Study Diagnosis		18
 igm.archer_fusion	single_tier_one_or_two_result	subject_id	Subject ID		1
-igm.archer_fusion	single_tier_one_or_two_result	percent_tumor	Fusion Report Percent Tumor		22
-igm.archer_fusion	single_tier_one_or_two_result	percent_necrosis	Fusion Report Percent Necrosis		23
-igm.archer_fusion	single_tier_one_or_two_result	indication_for_study	Fusion Indication for Study Diagnosis		17
-igm.archer_fusion	single_tier_one_or_two_result	gene	Intragene Fusion Gene	transpose	54
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.transcript	Intragene Fusion Transcript	transpose	55
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.exon	Intragene Fusion Breakpoint 1 Exon	transpose	56
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.genomic_location.chromosone	Intragene Fusion Chromosome	transpose	57
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.genomic_location.postion	Intragene Fusion Breakpoint 1 Position	transpose	58
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint2.exon	Intragene Fusion Breakpoint 2 Exon	transpose	59
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint2.genomic_location.postion	Intragene Fusion Breakpoint 2 Position	transpose	60
-igm.archer_fusion	single_tier_one_or_two_result	classification.guideline	Intragene Fusion Interpretation Guideline	transpose	61
-igm.archer_fusion	single_tier_one_or_two_result	classification.value	Intragene Fusion Interpretation Value	transpose	62
+igm.archer_fusion	single_tier_one_or_two_result	percent_tumor	Fusion Report Percent Tumor		24
+igm.archer_fusion	single_tier_one_or_two_result	percent_necrosis	Fusion Report Percent Necrosis		25
+igm.archer_fusion	single_tier_one_or_two_result	indication_for_study	Fusion Indication for Study Diagnosis		19
+igm.archer_fusion	single_tier_one_or_two_result	gene	Intragene Fusion Gene	transpose	56
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.transcript	Intragene Fusion Transcript	transpose	57
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.exon	Intragene Fusion Breakpoint 1 Exon	transpose	58
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.genomic_location.chromosone	Intragene Fusion Chromosome	transpose	59
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.genomic_location.postion	Intragene Fusion Breakpoint 1 Position	transpose	60
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint2.exon	Intragene Fusion Breakpoint 2 Exon	transpose	61
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint2.genomic_location.postion	Intragene Fusion Breakpoint 2 Position	transpose	62
+igm.archer_fusion	single_tier_one_or_two_result	classification.guideline	Intragene Fusion Interpretation Guideline	transpose	63
+igm.archer_fusion	single_tier_one_or_two_result	classification.value	Intragene Fusion Interpretation Value	transpose	64
 igm.archer_fusion	fusion_tier_one_or_two_result	subject_id	Subject ID		1
-igm.archer_fusion	fusion_tier_one_or_two_result	percent_tumor	Fusion Report Percent Tumor		22
-igm.archer_fusion	fusion_tier_one_or_two_result	percent_necrosis	Fusion Report Percent Necrosis		23
-igm.archer_fusion	fusion_tier_one_or_two_result	indication_for_study	Fusion Indication for Study Diagnosis		17
-igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.three_prime_transcript	Gene Fusion 3' Gene Partner Transcript		44
-igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.three_prime_exon	Gene Fusion 3' Gene Partner Exon		45
-igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.genomic_location.chromosone	Gene Fusion 3' Gene Partner Chromosome		46
-igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.genomic_location.postion	Gene Fusion 3' Gene Partner Position		47
-igm.archer_fusion	fusion_tier_one_or_two_result	gene_fusion	Gene Fusion		43
-igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.five_prime_transcript	Gene Fusion 5' Gene Partner Transcript		48
-igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.five_prime_exon	Gene Fusion 5' Gene Partner Exon		49
-igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.genomic_location.chromosone	Gene Fusion 5' Gene Partner Chromosome		50
-igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.genomic_location.postion	Gene Fusion 5' Gene Partner Position		51
-igm.archer_fusion	fusion_tier_one_or_two_result	classification.guideline	Gene Fusion Interpretation Guideline		52
-igm.archer_fusion	fusion_tier_one_or_two_result	classification.value	Gene Fusion Interpretation Value		53
+igm.archer_fusion	fusion_tier_one_or_two_result	percent_tumor	Fusion Report Percent Tumor		24
+igm.archer_fusion	fusion_tier_one_or_two_result	percent_necrosis	Fusion Report Percent Necrosis		25
+igm.archer_fusion	fusion_tier_one_or_two_result	indication_for_study	Fusion Indication for Study Diagnosis		19
+igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.three_prime_transcript	Gene Fusion 3' Gene Partner Transcript		46
+igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.three_prime_exon	Gene Fusion 3' Gene Partner Exon		47
+igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.genomic_location.chromosone	Gene Fusion 3' Gene Partner Chromosome		48
+igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.genomic_location.postion	Gene Fusion 3' Gene Partner Position		49
+igm.archer_fusion	fusion_tier_one_or_two_result	gene_fusion	Gene Fusion		45
+igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.five_prime_transcript	Gene Fusion 5' Gene Partner Transcript		50
+igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.five_prime_exon	Gene Fusion 5' Gene Partner Exon		51
+igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.genomic_location.chromosone	Gene Fusion 5' Gene Partner Chromosome		52
+igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.genomic_location.postion	Gene Fusion 5' Gene Partner Position		53
+igm.archer_fusion	fusion_tier_one_or_two_result	classification.guideline	Gene Fusion Interpretation Guideline		54
+igm.archer_fusion	fusion_tier_one_or_two_result	classification.value	Gene Fusion Interpretation Value		55

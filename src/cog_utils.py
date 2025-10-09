@@ -394,7 +394,7 @@ def cog_to_tsv(dir_path: str, cog_jsons: list, cog_op: str, timestamp: str):
         
 
         cleaned_df.to_csv(
-            f"{cog_op}/COG_JSON_table_conversion_cleaned_{timestamp}.tsv", sep="\t", index=False
+            f"{cog_op}/COG_JSON_table_conversion_decoded_{timestamp}.tsv", sep="\t", index=False
         )
 
         return cleaned_df, cog_flattened_file_name, success_count, error_count

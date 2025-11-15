@@ -137,7 +137,7 @@ def json2tsv(json_dir_path, output_path):
         encoding="utf-8",
         filemode="w",
         level=logging.INFO,
-        format="%(name)s - %(levelname)s - %(message)s",
+        format=">>> %(name)s - %(asctime)s - %(levelname)s - %(message)s\n",
 )
 
     logger.info("Running MCI_JSON2TSV.py ....")
@@ -231,7 +231,15 @@ def json2tsv(json_dir_path, output_path):
         igm_error_count = 0
         
     # perform COG and IGM data integration if both COG and IGM JSONs were present
-    cog_igm_integrate(cog_success_count, igm_success_count, integration_files, output_path, get_time)
+    print(integration_files)
+    integrate = cog_igm_integrate(cog_success_count, igm_success_count, integration_files, output_path, get_time)
+    
+    if integrate:
+        print("\n\t>>> COG and IGM data integration complete.")
+        logger.info("COG and IGM data integration complete.")
+    else:
+        print("\n\t>>> COG and IGM data integration not performed. If expected to be performed, please check log for errors.")
+        logger.info("COG and IGM data integration not performed. If expected to be performed, please check log for errors.")
 
     if len(json_sorted["other"]) > 0:
         # save list of others to output dir
@@ -250,21 +258,38 @@ def json2tsv(json_dir_path, output_path):
     print(f"\n\t>>> Time to Completion: {time_diff}")
     logger.info(f"Time to Completion: {time_diff}")
     print(f"\t>>> # COG JSON Files Successfully Transformed: {cog_success_count}")
+    logger.info(f"# COG JSON Files Successfully Transformed: {cog_success_count}")
     if cog_error_count > 0:
         print(
             f"\t>>> # COG JSON Files NOT Transformed (Errors): {cog_error_count}, check log file {output_path}/JSON2TSV_{get_time}.log for errors"
         )
+        logger.info(
+            f"# COG JSON Files NOT Transformed (Errors): {cog_error_count}, check log file {output_path}/JSON2TSV_{get_time}.log for errors"
+        )
     else:
         print(f"\t>>> # COG JSON Files NOT Transformed (Errors): {cog_error_count}")
+        logger.info(
+            f"# COG JSON Files NOT Transformed (Errors): {cog_error_count}"
+        )
     print(f"\t>>> # IGM JSON Files Successfully Transformed: {igm_success_count}")
+    logger.info(f"# IGM JSON Files Successfully Transformed: {igm_success_count}")
     if igm_error_count > 0:
         print(
             f"\t>>> # IGM JSON Files NOT Transformed (Errors): {igm_error_count}, check log file {output_path}/JSON2TSV_{get_time}.log for errors \n"
         )
+        logger.info(
+            f"# IGM JSON Files NOT Transformed (Errors): {igm_error_count}, check log file {output_path}/JSON2TSV_{get_time}.log for errors"
+        )
     else:
         print(f"\t>>> # IGM JSON Files NOT Transformed (Errors): {igm_error_count}")
+        logger.info(
+            f"# IGM JSON Files NOT Transformed (Errors): {igm_error_count}"
+        )
     print(
         f"\t>>> Check log file JSON2TSV_{get_time}.log for additional information\n"
+    )
+    logger.info(
+        f"Check log file JSON2TSV_{get_time}.log for additional information"
     )
 
     # move log file to output dir and shutdown logging
@@ -274,7 +299,6 @@ def json2tsv(json_dir_path, output_path):
 
 
 if __name__ == "__main__":
-    
     parser = argparse.ArgumentParser(
         prog="MCI_JSON2TSV.py",
         description="This script will take a folder of JSON files, \
@@ -305,9 +329,20 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-
-    # pull in args as variables
     json_dir_path = args.directory
     output_path = args.output_path
 
-    json2tsv(json_dir_path, output_path)
+    try:
+        json2tsv(json_dir_path, output_path)
+    except Exception as e:
+        logging.error(f"Unhandled exception: {e}", exc_info=True)
+        print(f"Error occurred: {e}")
+    finally:
+        logging.shutdown()
+        # Move log file if it exists
+        log_file = "JSON2TSV.log"
+        if os.path.exists(log_file):
+            # Use a timestamp for consistency
+            from datetime import datetime
+            get_time = datetime.today().strftime("%Y%m%d_%H%M%S")
+            shutil.move(log_file, f"{output_path}/JSON2TSV_{get_time}.log")

@@ -1,107 +1,844 @@
-type	source	data_elements	label	modifier	order
-COG	COG	upi	Subject ID		1
-COG	COG	DEMOGRAPHY.DM_BRTHDAT	Birth Date		2
-COG	COG	DEMOGRAPHY.DM_ETHNIC	Ethnicity		3
-COG	COG	DEMOGRAPHY.DM_SEX	Sex		4
-COG	COG	DEMOGRAPHY.SC_SCORRES_CNTRYRES	Country of Residence		5
-COG	COG	DEMOGRAPHY.DM_CRACE	Race		6
-COG	COG	COG_UPR_DX.MORPHO_ICDO	Initial Diagnosis (MORPHOLOGY) ICD-O CODE		7
-COG	COG	COG_UPR_DX.MORPHO_TEXT	Initial Diagnosis (MORPHOLOGY) ICD-O TERM		8
-COG	COG	COG_UPR_DX.TOPO_ICDO	Primary site (TOPOGRAPHY) ICD-O CODE		9
-COG	COG	COG_UPR_DX.TOPO_TEXT	Primary site (TOPOGRAPHY) ICD-O TERM		10
-COG	COG	NCI_MCI_FUP.MCRPTRCVD	Were Molecular Characterization Reports received?		11
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHCAT_CNSDXCAT	CNS diagnosis category		12
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHCAT_CNSDXCAT	CNS diagnosis category		12
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_HGG	CNS integrated Diagnosis		13
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_LGG	CNS integrated Diagnosis		13
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_EPDMM	CNS integrated Diagnosis		13
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_MEDUBL	CNS integrated Diagnosis		13
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_ATRT	CNS integrated Diagnosis		13
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_EBYONO	CNS integrated Diagnosis		13
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_GCT	CNS integrated Diagnosis		13
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_GLNRN	CNS integrated Diagnosis		13
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CRNPRG	CNS integrated Diagnosis		13
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CPT	CNS integrated Diagnosis		13
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_SARC	CNS integrated Diagnosis		13
-COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CNSOTH	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_HGG	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_LGG	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_EPDMM	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_MEDUBL	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_ATRT	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_EBYONO	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_GCT	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_GLNRN	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CRNPRG	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CPT	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_SARC	CNS integrated Diagnosis		13
-COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CNSOTH	CNS integrated Diagnosis		13
-igm.methylation	final_diagnosis	subject_id	Subject ID		1
-igm.methylation	final_diagnosis	percent_tumor	Methylation Report Percent Tumor		20
-igm.methylation	final_diagnosis	percent_necrosis	Methylation Report Percent Necrosis		21
-igm.methylation	final_diagnosis	indication_for_study	Methylation Indication for Study Diagnosis		17
-igm.methylation	final_diagnosis	report_version	CNS Methylation Classifier		14
-igm.methylation	final_diagnosis	methylation_class	CNS Methylation Predicted Classification		15
-igm.methylation	final_diagnosis	mgmt_status	CNS MGMT Promoter Methylation Status		16
-igm.tumor_normal	somatic_cnv_results	subject_id	Subject ID		1
-igm.tumor_normal	somatic_cnv_results	percent_tumor	WXS Report Percent Tumor		22
-igm.tumor_normal	somatic_cnv_results	percent_necrosis	WXS Report Percent Necrosis		23
-igm.tumor_normal	somatic_cnv_results	indication_for_study	WXS Indication for Study Diagnosis		18
-igm.tumor_normal	somatic_cnv_results	interpretation.guideline	Somatic CNV Interpretation Guideline	transpose	35
-igm.tumor_normal	somatic_cnv_results	interpretation.value	Somatic CNV Interpretation Value	transpose	34
-igm.tumor_normal	somatic_cnv_results	copy_number_type	Somatic CNV Copy Number Type	transpose	33
-igm.tumor_normal	somatic_cnv_results	gene	Somatic CNV Gene	transpose	32
-igm.tumor_normal	germline_cnv_results	subject_id	Subject ID		1
-igm.tumor_normal	germline_cnv_results	interpretation.guideline	Germline CNV Interpretation Guideline	transpose	44
-igm.tumor_normal	germline_cnv_results	interpretation.value	Germline CNV Interpretation Value	transpose	43
-igm.tumor_normal	germline_cnv_results	copy_number_type	Germline CNV Copy Number Type	transpose	42
-igm.tumor_normal	germline_cnv_results	gene	Germline CNV Gene	transpose	41
-igm.tumor_normal	germline_cnv_results	percent_tumor	WXS Report Percent Tumor		22
-igm.tumor_normal	germline_cnv_results	percent_necrosis	WXS Report Percent Necrosis		23
-igm.tumor_normal	germline_cnv_results	indication_for_study	WXS Indication for Study Diagnosis		18
-igm.tumor_normal	germline_results	subject_id	Subject ID		1
-igm.tumor_normal	germline_results	interpretation.guideline	Germline Variant Interpretation Guideline	transpose	40
-igm.tumor_normal	germline_results	interpretation.value	Germline Variant Interpretation Value	transpose	39
-igm.tumor_normal	germline_results	gene	Germline Gene	transpose	36
-igm.tumor_normal	germline_results	nucleotide_change	Germline Nucleotide Change	transpose	37
-igm.tumor_normal	germline_results	predicted_protein_change	Germline Protein Change	transpose	38
-igm.tumor_normal	germline_results	percent_tumor	WXS Report Percent Tumor		22
-igm.tumor_normal	germline_results	percent_necrosis	WXS Report Percent Necrosis		23
-igm.tumor_normal	germline_results	indication_for_study	WXS Indication for Study Diagnosis		18
-igm.tumor_normal	somatic_results	subject_id	Subject ID		1
-igm.tumor_normal	somatic_results	interpretation.guideline	Somatic Variant Interpretation Guideline	transpose	30
-igm.tumor_normal	somatic_results	interpretation.value	Somatic Variant Interpretation Value	transpose	31
-igm.tumor_normal	somatic_results	gene	Somatic Gene	transpose	27
-igm.tumor_normal	somatic_results	nucleotide_change	Somatic Nucleotide Change	transpose	28
-igm.tumor_normal	somatic_results	predicted_protein_change	Somatic Protein Change	transpose	29
-igm.tumor_normal	somatic_results	percent_tumor	WXS Report Percent Tumor		22
-igm.tumor_normal	somatic_results	percent_necrosis	WXS Report Percent Necrosis		23
-igm.tumor_normal	somatic_results	indication_for_study	WXS Indication for Study Diagnosis		18
-igm.archer_fusion	single_tier_one_or_two_result	subject_id	Subject ID		1
-igm.archer_fusion	single_tier_one_or_two_result	percent_tumor	Fusion Report Percent Tumor		24
-igm.archer_fusion	single_tier_one_or_two_result	percent_necrosis	Fusion Report Percent Necrosis		25
-igm.archer_fusion	single_tier_one_or_two_result	indication_for_study	Fusion Indication for Study Diagnosis		19
-igm.archer_fusion	single_tier_one_or_two_result	gene	Intragene Fusion Gene	transpose	56
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.transcript	Intragene Fusion Transcript	transpose	57
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.exon	Intragene Fusion Breakpoint 1 Exon	transpose	58
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.genomic_location.chromosone	Intragene Fusion Chromosome	transpose	59
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.genomic_location.postion	Intragene Fusion Breakpoint 1 Position	transpose	60
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint2.exon	Intragene Fusion Breakpoint 2 Exon	transpose	61
-igm.archer_fusion	single_tier_one_or_two_result	breakpoint2.genomic_location.postion	Intragene Fusion Breakpoint 2 Position	transpose	62
-igm.archer_fusion	single_tier_one_or_two_result	classification.guideline	Intragene Fusion Interpretation Guideline	transpose	63
-igm.archer_fusion	single_tier_one_or_two_result	classification.value	Intragene Fusion Interpretation Value	transpose	64
-igm.archer_fusion	fusion_tier_one_or_two_result	subject_id	Subject ID		1
-igm.archer_fusion	fusion_tier_one_or_two_result	percent_tumor	Fusion Report Percent Tumor		24
-igm.archer_fusion	fusion_tier_one_or_two_result	percent_necrosis	Fusion Report Percent Necrosis		25
-igm.archer_fusion	fusion_tier_one_or_two_result	indication_for_study	Fusion Indication for Study Diagnosis		19
-igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.three_prime_transcript	Gene Fusion 3' Gene Partner Transcript		46
-igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.three_prime_exon	Gene Fusion 3' Gene Partner Exon		47
-igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.genomic_location.chromosone	Gene Fusion 3' Gene Partner Chromosome		48
-igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.genomic_location.postion	Gene Fusion 3' Gene Partner Position		49
-igm.archer_fusion	fusion_tier_one_or_two_result	gene_fusion	Gene Fusion		45
-igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.five_prime_transcript	Gene Fusion 5' Gene Partner Transcript		50
-igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.five_prime_exon	Gene Fusion 5' Gene Partner Exon		51
-igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.genomic_location.chromosone	Gene Fusion 5' Gene Partner Chromosome		52
-igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.genomic_location.postion	Gene Fusion 5' Gene Partner Position		53
-igm.archer_fusion	fusion_tier_one_or_two_result	classification.guideline	Gene Fusion Interpretation Guideline		54
-igm.archer_fusion	fusion_tier_one_or_two_result	classification.value	Gene Fusion Interpretation Value		55
+type	source	data_elements	label	modifier	integrated_sheet_order	substudy
+COG	COG	upi	Subject ID		1	ALL
+COG	COG	DEMOGRAPHY.DM_BRTHDAT	Birth Date		2	ALL
+COG	COG	DEMOGRAPHY.DM_ETHNIC	Ethnicity		3	ALL
+COG	COG	DEMOGRAPHY.DM_SEX	Sex		4	ALL
+COG	COG	DEMOGRAPHY.SC_SCORRES_CNTRYRES	Country of Residence		5	ALL
+COG	COG	DEMOGRAPHY.DM_CRACE	Race		6	ALL
+COG	COG	COG_UPR_DX.MORPHO_ICDO	Initial Diagnosis (MORPHOLOGY) ICD-O CODE		7	ALL
+COG	COG	COG_UPR_DX.MORPHO_TEXT	Initial Diagnosis (MORPHOLOGY) ICD-O TERM		8	ALL
+COG	COG	COG_UPR_DX.TOPO_ICDO	Primary site (TOPOGRAPHY) ICD-O CODE		9	ALL
+COG	COG	COG_UPR_DX.TOPO_TEXT	Primary site (TOPOGRAPHY) ICD-O TERM		10	ALL
+COG	COG	NCI_MCI_FUP.MCRPTRCVD	Were Molecular Characterization Reports received?		11	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHCAT_CNSDXCAT	CNS diagnosis category		12	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHCAT_CNSDXCAT	CNS diagnosis category		12	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_HGG	CNS integrated Diagnosis		13	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_LGG	CNS integrated Diagnosis		13	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_EPDMM	CNS integrated Diagnosis		13	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_MEDUBL	CNS integrated Diagnosis		13	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_ATRT	CNS integrated Diagnosis		13	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_EBYONO	CNS integrated Diagnosis		13	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_GCT	CNS integrated Diagnosis		13	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_GLNRN	CNS integrated Diagnosis		13	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CRNPRG	CNS integrated Diagnosis		13	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CPT	CNS integrated Diagnosis		13	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_SARC	CNS integrated Diagnosis		13	CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.MH_MHSCAT_CNSDXINTGRT_CNSOTH	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_HGG	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_LGG	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_EPDMM	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_MEDUBL	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_ATRT	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_EBYONO	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_GCT	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_GLNRN	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CRNPRG	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CPT	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_SARC	CNS integrated Diagnosis		13	CNS
+COG	COG	MCI_MOLECULAR_REPORT.MH_MHSCAT_CNSDXINTGRT_CNSOTH	CNS integrated Diagnosis		13	CNS
+igm.methylation	final_diagnosis	subject_id	Subject ID		1	
+igm.methylation	final_diagnosis	percent_tumor	Methylation Report Percent Tumor		20	
+igm.methylation	final_diagnosis	percent_necrosis	Methylation Report Percent Necrosis		21	
+igm.methylation	final_diagnosis	indication_for_study	Methylation Indication for Study Diagnosis		17	
+igm.methylation	final_diagnosis	report_version	CNS Methylation Classifier		14	CNS
+igm.methylation	final_diagnosis	methylation_class	CNS Methylation Predicted Classification		15	CNS
+igm.methylation	final_diagnosis	mgmt_status	CNS MGMT Promoter Methylation Status		16	CNS
+igm.tumor_normal	somatic_cnv_results	subject_id	Subject ID		1	
+igm.tumor_normal	somatic_cnv_results	percent_tumor	WXS Report Percent Tumor		22	
+igm.tumor_normal	somatic_cnv_results	percent_necrosis	WXS Report Percent Necrosis		23	
+igm.tumor_normal	somatic_cnv_results	indication_for_study	WXS Indication for Study Diagnosis		18	
+igm.tumor_normal	somatic_cnv_results	interpretation.guideline	Somatic CNV Interpretation Guideline	transpose	35	
+igm.tumor_normal	somatic_cnv_results	interpretation.value	Somatic CNV Interpretation Value	transpose	34	
+igm.tumor_normal	somatic_cnv_results	copy_number_type	Somatic CNV Copy Number Type	transpose	33	
+igm.tumor_normal	somatic_cnv_results	gene	Somatic CNV Gene	transpose	32	
+igm.tumor_normal	germline_cnv_results	subject_id	Subject ID		1	
+igm.tumor_normal	germline_cnv_results	interpretation.guideline	Germline CNV Interpretation Guideline	transpose	44	
+igm.tumor_normal	germline_cnv_results	interpretation.value	Germline CNV Interpretation Value	transpose	43	
+igm.tumor_normal	germline_cnv_results	copy_number_type	Germline CNV Copy Number Type	transpose	42	
+igm.tumor_normal	germline_cnv_results	gene	Germline CNV Gene	transpose	41	
+igm.tumor_normal	germline_cnv_results	percent_tumor	WXS Report Percent Tumor		22	
+igm.tumor_normal	germline_cnv_results	percent_necrosis	WXS Report Percent Necrosis		23	
+igm.tumor_normal	germline_cnv_results	indication_for_study	WXS Indication for Study Diagnosis		18	
+igm.tumor_normal	germline_results	subject_id	Subject ID		1	
+igm.tumor_normal	germline_results	interpretation.guideline	Germline Variant Interpretation Guideline	transpose	40	
+igm.tumor_normal	germline_results	interpretation.value	Germline Variant Interpretation Value	transpose	39	
+igm.tumor_normal	germline_results	gene	Germline Gene	transpose	36	
+igm.tumor_normal	germline_results	nucleotide_change	Germline Nucleotide Change	transpose	37	
+igm.tumor_normal	germline_results	predicted_protein_change	Germline Protein Change	transpose	38	
+igm.tumor_normal	germline_results	percent_tumor	WXS Report Percent Tumor		22	
+igm.tumor_normal	germline_results	percent_necrosis	WXS Report Percent Necrosis		23	
+igm.tumor_normal	germline_results	indication_for_study	WXS Indication for Study Diagnosis		18	
+igm.tumor_normal	somatic_results	subject_id	Subject ID		1	
+igm.tumor_normal	somatic_results	interpretation.guideline	Somatic Variant Interpretation Guideline	transpose	30	
+igm.tumor_normal	somatic_results	interpretation.value	Somatic Variant Interpretation Value	transpose	31	
+igm.tumor_normal	somatic_results	gene	Somatic Gene	transpose	27	
+igm.tumor_normal	somatic_results	nucleotide_change	Somatic Nucleotide Change	transpose	28	
+igm.tumor_normal	somatic_results	predicted_protein_change	Somatic Protein Change	transpose	29	
+igm.tumor_normal	somatic_results	percent_tumor	WXS Report Percent Tumor		22	
+igm.tumor_normal	somatic_results	percent_necrosis	WXS Report Percent Necrosis		23	
+igm.tumor_normal	somatic_results	indication_for_study	WXS Indication for Study Diagnosis		18	
+igm.archer_fusion	single_tier_one_or_two_result	subject_id	Subject ID		1	
+igm.archer_fusion	single_tier_one_or_two_result	percent_tumor	Fusion Report Percent Tumor		24	
+igm.archer_fusion	single_tier_one_or_two_result	percent_necrosis	Fusion Report Percent Necrosis		25	
+igm.archer_fusion	single_tier_one_or_two_result	indication_for_study	Fusion Indication for Study Diagnosis		19	
+igm.archer_fusion	single_tier_one_or_two_result	gene	Intragene Fusion Gene	transpose	56	
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.transcript	Intragene Fusion Transcript	transpose	57	
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.exon	Intragene Fusion Breakpoint 1 Exon	transpose	58	
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.genomic_location.chromosone	Intragene Fusion Chromosome	transpose	59	
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint1.genomic_location.postion	Intragene Fusion Breakpoint 1 Position	transpose	60	
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint2.exon	Intragene Fusion Breakpoint 2 Exon	transpose	61	
+igm.archer_fusion	single_tier_one_or_two_result	breakpoint2.genomic_location.postion	Intragene Fusion Breakpoint 2 Position	transpose	62	
+igm.archer_fusion	single_tier_one_or_two_result	classification.guideline	Intragene Fusion Interpretation Guideline	transpose	63	
+igm.archer_fusion	single_tier_one_or_two_result	classification.value	Intragene Fusion Interpretation Value	transpose	64	
+igm.archer_fusion	fusion_tier_one_or_two_result	subject_id	Subject ID		1	
+igm.archer_fusion	fusion_tier_one_or_two_result	percent_tumor	Fusion Report Percent Tumor		24	
+igm.archer_fusion	fusion_tier_one_or_two_result	percent_necrosis	Fusion Report Percent Necrosis		25	
+igm.archer_fusion	fusion_tier_one_or_two_result	indication_for_study	Fusion Indication for Study Diagnosis		19	
+igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.three_prime_transcript	Gene Fusion 3' Gene Partner Transcript		46	
+igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.three_prime_exon	Gene Fusion 3' Gene Partner Exon		47	
+igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.genomic_location.chromosone	Gene Fusion 3' Gene Partner Chromosome		48	
+igm.archer_fusion	fusion_tier_one_or_two_result	three_prime_gene_partner.genomic_location.postion	Gene Fusion 3' Gene Partner Position		49	
+igm.archer_fusion	fusion_tier_one_or_two_result	gene_fusion	Gene Fusion		45	
+igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.five_prime_transcript	Gene Fusion 5' Gene Partner Transcript		50	
+igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.five_prime_exon	Gene Fusion 5' Gene Partner Exon		51	
+igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.genomic_location.chromosone	Gene Fusion 5' Gene Partner Chromosome		52	
+igm.archer_fusion	fusion_tier_one_or_two_result	five_prime_gene_partner.genomic_location.postion	Gene Fusion 5' Gene Partner Position		53	
+igm.archer_fusion	fusion_tier_one_or_two_result	classification.guideline	Gene Fusion Interpretation Guideline		54	
+igm.archer_fusion	fusion_tier_one_or_two_result	classification.value	Gene Fusion Interpretation Value		55	
+COG	COG	REGISTRY_DATA.PT_COGENITALABN_SPEC	Known Structural Defects		58	ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXSP	Known Genetic Syndromes		60	ALL
+COG	COG	REGISTRY_DATA.AUTOIMMUNEDSZSP	Known Autoimmune Diseases		62	ALL
+COG	COG	RADIATION_THERAPY.RT_TX_TP_O_SPEC	Type of Radiation Therapy		64	ALL
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.SUPPTU_QVAL_TUPTDZSTG	Patient Disease Stage		65	CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_PRM	Site of primary tumor		68	CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.PR_PRYN_SURG	Was surgery performed prior to enrollment?		69	CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.SUPPMH_QVAL_MHNUMPRIORSUG	Number of prior surgeries		70	CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.AE_AEOCCUR_POP_PFSCMS	Did the patient develop post-operative posterior fossa syndrome/cerebellar mutism?		71	CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.AE_AEOCCUR_HYDROCEPHALUS	Was hydrocephalus present at presentation?		72	CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.PR_PRYN_LMBCSFCYT	Was lumbar CSF cytology performed?		73	CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.PR_PROCCUR_SURG	Was a surgical biopsy or resection performed?		74	CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.PR_PRSCAT_EXT_SURGRPT	Extent of tumor resection shown/indicated on operative report		75	CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TUYN_METDZ_PRESENT	Is metastatic disease present?		76	CNS
+COG	COG	DEATH.DEATH_DOC_DATE	Death Date (Days after Index)		83	ALL
+COG	COG	DEATH.PT_DEATH_PRM_RSN	Death Reason		84	ALL
+COG	COG	DEATH.P_CDETH_OTH_RSN_SPEC	Death Reason		85	ALL
+COG	COG	SURGERY.SURG_RESECT_EXT_TP	Type of Surgery		86	ALL
+COG	COG	SURGERY.SURG_PROC_O_SPEC_TXT	Type of Surgery		87	ALL
+COG	COG	FOLLOW_UP.REP_EVAL_PD_TP	Follow-Up APEC14B1 Reporting Period	transpose	88	ALL
+COG	COG	FOLLOW_UP.PT_FU_BEGDT	Follow-up start date	transpose	89	ALL
+COG	COG	FOLLOW_UP.PT_FU_END_DT	Follow-up end date	transpose	90	ALL
+COG	COG	FOLLOW_UP.PT_VST	Vital Status	transpose	91	ALL
+COG	COG	FOLLOW_UP.FSTLNTXINIDXADMOS	Treatment type	transpose	93	ALL
+COG	COG	FOLLOW_UP.COMP_RESP_CONF_IND_3	Complete Remission response?	transpose	94	ALL
+COG	COG	FOLLOW_UP.DZ_REL_PROG_IND3	Progression or Relapse?	transpose	95	ALL
+COG	COG	FOLLOW_UP.NEW_CA_DX_IND_3	New primary cancer diagnosis?	transpose	96	ALL
+COG	COG	FOLLOW_UP.PT_FU_ANNIV_REACH_IND	Did patient reach tenth anniversary of their study enrollment?	transpose	97	ALL
+COG	COG	Tx Chemo:CNS.TX_RCVD_YES_NO	"Was patient treated according to, but not enrolled on, a COG therapeutic study?"		98	CNS
+COG	COG	Tx Chemo:CNS.COG_ID_ENUM	COG Anti-Cancer Therapeutic regimen administered		99	CNS
+COG	COG	Tx Chemo:CNS.COG_ID_OTHER	"If Other, specify COG Protocol Number"		100	CNS
+COG	COG	Tx Chemo:CNS.PRI_TX_RGM_SPEC	"If Other, specify treatment regimen"		101	CNS
+COG	COG	Tx Chemo:CNS.NPROT_TX_ADM_IND_3	Was patient treated per a Non-COG anti-cancer treatment regimen?		102	CNS
+COG	COG	Tx Chemo:CNS.NPROT_TX_ADM_NM	Select regimen administered		103	CNS
+COG	COG	Tx Chemo:CNS.NPROT_TX_ADM_SPEC	Agent administered		105	CNS
+COG	COG	CELLULAR_THERAPY.CELLULARTXTPSPEC	Type of cellular therapy administered		106	ALL
+COG	COG	ON_STUDY_DX_RARE_TUMOR.CCMARARENEOPDXTP	Rare Cancer Diagnosis Type		107	RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.NEOP_CLIN_AJCC_GRP_STG	Adrenocortical Carcinoma AJCC Stage		108	RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.MET_DZ_ANAT_STE_TXT_X1	Location Metastatic Disease		110	RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.SX_EXC_PERF_IND2	Adrenocortical Carcinoma - Did patient have complete resection within one month of diagnosis?		111	RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.SPEC_RES_WT_MSRMT	Adrenocortical Carcinoma - Weight of resected tumor		112	RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.TUMORLK_PRES_IND_3	Adrenocortical Carcinoma - Was there tumor spillage?		113	RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.MEDNSPZT	Adrenocortical Carcinoma - Multiple endocrine syndrome		114	RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.ADVRPZT	Adrenocortical Carcinoma  - Adrenal virilization		115	RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.HYPERTENSION	Adrenocortical Carcinoma - Hypertension at diagnosis		116	RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.KTPTP53GMLMUTPZT	Adrenocortical Carcinoma - Germline TP53 mutation		117	RARE
+COG	COG	SMN.REP_EVAL_PD_TP	New Cancer - APEC14B1 Reporting Period		118	ALL
+COG	COG	SMN.NEW_CA_DX_DT	New cancer diagnosis date (days from index)		119	ALL
+COG	COG	SMN.NEW_CA_DX_ICD_O_CD	New cancer morphology code (ICD-O)		120	ALL
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSDXTP	Soft Tissue Sarcoma Disease Type		121	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSDXCAT_X1	Soft Tissue Sarcoma Histology Type		122	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSDXCAT_X2	Soft Tissue Sarcoma Histology Type		123	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.TUMOR_HIST_CAT_SPEC_X1	Soft Tissue Sarcoma Histology Type		124	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.TUMOR_HIST_CAT_SPEC_X2	Soft Tissue Sarcoma Histology Type		125	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.SURG_RESECT_EXT_TP	Type of Surgery		126	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.SURG_PROC_O_SPEC_TXT	Type of Surgery		127	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MGNSTPTMRCTN	Surgical Margins		128	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.LNINVLTIND	Is there clinical or imaging evidence of regional lymph node involvement?		129	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.LNBX_SMPLG_IND2	Was a lymph node biopsy performed?		130	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.LN_HIS_CY_CO_INV_IND	Was there histologic or cytologic evidence of lymph node involvement		131	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.RGLMPNDEXCRSLTP	Extent of resection		132	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.RMSNPLMPRMANAST	Sarcoma Primary site		133	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.DZ_INVL_SITE_SPEC	Sarcoma Primary site		134	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.NRSTSPMYLOCANAST	Sarcoma Primary site		135	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.NPLSMBNDPRMSTSTSIND	Was tumor confined to organ of origin?		136	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.PSTSRGPCDNPSTSTP	IRS (Intergroup Rhabdomyosarcoma Study) group		137	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.APLSLSNCAT	Anaplasia		138	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.SA_TUM_FRE_CL_HIS_GD	Tumor Histologic grade		139	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.TMRDEPTH	Tumor Depth		140	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.INVASIVEASSMTCAT_X1	Bone invasiveness		141	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.INVASIVEASSMTCAT_X2	Neurovascular invasiveness		142	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.PRIMINDENTIFY	Was primary tumor identifiable at initial diagnosis?		143	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.TUMOR_MAX_DIAM_MSRMT	Maximum diameter (cm) of primary tumor		144	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.PTMETDSZENRPZTIND4	Does the patient have metastatic disease?		145	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.DZ_INVLT_SITE_O_SPEC	Location Metastatic Disease		147	STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.BIO_PRED_OTX_RSL_TXT	Genetic Alteration/Predisposition		149	STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.TX_RCVD_YES_NO	"Was patient treated according to, but not enrolled on, a COG therapeutic study?"		150	STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.COG_ID_ENUM	COG Anti-Cancer Therapeutic regimen administered		151	STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.COG_ID_OTHER	"If Other, specify COG Protocol Number"		152	STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.PRI_TX_RGM_SPEC	"If Other, specify treatment regimen"		153	STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.NPROT_TX_ADM_IND_3	Was patient treated per a Non-COG anti-cancer treatment regimen?		154	STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.NPROT_TX_ADM_SPEC	Specify Non-COG anti-cancer treatment regimen		155	STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.O_CT_AGT_ADM_SPEC	Agent administered		157	STS
+COG	COG	ANY_OTHER_CARCINOMAS.OTH_TUMOR_C_T_STG	TNM Staging: Clinical T Stage		158	RARE
+COG	COG	ANY_OTHER_CARCINOMAS.OTH_TUMOR_C_N_STG	TNM Staging: Clinical N Stage		159	RARE
+COG	COG	ANY_OTHER_CARCINOMAS.OTH_TUMOR_C_M_STG	TNM Staging: Clinical M Stage		160	RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.TX_RCVD_YES_NO	"Was patient treated according to, but not enrolled on, a COG therapeutic study?"		161	RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.COG_ID_ENUM	COG Anti-Cancer Therapeutic regimen administered:		162	RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.COG_ID_OTHER	"If Other, specify COG Protocol Number"		163	RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.PRI_TX_RGM_SPEC	"If Other, specify treatment regimen"		164	RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.NPROT_TX_ADM_IND_3	Was patient treated per a Non-COG anti-cancer treatment regimen?		165	RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.NPROT_TX_ADM_SPEC	Specify Non-COG anti-cancer treatment regimen		166	RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_NAME	Agent administered		168	RARE
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.REP_EVAL_PD_TP	STS Relapse_Progression - APEC14B1 Reporting Period		169	STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.PROG_REL_STAT	Select relapse/progression status		170	STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZ_RECUR_PROG_DX_DT	Date of relapse or progression		174	STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_TXT	Location Relapse_Progression		176	STS
+COG	COG	THYROID_CARCINOMA.THYROID_CLIN_T_STG	TNM Staging: Clinical T Stage		177	RARE
+COG	COG	THYROID_CARCINOMA.THYROID_CLIN_N_STG	TNM Staging: Clinical N Stage		178	RARE
+COG	COG	THYROID_CARCINOMA.THYROID_CLIN_M_STG	TNM Staging: Clinical M Stage		179	RARE
+COG	COG	THYROID_CARCINOMA.CHEM_TSH_LAB_SPE_VAL	TSH		180	RARE
+COG	COG	THYROID_CARCINOMA.L_TSH_TMSMRT_ULN_VAL	TSH Institutional normal		181	RARE
+COG	COG	THYROID_CARCINOMA.THYROGLOBULINVAL	Thyroglobulin (ng/mL)		182	RARE
+COG	COG	THYROID_CARCINOMA.TTLT4PFM	Total T4		183	RARE
+COG	COG	THYROID_CARCINOMA.FREET4_PHCCN3U35	Free T4		184	RARE
+COG	COG	THYROID_CARCINOMA.BRAFMUTPFM	BRAF mutation?		185	RARE
+COG	COG	THYROID_CARCINOMA.PRIOR_CA_DX_IND_3	Does patient have prior history of malignancy?		186	RARE
+COG	COG	THYROID_CARCINOMA.NEW_CA_DX_ICD_O_CD	Malignancy ICD-O Morphology		187	RARE
+COG	COG	THYROID_CARCINOMA.DZ_PRM_SITE_ICD_O_CD	Malignancy ICD-O Topography		188	RARE
+COG	COG	NEUROENDOCRINE_TUMORS.MEDNTYP1PZT	MEN syndrome 1 present?		189	RARE
+COG	COG	NEUROENDOCRINE_TUMORS.MEDNTYP2PZT	MEN syndrome 2 present?		190	RARE
+COG	COG	NEUROENDOCRINE_TUMORS.GASTRINLVLVAL	Gastrin level(pg/mL)		191	RARE
+COG	COG	NEUROENDOCRINE_TUMORS.LAB_5HI_TMK_RSLT_VAL	5HIAA level (5-hydroxyindoleacetic acid)		192	RARE
+COG	COG	NEUROENDOCRINE_TUMORS.CHROMOGRANINALVLVAL	Chromogranin-A level		193	RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NURENDO_TMR_C_T_STG	TNM Staging: Clinical T Stage		194	RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NURENDO_TMR_C_N_STG	TNM Staging: Clinical N Stage		195	RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NURENDO_TMR_C_M_STG	TNM Staging: Clinical M Stage		196	RARE
+COG	COG	MELANOMA.MELANM_TUMOR_C_T_STG	TNM Staging: T Stage		198	RARE
+COG	COG	MELANOMA.MELANM_TUMOR_C_N_STG	TNM Staging: N Stage		199	RARE
+COG	COG	MELANOMA.MELANM_TUMOR_C_M_STG	TNM Staging: M Stage		200	RARE
+COG	COG	MELANOMA.CGTNVIDYSPPZT	Large congenital nevi or dysplastic nevi present?		201	RARE
+COG	COG	MELANOMA.BRAFMUTATION	BRAF mutation?		202	RARE
+COG	COG	MELANOMA.FMLHXMMADX	Is there a family history of melanoma in first or second degree relative?		203	RARE
+COG	COG	STEM_CELL_TRANSPLANT.BMSCT_TP	Type of Bone Marrow or Peripheral Blood Stem Cell (PBSC) Transplant		204	ALL
+COG	COG	STEM_CELL_TRANSPLANT.BMSCT_DESC_O_SPEC	Type of Bone Marrow or Peripheral Blood Stem Cell (PBSC) Transplant		205	ALL
+COG	COG	STEM_CELL_TRANSPLANT.TSPL_CONDRGM_TXT_TP	Transplant Conditioning Regimen		206	ALL
+COG	COG	DESMOPLASTIC_SMALL_ROUND_CELL_TUMOR.MALN_LIV_MET_INV_IN3	Liver metastases		207	RARE
+COG	COG	DESMOPLASTIC_SMALL_ROUND_CELL_TUMOR.XABDFBMETPZT	Extraabdominal metastases		208	RARE
+COG	COG	RETINOBLASTOMA.DSZDSORETDESCTMRLATTP	Retinoblastoma site of disease		209	RARE
+COG	COG	RETINOBLASTOMA.PTMETDSZENRPZTIND4	Does the patient have metastatic disease?		210	RARE
+COG	COG	RETINOBLASTOMA.MET_DZ_ANAT_STE_TXT_X2	Location Metastatic Disease		212	RARE
+COG	COG	RETINOBLASTOMA.DSZDSORETDESCHERETP	Retinoblastoma Case Type		213	RARE
+COG	COG	RETINOBLASTOMA.REESEELLSWORTHRTEYE	Reese-Ellsworth Group of right eye		214	RARE
+COG	COG	RETINOBLASTOMA.REESEELLSWORTHLFTEYE	Reese-Ellsworth Group of left eye		215	RARE
+COG	COG	CNS_TX_CHEMO_CNS.TX_RCVD_YES_NO	"Was patient treated according to, but not enrolled on, a COG therapeutic study?"		216	CNS
+COG	COG	CNS_TX_CHEMO_CNS.COG_ID_ENUM	COG Anti-Cancer Therapeutic regimen administered		217	CNS
+COG	COG	CNS_TX_CHEMO_CNS.NPROT_TX_ADM_IND_3	Was patient treated per a Non-COG anti-cancer treatment regimen?		218	CNS
+COG	COG	CNS_TX_CHEMO_CNS.NPROT_TX_ADM_NM	Select regimen administered		219	CNS
+COG	COG	CNS_TX_CHEMO_CNS.AGT_ADM_NM	Agent administered		220	CNS
+COG	COG	Tx Chemo:CNS.O_CT_AGT_ADM_SPEC	Agent administered		229	CNS
+COG	COG	ON_STUDY_DX_CNS.TUMOR_GP_ST	Tumor grade		230	CNS
+COG	COG	ON_STUDY_DX_CNS.CNSTMRMSTG	TNM Staging: M Stage		231	CNS
+COG	COG	ON_STUDY_DX_CNS.CSFCYTLGY	Cerebrospinal Fluid Status		232	CNS
+COG	COG	ON_STUDY_DX_CNS.CNSSPNDXSTATUS	Spine at diagnosis		233	CNS
+COG	COG	ON_STUDY_DX_CNS.SURGBXRCTPFM	Was surgical biopsy or resection performed?		234	CNS
+COG	COG	ON_STUDY_DX_CNS.TUM_RES_EXT_TP	What was the extent of tumor resection?		235	CNS
+COG	COG	ON_STUDY_DX_CNS.OTX_SURG_RESECT_TXT	What was the extent of tumor resection?		236	CNS
+COG	COG	ON_STUDY_DX_CNS.RESI_MALI_POST_SURG_MEAS	Postoperative amount of residual tumor		237	CNS
+COG	COG	RT_DETAILS_CNS.REP_EVAL_PD_TP	Radiation Therapy - APEC14B1 Reporting Period		238	CNS
+COG	COG	RT_DETAILS_CNS.SUPPEC_QVAL_ECTXFIELD	Radiation therapy field		239	CNS
+COG	COG	RLP_PROG_CNS.REP_EVAL_PD_TP	CNS RLP_PROG - APEC14B1 Reporting Period		240	CNS
+COG	COG	RLP_PROG_CNS.PROG_REL_STAT	Select relapse/progression status		241	CNS
+COG	COG	RLP_PROG_CNS.DZ_RECUR_PROG_DX_DT	Date of relapse or progression		242	CNS
+COG	COG	RLP_PROG_CNS.DZPROG_REL_SITE_TXT	Location CNS Relapse/Progression		244	CNS
+COG	COG	RLP_PROG_RARE_TUMORS.REP_EVAL_PD_TP	Rare Tumor RLP_PROG - APEC14B1 Reporting Period		245	RARE
+COG	COG	RLP_PROG_RARE_TUMORS.PROG_REL_STAT	Select relapse/progression status		246	RARE
+COG	COG	RLP_PROG_RARE_TUMORS.DZ_RECUR_PROG_DX_DT	Date of relapse or progression		247	RARE
+COG	COG	RLP_PROG_RARE_TUMORS.DZPROG_REL_SITE_TXT	Rare Tumor RLP_PROG Sites		249	RARE
+COG	COG	GASTROINTESTINAL_STROMAL_TUMOR.GIST_CLIN_T_STG	TMN Staging: Clinical T Stage		250	RARE
+COG	COG	GASTROINTESTINAL_STROMAL_TUMOR.GIST_CLIN_N_STG	TNM Staging: Clinical N Stage		251	RARE
+COG	COG	GASTROINTESTINAL_STROMAL_TUMOR.GIST_CLIN_M_STG	TNM Staging: Clinical M Stage		252	RARE
+COG	COG	GASTROINTESTINAL_STROMAL_TUMOR.MED_TUMOR_PRES_IND_3	Is there a paraspinal/mediastinal mass present?		253	RARE
+COG	COG	GASTROINTESTINAL_STROMAL_TUMOR.NEUROF_FAMMEDHX_IND3	Is there a history of Neurofibromatosis?		254	RARE
+COG	COG	GASTROINTESTINAL_STROMAL_TUMOR.FMLHXGASTROSTRMDX	Is there a family history of gastrointestinal stromal tumors in first or second degree relative?		255	RARE
+COG	COG	GASTROINTESTINAL_STROMAL_TUMOR.CD117MRKRSLT	KIT (CD117) mutation		256	RARE
+COG	COG	GASTROINTESTINAL_STROMAL_TUMOR.PDGFRAGNERGMTPZT	PDGFRA mutation		257	RARE
+COG	COG	NASOPHARYNGEAL_CARCINOMA.NASOPHAR_AJCC_DISEASE_STG	Nasopharyngeal Carcinoma Disease Stage		258	RARE
+COG	COG	NASOPHARYNGEAL_CARCINOMA.PT_PL_EBV_DNA_YN_IND	Does the patient have detectable pre-treatment plasma EBV DNA?		259	RARE
+COG	COG	NASOPHARYNGEAL_CARCINOMA.GENOMECOPYCNT	Genome copies detected		260	RARE
+COG	COG	PLEUROPULMONARY_BLASTOMA.DSZDSOPLEURBLASDESCTP	Pleuropulmonary Blastoma Type		261	RARE
+COG	COG	PLEUROPULMONARY_BLASTOMA.DICER1GNMUTPZT_X2	DICER I mutation present ?		262	RARE
+COG	COG	PLEUROPULMONARY_BLASTOMA.MET_NEOP_CONF_DX_IND	Metastases present?		263	RARE
+COG	COG	PLEUROPULMONARY_BLASTOMA.PLRAPLMBLAPPZT	Anaplasia present?		264	RARE
+COG	COG	COLORECTAL_CARCINOMA.COLORECTAL_CLIN_T_STG	TNM Staging: Clinical T Stage		268	RARE
+COG	COG	COLORECTAL_CARCINOMA.COLORECTAL_CLIN_N_STG	TNM Staging: Clinical N Stage		269	RARE
+COG	COG	COLORECTAL_CARCINOMA.COLORECTAL_CLIN_M_STG	TNM Staging: Clinical M Stage		270	RARE
+COG	COG	COLORECTAL_CARCINOMA.DSZDSODUKCLFIDFSTGCDE	Duke's Classification		271	RARE
+COG	COG	COLORECTAL_CARCINOMA.FMLHXCOLRECPOLYPDX	Is there a family history of colorectal polyps in first or second degree relative?		272	RARE
+COG	COG	COLORECTAL_CARCINOMA.FAM_COLON_CA_HX_IND	Is there a family history of colorectal cancer in first or second degree relative?		273	RARE
+COG	COG	COLORECTAL_CARCINOMA.FMLHXLYNSYDDX	Is there a family history of Lynch syndrome in first or second degree relative?		274	RARE
+COG	COG	PANCREATOBLASTOMA.PANCREATIC_CLIN_T_STG	TNM Staging: Clinical T Stage		275	RARE
+COG	COG	PANCREATOBLASTOMA.PANCREATIC_CLIN_N_STG	TNM Staging: Clinical N Stage		276	RARE
+COG	COG	PANCREATOBLASTOMA.PANCREATIC_CLIN_M_STG	TNM Staging: Clinical M Stage		277	RARE
+COG	COG	PANCREATOBLASTOMA.BWTHWMASYDPZT	Beckwith Wiedeman syndrome present?		278	RARE
+COG	COG	PANCREATOBLASTOMA.FMLHXFAMADNMTPLYP	Is there a family history of familial adenomatosis polyposis in first or second degree relative?		279	RARE
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.METDSZPZTPMYDXIND4	Was metastatic disease present at initial diagnosis?		280	STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.NE_SPE_ME_ANLCT_SPEC	Location Metastatic Disease		282	STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.NPLOSTDXST	Stage of disease:		283	STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.PRM_CA_DX_ICD_O_CD	"Primary tumor, ICD-O morphology"		284	STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.LES_SITE_ICD_O_CD	"Primary tumor site, ICD-O topography"		285	STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.PRM_TUMOR_SZ_MSRMT	Size of primary tumor at presentation		286	STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.NEOHSTGD	Tumor grade		287	STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.NPLMPRSPRRTXLOCIND	Did tumor arise in previous radiation site?		288	STS
+COG	COG	SURG_RESECTION_OSTEOSARCOMA.PRITMRRST	Was primary tumor resected?		289	STS
+COG	COG	SURG_RESECTION_OSTEOSARCOMA.PT_SURGICAL_RESEC_DT	Date of surgical resection		290	STS
+COG	COG	SURG_RESECTION_OSTEOSARCOMA.TUM_RES_EXT_TP	Extent of tumor resection		291	STS
+COG	COG	SURG_RESECTION_OSTEOSARCOMA.SURG_MARG_RES_FNG_TP	Margin status of primary tumor resection		292	STS
+COG	COG	SURG_RESECTION_OSTEOSARCOMA.PRITMRRSTNCRPCTTP	Percent necrosis in primary tumor at the time of initial resection:		293	STS
+COG	COG	FINAL_DIAGNOSIS.PRIMDXDSCAT	MCI Sub-Study			RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.ADRENO_MET_DZ_ANAT_SITE_NM_A1	Location Metastatic Disease			RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.ADRENO_MET_DZ_ANAT_SITE_NM_A2	Location Metastatic Disease			RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.ADRENO_MET_DZ_ANAT_SITE_NM_A3	Location Metastatic Disease			RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.ADRENO_MET_DZ_ANAT_SITE_NM_A4	Location Metastatic Disease			RARE
+COG	COG	ADRENOCORTICAL_CARCINOMA.ADRENO_MET_DZ_ANAT_SITE_NM_A5	Location Metastatic Disease			RARE
+COG	COG	REGISTRY_DATA.FTDEGCANRLTTP_A1	First Degree Relative(s) with Cancer			ALL
+COG	COG	REGISTRY_DATA.FTDEGCANRLTTP_A2	First Degree Relative(s) with Cancer			ALL
+COG	COG	REGISTRY_DATA.FTDEGCANRLTTP_A3	First Degree Relative(s) with Cancer			ALL
+COG	COG	REGISTRY_DATA.FTDEGCANRLTTP_A4	First Degree Relative(s) with Cancer			ALL
+COG	COG	REGISTRY_DATA.FTDEGCANRLTTP_A5	First Degree Relative(s) with Cancer			ALL
+COG	COG	REGISTRY_DATA.FTDEGCANRLTTP_A6	First Degree Relative(s) with Cancer			ALL
+COG	COG	REGISTRY_DATA.PTCGTABNMLTP_A1	Known Structural Defects			ALL
+COG	COG	REGISTRY_DATA.PTCGTABNMLTP_A2	Known Structural Defects			ALL
+COG	COG	REGISTRY_DATA.PTCGTABNMLTP_A3	Known Structural Defects			ALL
+COG	COG	REGISTRY_DATA.PTCGTABNMLTP_A4	Known Structural Defects			ALL
+COG	COG	REGISTRY_DATA.PTCGTABNMLTP_A5	Known Structural Defects			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A01	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A02	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A03	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A04	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A05	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A06	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A07	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A08	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A09	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A10	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A11	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A12	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A13	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A14	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.PTGNTCSYDDXTP_A15	Known Genetic Syndromes			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A01	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A02	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A03	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A04	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A05	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A06	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A07	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A08	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A09	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A10	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A11	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A12	Known Autoimmune Diseases			ALL
+COG	COG	REGISTRY_DATA.AUTO_IMMU_DIS_TYP_A13	Known Autoimmune Diseases			ALL
+COG	COG	FOLLOW_UP.FSTLNTXINIDXADMCAT_A1	Treatment type			ALL
+COG	COG	FOLLOW_UP.FSTLNTXINIDXADMCAT_A2	Treatment type			ALL
+COG	COG	FOLLOW_UP.FSTLNTXINIDXADMCAT_A3	Treatment type			ALL
+COG	COG	FOLLOW_UP.FSTLNTXINIDXADMCAT_A4	Treatment type			ALL
+COG	COG	FOLLOW_UP.FSTLNTXINIDXADMCAT_A5	Treatment type			ALL
+COG	COG	FOLLOW_UP.PT_LOST_FU_IND_2	Was patient confirmed lost to follow-up since the most recent contact date?			ALL
+COG	COG	FOLLOW_UP.PT_FOL_CON_IND	Does patient plan to continue on Tracking Outcome?			ALL
+COG	COG	FOLLOW_UP.PTWDRWCSNTFUENDRPDIND	Did patient withdraw consent to all involvement in APEC14B1?			ALL
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A01	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A02	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A03	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A04	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A05	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A06	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A07	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A08	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A09	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A10	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A11	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A12	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A13	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A14	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A15	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A16	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A17	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A18	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A19	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A20	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A21	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A22	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A23	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A24	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A25	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A26	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A27	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A28	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A29	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A30	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A31	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A32	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A33	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A34	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A35	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A36	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A37	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A38	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A39	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A40	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A41	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A42	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A43	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A44	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A45	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A46	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A47	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A48	Agent administered			CNS
+COG	COG	Tx Chemo:CNS.AGT_ADM_NM_A49	Agent administered			CNS
+COG	COG	RADIATION_THERAPY.RT_TX_TP_A1	Type of Radiation Therapy			ALL
+COG	COG	RADIATION_THERAPY.RT_TX_TP_A2	Type of Radiation Therapy			ALL
+COG	COG	RADIATION_THERAPY.RT_TX_TP_A3	Type of Radiation Therapy			ALL
+COG	COG	RADIATION_THERAPY.RT_TX_TP_A4	Type of Radiation Therapy			ALL
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A01	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A02	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A03	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A04	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A05	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A06	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A07	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A08	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A09	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A10	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A11	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A12	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A13	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A14	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.MET_DZ_ANAT_SITE_NM_A15	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A01	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A02	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A03	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A04	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A05	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A06	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A07	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A08	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A09	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A10	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A11	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A12	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A13	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A14	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A15	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A16	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A17	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A18	Genetic Alteration/Predisposition			STS
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.STSNPLMCRPRGBIMKNM_A19	Genetic Alteration/Predisposition			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A01	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A02	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A03	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A04	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A05	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A06	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A07	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A08	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A09	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A10	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A11	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A12	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A13	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A14	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A15	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A16	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A17	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A18	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A19	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A20	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A21	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A22	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A23	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A24	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A25	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A26	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A27	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A28	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A29	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A30	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A31	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A32	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A33	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A34	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A35	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A36	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A37	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A38	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A39	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A40	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A41	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A42	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A43	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A44	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A45	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A46	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A47	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A48	Agent administered			STS
+COG	COG	TX_CHEMO_SOFT_TISSUE_SARCOMA.AGT_ADM_NM_A49	Agent administered			STS
+COG	COG	RLP_PROG_CNS.MET_REL_PROG_LOC_CATE_A1	Location CNS Relapse/Progression			CNS
+COG	COG	RLP_PROG_CNS.MET_REL_PROG_LOC_CATE_A2	Location CNS Relapse/Progression			CNS
+COG	COG	RLP_PROG_CNS.MET_REL_PROG_LOC_CATE_A3	Location CNS Relapse/Progression			CNS
+COG	COG	RLP_PROG_CNS.MET_REL_PROG_LOC_CATE_A4	Location CNS Relapse/Progression			CNS
+COG	COG	RLP_PROG_CNS.MET_REL_PROG_LOC_CATE_A5	Location CNS Relapse/Progression			CNS
+COG	COG	RLP_PROG_CNS.MET_REL_PROG_LOC_CATE_A6	Location CNS Relapse/Progression			CNS
+COG	COG	RLP_PROG_CNS.MET_REL_PROG_LOC_CATE_A7	Location CNS Relapse/Progression			CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.SUPPTU_QVAL_TULGG_OPTCGLI	Is the target low grade glioma (LGG) an optic pathway glioma (OPG)?			CNS
+COG	COG	CNS_DIAGNOSIS_DETAIL.SUPPTU_QVAL_TUDMG	Is the tumor a diffuse midline glioma (DMG)?			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.PR_PRTYP_DXMETH_TUHSTO	Diagnosis Method			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.PR_PRTYP_DXMETH_IMG	Diagnosis Method			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.PR_PRTYP_DXMETH_TUMK	Diagnosis Method			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_PRMTUM_BRAININFRT	Primary Tumor Location			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_PRMTUM_BRAINSUPRT	Primary Tumor Location			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_PRMTUM_SPNLCRD	Primary Tumor Location			CNS
+COG	COG	ON_STUDY_DX.SUPPTU_QVAL_TUPTDZSTG	INRGSS stage			NBL
+COG	COG	ON_STUDY_DX.MH_MHOCCUR_DZSYMP	Does the patient have MS tumor - related symptoms (MS tumors only)			NBL
+COG	COG	ON_STUDY_DX.TU_TUORRES_SIZE	Tumor Size at Diagnosis (For L1 tumors only)			NBL
+COG	COG	ON_STUDY_DX.PR_PRTYP_DXMETH_PTB	Diagnosis Method			NBL
+COG	COG	ON_STUDY_DX.PR_PRTYP_DXMETH_BMA	Diagnosis Method			NBL
+COG	COG	ON_STUDY_DX.PR_PRTYP_DXMETH_NST	Diagnosis Method			NBL
+COG	COG	ON_STUDY_DX.PR_PRTYP_DXMETH_CBB	Diagnosis Method			NBL
+COG	COG	ON_STUDY_DX.PR_PRTYP_DXMETH_NON	Diagnosis Method			NBL
+COG	COG	ON_STUDY_DX.PR_PRTYP_DXMETH_OTH	Diagnosis Method			NBL
+COG	COG	ON_STUDY_DX.PR_PRSCAT_EXT	Degree of primary tumor resection:			NBL
+COG	COG	ON_STUDY_DX.SUPPMH_QVAL_MHIDRF	Are imaging-defined risk factors present?			NBL
+COG	COG	ON_STUDY_DX.SUPPMH_QVAL_MHIDRF_LOG	Imaging Defined Risk Factors			NBL
+COG	COG	ON_STUDY_DX.SUPPTU_QVAL_TUICDOMRCD	Primary Disease Site Topography ICD-O			NBL
+COG	COG	ON_STUDY_DX.TU_TULOC_PRM	Primary Tumor Site/ location where majority of tumor bulk located			NBL
+COG	COG	ON_STUDY_DX.TU_TULOC_METSDZ_BONE	Primary Tumor Site/ location where majority of tumor bulk located			NBL
+COG	COG	ON_STUDY_DX.TU_TULOC_METSDZ_BMW	Primary Tumor Site/ location where majority of tumor bulk located			NBL
+COG	COG	ON_STUDY_DX.TU_TULOC_METSDZ_DLN	Primary Tumor Site/ location where majority of tumor bulk located			NBL
+COG	COG	ON_STUDY_DX.TU_TULOC_METSDZ_LIV	Primary Tumor Site/ location where majority of tumor bulk located			NBL
+COG	COG	ON_STUDY_DX.TU_TULOC_METSDZ_SKIN	Primary Tumor Site/ location where majority of tumor bulk located			NBL
+COG	COG	ON_STUDY_DX.TU_TULOC_METSDZ_LUNG	Primary Tumor Site/ location where majority of tumor bulk located			NBL
+COG	COG	ON_STUDY_DX.TU_TULOC_METSDZ_CNSP	Primary Tumor Site/ location where majority of tumor bulk located			NBL
+COG	COG	ON_STUDY_DX.TU_TULOC_METSDZ_CNSL	Primary Tumor Site/ location where majority of tumor bulk located			NBL
+COG	COG	ON_STUDY_DX.TU_TULOC_METSDZ_OTH	Primary Tumor Site/ location where majority of tumor bulk located			NBL
+COG	COG	ON_STUDY_DX.MH_MHOCCUR_OMAS	Has patient been diagnosed with Opsoclonus myoclonus ataxia syndrome (OMAS)?			NBL
+COG	COG	ON_STUDY_DX_SOFT_TISSUE_SARCOMA.FRST_DX_SURG_IND	Was surgery performed at diagnosis?			STS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_LOCMETSDZ_BRAIN	Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_LOCMETSDZ_SPCRD	Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_LOCMETSDZ_CSF	Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_LOCMETSDZ_EXTRA_CNS	Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_FRONTAL	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_PARIETAL	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_TEMPORAL	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_OCCIPITAL	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_BSGLG	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_HYPOTHALAMUS	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_OPTCNRV	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_PINEAL	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_SUPRASELLAR	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_MIDBRAIN	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_PONS	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_MEDULLA	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_CEREBELLUM	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_VENT_LAT	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_VENT_3RD	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_LPTMNGL	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_SPCRD_CERVCL	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_SPCRD_THORC	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_SPCRD_LMB	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_SPCRD_CADEQN	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_EXTRA_CNS	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_OTHER	Specific Location Metastatic Disease			CNS
+COG	COG	CNS_ON_STUDY_INITIAL_DIAGNOSIS.TU_TULOC_METSDZ_NA	Specific Location Metastatic Disease			CNS
+COG	COG	RETINOBLASTOMA.RET_MET_DZ_ANAT_SITE_NM_A1	Location Metastatic Disease			RARE
+COG	COG	RETINOBLASTOMA.RET_MET_DZ_ANAT_SITE_NM_A2	Location Metastatic Disease			RARE
+COG	COG	RETINOBLASTOMA.RET_MET_DZ_ANAT_SITE_NM_A3	Location Metastatic Disease			RARE
+COG	COG	RETINOBLASTOMA.RET_MET_DZ_ANAT_SITE_NM_A4	Location Metastatic Disease			RARE
+COG	COG	RETINOBLASTOMA.RET_MET_DZ_ANAT_SITE_NM_A5	Location Metastatic Disease			RARE
+COG	COG	RETINOBLASTOMA.RET_MET_DZ_ANAT_SITE_NM_A6	Location Metastatic Disease			RARE
+COG	COG	RETINOBLASTOMA.RET_MET_DZ_ANAT_SITE_NM_A7	Location Metastatic Disease			RARE
+COG	COG	RETINOBLASTOMA.RET_MET_DZ_ANAT_SITE_NM_A8	Location Metastatic Disease			RARE
+COG	COG	RETINOBLASTOMA.RET_MET_DZ_ANAT_SITE_NM_A9	Location Metastatic Disease			RARE
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.RELPROGLCLCAT_A1	STS Relapse/Progression Category			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.RELPROGLCLCAT_A2	STS Relapse/Progression Category			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.RELPROGLCLCAT_A3	STS Relapse/Progression Category			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A01	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A02	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A03	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A04	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A05	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A06	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A07	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A08	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A09	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A10	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A11	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A12	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A13	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A14	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_SOFT_TISSUE_SARCOMA.DZPROG_REL_SITE_NM_A15	Location Relapse_Progression			STS
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A01	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A02	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A03	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A04	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A05	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A06	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A07	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A08	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A09	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A10	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A11	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A12	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A13	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A14	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A15	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	NEUROENDOCRINE_TUMORS.NEPNENDCLXANTOST_A16	Neuroendocrine Tumors Disease/Site			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A01	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A02	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A03	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A04	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A05	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A06	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A07	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A08	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A09	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A10	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A11	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A12	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A13	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A14	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A15	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A16	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A17	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A18	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A19	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A20	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A21	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A22	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A23	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A24	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A25	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A26	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A27	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A28	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A29	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A30	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A31	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A32	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A33	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A34	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A35	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A36	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A37	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A38	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A39	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A40	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A41	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A42	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A43	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A44	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A45	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A46	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A47	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A48	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A49	Agent administered			RARE
+COG	COG	TX_CHEMO_RARE_TUMORS.AGT_ADM_NM_A50	Agent administered			RARE
+COG	COG	RLP_PROG_RARE_TUMORS.RELPROGLCLCAT_A1	Location Relapse_Progression			RARE
+COG	COG	RLP_PROG_RARE_TUMORS.RELPROGLCLCAT_A2	Location Relapse_Progression			RARE
+COG	COG	RLP_PROG_RARE_TUMORS.RELPROGLCLCAT_A3	Location Relapse_Progression			RARE
+COG	COG	RLP_PROG_RARE_TUMORS.RELPROGLCLCAT_A4	Location Relapse_Progression			RARE
+COG	COG	RLP_PROG_RARE_TUMORS.RELPROGLCLCAT_A5	Location Relapse_Progression			RARE
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.TUMOR_SITE_LCTN_NM	Primary Tumor Location			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.TUMOR_A_SPEC	Primary Tumor Location			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.PRM_TUMOR_LATERAL_TP	Laterality			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.TUMOR_GP_ST	Tumor Stage			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.MET_DZ_ANAT_SITE_NM_A1	Location Metastatic Disease			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.MET_DZ_ANAT_SITE_NM_A2	Location Metastatic Disease			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.MET_DZ_ANAT_SITE_NM_A3	Location Metastatic Disease			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.MET_DZ_ANAT_SITE_NM_A4	Location Metastatic Disease			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.MET_DZ_ANAT_SITE_NM_A5	Location Metastatic Disease			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.MET_DZ_ANAT_SITE_NM_A6	Location Metastatic Disease			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.MET_DZ_ANAT_SITE_NM_A7	Location Metastatic Disease			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.MET_DZ_ANAT_SITE_NM_A8	Location Metastatic Disease			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.MET_DZ_ANAT_SITE_SP	Location Metastatic Disease			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LP_AFP_OUT_VAL_X1	Alphafetoprotein (AFP) ng/ml value prior to any surgical intervention			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LP_AFP_OUT_VAL_X2	Alphafetoprotein (AFP) ng/ml value prior to start of chemotherapy			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LP_AFP_OUT_ULN_VAL	Alphafetoprotein (AFP) ng/ml ULN			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LP_BHCG_OUTCOME_LABS_IND_2	Was Beta-hCG evaluated prior to study entry?			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LP_SERUM_BHCG_RSLT_HCGB_VALU_X1	Beta-HCG (mIU/mL) value prior to any surgical intervention			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LP_SERUM_BHCG_RSLT_HCGB_VALU_X2	Beta-HCG (mIU/mL) value prior to start of chemotherapy			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LP_BHCG_ULN_VALU	Beta-HCG (mIU/mL) ULN			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LDHDONE	Was lactate dehydrogenase (LDH) collected?			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LAB_LDH_RSL_UNS_VA_X1	LDH (IU/ml) value prior to any surgical intervention			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LAB_LDH_RSL_UNS_VA_X2	LDH (IU/ml) value prior to start of chemotherapy			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LA_LDH_RSL_ULN_VAL	LDH (IU/ml) ULN			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.CYT_PER_RES_POS_IND3	Positive peritoneal cytology?			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LNBX_SMPLG_IND2	Was a lymph node biopsy performed?			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.LN_POS_GROS_INV_IND2	Were the nodes grossly positive?			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.FRST_DX_SURG_IND	Was surgery performed at diagnosis?			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.TUMOR_LYMVAC_INV_IND	Is there lymphovascular invasion?			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.YOLKSACTUMORPZTVAL	Percent yolk sac tumor			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.EMBRYONALCNMPCTVAL	Percent embryonal carcinoma			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.CHORIOCARCINOMAPCTVAL	Percent choriocarcinoma			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.SEMORDYSGERMPCTVAL	Percent seminoma or dysgerminoma			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.OTHNONGCTPCTVAL	Percent other non-germ cell tumor			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.HISTOLOGICTP	Histologic Type			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.TERATOMAPZT	Was teratoma present?			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.TERATOMAPZTCAT	Type of teratoma			CNS
+COG	COG	ON_STUDY_DX_GERM_CELL_TUMOR.IMMATURETERATOMAGDTXT	"If immature, Grade of immature teratoma"			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.TX_RCVD_YES_NO	"Was patient treated according to, but not enrolled on, a COG therapeutic study?"			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.COG_ID_ENUM	COG Anti-Cancer Therapeutic regimen administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.COG_ID_OTHER	"If Other, specify COG Protocol Number"			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.PRI_TX_RGM_SPEC	"If Other, specify treatment regimen"			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.NPROT_TX_ADM_IND_3	Was patient treated per a Non-COG anti-cancer treatment regimen?			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.NPROT_TX_ADM_NM	Select regimen administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.NPROT_TX_ADM_SPEC	Select regimen administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A01	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A02	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A03	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A04	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A05	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A06	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A07	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A08	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A09	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A10	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A11	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A12	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A13	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A14	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A15	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A16	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A17	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A18	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A19	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A20	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A21	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A22	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A23	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A24	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A25	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A26	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A27	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A28	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A29	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A30	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A31	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A32	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A33	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A34	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A35	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A36	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A37	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A38	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A39	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A40	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A41	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A42	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A43	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A44	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A45	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A46	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A47	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A48	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.AGT_ADM_NM_A49	Agent administered			CNS
+COG	COG	TX_CHEMO_GERM_CELL_TUMOR.O_CT_AGT_ADM_SPEC	Agent administered			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.REP_EVAL_PD_TP	Germ Cell RLP_PROG - APEC14B1 Reporting Period			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.PROG_REL_STAT	Select relapse/progression status			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.DZ_RECUR_PROG_DX_DT	Date of relapse or progression			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.DZPROG_REL_SITE_NM_A1	Location Relapse_Progression			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.DZPROG_REL_SITE_NM_A2	Location Relapse_Progression			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.DZPROG_REL_SITE_NM_A3	Location Relapse_Progression			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.DZPROG_REL_SITE_NM_A4	Location Relapse_Progression			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.DZPROG_REL_SITE_NM_A5	Location Relapse_Progression			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.DZPROG_REL_SITE_NM_A6	Location Relapse_Progression			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.DZPROG_REL_SITE_NM_A7	Location Relapse_Progression			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.DZPROG_REL_SITE_NM_A8	Location Relapse_Progression			CNS
+COG	COG	RLP_PROG_GERM_CELL_TUMOR.DZPROG_REL_SITE_TXT	Location Relapse_Progression			CNS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.MET_DZ_ANAT_SITE_NM_A1	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.MET_DZ_ANAT_SITE_NM_A2	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.MET_DZ_ANAT_SITE_NM_A3	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.MET_DZ_ANAT_SITE_NM_A4	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.MET_DZ_ANAT_SITE_NM_A5	Location Metastatic Disease			STS
+COG	COG	ON_STUDY_DX_OSTEOGENIC_SARCOMA.MET_DZ_ANAT_SITE_NM_A6	Location Metastatic Disease			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.TX_RCVD_YES_NO	"Was patient treated according to, but not enrolled on, a COG therapeutic study?"			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.COG_ID_ENUM	COG Anti-Cancer Therapeutic regimen administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.COG_ID_OTHER	"If Other, specify COG Protocol Number"			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.PRI_TX_RGM_SPEC	"If Other, specify treatment regimen"			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.NPROT_TX_ADM_IND_3	Was patient treated per a Non-COG anti-cancer treatment regimen?			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.NPROT_TX_ADM_NM	Select regimen administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.NPROT_TX_ADM_SPEC	Select regimen administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A01	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A02	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A03	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A04	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A05	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A06	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A07	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A08	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A09	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A10	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A11	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A12	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A13	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A14	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A15	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A16	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A17	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A18	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A19	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A20	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A21	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A22	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A23	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A24	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A25	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A26	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A27	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A28	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A29	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A30	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A31	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A32	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A33	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A34	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A35	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A36	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A37	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A38	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A39	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A40	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A41	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A42	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A43	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A44	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A45	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A46	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A47	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A48	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.AGT_ADM_NM_A49	Agent administered			STS
+COG	COG	TX_CHEMO_OSTEOSARCOMA.O_CT_AGT_ADM_SPEC	Agent administered			STS
+COG	COG	RLP_PROG_OSTEOSARCOMA.REP_EVAL_PD_TP	Osteosarcoma RLP/PRG - APEC14B1 Reporting Period			STS
+COG	COG	RLP_PROG_OSTEOSARCOMA.PROG_REL_STAT	Select relapse/progression status			STS
+COG	COG	RLP_PROG_OSTEOSARCOMA.DZ_RECUR_PROG_DX_DT	Date of relapse or progression			STS
+COG	COG	RLP_PROG_OSTEOSARCOMA.DZPROG_REL_SITE_NM_A1	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_OSTEOSARCOMA.DZPROG_REL_SITE_NM_A2	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_OSTEOSARCOMA.DZPROG_REL_SITE_NM_A3	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_OSTEOSARCOMA.DZPROG_REL_SITE_NM_A4	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_OSTEOSARCOMA.DZPROG_REL_SITE_TXT	Location Relapse_Progression			STS
+COG	COG	RLP_PROG_OSTEOSARCOMA.RELAP_LCTN_TP	What is the relapse/progression region?			STS
+COG	COG	RLP_PROG_OSTEOSARCOMA.LUNG_DZ_STAT	What is the relapse/progression region?			STS
+COG	COG	RLP_PROG_OSTEOSARCOMA.NEW_CA_SITE_ICD_O_CD	Topography ICD-O Code			STS
+COG	COG	DEATH.REP_EVAL_PD_TP	Death APEC14B1 Reporting Period			ALL
+COG	COG	REGISTRY_DATA.CNCVASTRPDCTECH	Was patient conceived through use of assisted reproductive technology?			ALL
+COG	COG	REGISTRY_DATA.PTASTRPDCTECHUSTP	Type of reproductive procedure			ALL
+COG	COG	REGISTRY_DATA.PTASTRPDCTECHUSSP	Type of reproductive procedure			ALL

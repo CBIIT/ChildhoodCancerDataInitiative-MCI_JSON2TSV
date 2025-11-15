@@ -203,9 +203,9 @@ def igm_to_tsv(
         ]
     elif assay_type == "igm.tumor_normal":
         results_types = [
-            "amended_germline_results",
-            "amended_somatic_cnv_results",
-            "amended_somatic_results",
+            #"amended_germline_results",
+            #"amended_somatic_cnv_results",
+            #"amended_somatic_results",
             "germline_cnv_results",
             "germline_results",
             "somatic_cnv_results",
@@ -318,7 +318,7 @@ def igm_results_variants_parsing(
                     for result in form[results_type]["variants"]:
                         if results_type in [
                             "somatic_cnv_results",
-                            "amended_somatic_cnv_results",
+                            #"amended_somatic_cnv_results",
                             "germline_cnv_results",
                         ]:
                             flatten_temp = flatten_igm(result, parse_type="cnv")

@@ -50,9 +50,34 @@ def rem_single_quotes(value: list):
         str: String representation of list with single quotes removed
     """
     if isinstance(value, list):
+        if len(value) == 0:
+            return ""
         return "[" + ", ".join([str(v) for v in value]) + "]"
     else:
         return value
+
+def gene_names(text: str) -> list:
+    """
+    Extract out gene names from free text field
+    
+    Args:
+        text (str): Free text field potentially containing gene names
+    Returns:
+        list: List of gene names extracted from text
+    """
+
+    #Remove former names
+    current = re.sub(r'\(formerly [^)]+\)', '', text)
+    
+    #Regex for gene names to extract
+    pattern = re.compile(r"\b[A-Z]{2,6}[0-9]*(?:-[A-Z0-9]+)?\b")
+    matches = pattern.findall(current)
+    
+    # Remove unwanted matches
+    rem_match = {"I","II","III","IV","V","VI","VII","VIII","IX","X","LOH","NONE","DNA","NOTE","IHC","CNV","NGS"}
+    genes = [m for m in matches if m not in rem_match]
+    
+    return genes
 
 def flatten_igm(json_obj: dict, parent_key="", flatten_dict=None):
     """Recursive function to un-nest a nested dictionary for WXS and Archer Fusion
@@ -210,6 +235,7 @@ def igm_to_tsv(
             "germline_results",
             "somatic_cnv_results",
             "somatic_results",
+            "pertinent_negatives_results",
         ]
     elif assay_type == "igm.methylation":
         results_types = ['final_diagnosis']
@@ -236,7 +262,7 @@ def igm_to_tsv(
         
         # for cols with 'disease_associated_gene_content' in name, remove single quotes from list str representation
         for col in concat_variant_result_df.columns:
-            if 'disease_associated_gene_content' in col:
+            if 'disease_associated_gene_content' in col or 'pertinent_negatives_results' in col:
                 concat_variant_result_df[col] = concat_variant_result_df[col].apply(rem_single_quotes)
         
         concat_variant_result_df_file_name = f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_{result_type}_variant_data_{timestamp}.tsv"
@@ -307,31 +333,30 @@ def igm_results_variants_parsing(
         raise ValueError(f"Form is not of type dict.")
 
     all_output = {}  # init dict of dfs of each results section
+    
+    def writer(header, fields):
+        return dict(zip(header, fields))
+    
+    # init list of genes found with alteration
+    found_genes = []
+    
     core_header = ["form_name"] + [field for field in CORE_FIELDS]
     core_fields = [form_name] + [form[field] for field in CORE_FIELDS]
     for results_type in results_types:
         output = []  # init list of dicts to make df of form specific results
-        found = False  # if results/variants section found or not
         if results_type in form.keys():
             if assay_type == "igm.methylation":
                 if len(form[results_type]) > 0:
-                    found = True
-                    temp_header = list(form[results_type].keys())
-                    temp_fields = [null_n_strip(i) for i in form[results_type].values()]
-                    output.append(
-                        dict(
-                            zip(
-                                core_header + temp_header, core_fields + temp_fields
-                            )
-                        )
-                    )
+                    output.append(writer(
+                        core_header + list(form[results_type].keys()),
+                        core_fields + [null_n_strip(i) for i in form[results_type].values()],
+                    ))
 
             else:  # archer fusion and wxs
                 if (
                     "variants" in form[results_type].keys()
                     and len(form[results_type]["variants"]) > 0
                 ):
-                    found = True
                     for result in form[results_type]["variants"]:
                         if results_type in [
                             "somatic_cnv_results",
@@ -339,40 +364,40 @@ def igm_results_variants_parsing(
                         ]:
                             flatten_temp = flatten_igm(result)
                             genes = flatten_temp["disease_associated_gene_content"]
+                            found_genes.extend(genes)
                             flatten_temp.pop("disease_associated_gene_content")
-                            #for gene in genes:
-                            temp_header = list(flatten_temp.keys()) + ["disease_associated_gene_content"]
-                            temp_fields = [
-                                null_n_strip(i) for i in flatten_temp.values()
-                            ] + [genes]
-                            output.append(
-                                dict(
-                                    zip(
-                                        core_header + temp_header,
-                                        core_fields + temp_fields,
-                                    )
-                                )
-                            )
+                            output.append(writer(
+                                core_header + list(flatten_temp.keys()) + ["disease_associated_gene_content"],
+                                core_fields + [null_n_strip(i) for i in flatten_temp.values()] + [genes],
+                            ))
                         else:
                             flatten_temp = flatten_igm(result)
-                            temp_header = list(flatten_temp.keys())
-                            temp_fields = [
-                                null_n_strip(i) for i in flatten_temp.values()
-                            ]
-                            output.append(
-                                dict(
-                                    zip(
-                                        core_header + temp_header,
-                                        core_fields + temp_fields,
-                                    )
-                                )
-                            )
+                            found_genes.extend(gene_names(flatten_temp.get("gene", "")))
+
+                            output.append(writer(
+                                core_header + list(flatten_temp.keys()),
+                                core_fields + [null_n_strip(i) for i in flatten_temp.values()],
+                            ))
+                elif results_type == 'pertinent_negatives_results':
+                    if len(form[results_type].get("summary", [])) > 0:
+                        
+                        # extract out gene names from summary section
+                        absent_genes_flat = [gene for sublist in [gene_names(i) for i in form[results_type]["summary"]] for gene in sublist]
+                        
+                        # remove any genes that were found with alterations from absent genes list
+                        pertinent_neg_genes = list(set(absent_genes_flat) - set(found_genes))
+                        
+                        output.append(writer(
+                            core_header + ["pertinent_negatives_results_genes"],
+                            core_fields + [pertinent_neg_genes],
+                        ))
+                        
+                else:
+                    # no variants found in results section, append df indicating no data for file
+                    output.append(writer(core_header, core_fields))
         else:
-            found = False
-        if (
-            found == False
-        ):  # if never found results section, append df indicating no data for file
-            output.append(dict(zip(core_header, core_fields)))
+            # if never found results section, append df indicating no data for file
+            output.append(writer(core_header, core_fields))
 
         all_output[results_type] = pd.DataFrame(output)
 

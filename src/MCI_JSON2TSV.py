@@ -231,7 +231,6 @@ def json2tsv(json_dir_path, output_path):
         igm_error_count = 0
         
     # perform COG and IGM data integration if both COG and IGM JSONs were present
-    print(integration_files)
     integrate = cog_igm_integrate(cog_success_count, igm_success_count, integration_files, output_path, get_time)
     
     if integrate:

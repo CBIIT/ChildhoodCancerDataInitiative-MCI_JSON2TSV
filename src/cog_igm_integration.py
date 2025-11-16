@@ -238,7 +238,6 @@ def cog_igm_integrate(cog_success_count, igm_success_count, integration_files, o
 
     # read in each file, parse out columns, merge on participant, remove dups
     for k, v in integration_files.items():
-        print(f"Processing file for source: {k} at path: {v}")
         if k == 'COG':
             # data starts at row 2, drop rows missing upi
             temp_df = pd.read_csv(v, sep="\t", skiprows=[1,2], low_memory=False)
@@ -271,7 +270,6 @@ def cog_igm_integrate(cog_success_count, igm_success_count, integration_files, o
             parse_cols = cols
         
         # subset
-        print(k)
         temp_df = temp_df[parse_cols]
         
         # check for multi-field labels
@@ -344,7 +342,8 @@ def cog_igm_integrate(cog_success_count, igm_success_count, integration_files, o
             "germline_results": "IGM TmrNmrl Germline Variants",
             "somatic_cnv_results": "IGM TmrNmrl Soma CNV Variants",
             "somatic_results": "IGM TmrNmrl Somatic Variants",
-            "final_diagnosis": "IGM Methylation Classifier"
+            "final_diagnosis": "IGM Methylation Classifier",
+            "pertinent_negatives_results": "IGM Pertinent Negatives Results"
         }
         
         

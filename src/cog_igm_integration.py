@@ -263,7 +263,7 @@ def cog_igm_integrate(cog_success_count, igm_success_count, integration_files, o
         elif not all(col in temp_df.columns for col in cols) and k != 'COG':
             # log info that file has no data to parse as not all cols
             # were produced from IGM parsing
-            logger.info(f"Not all columns specified in integration mapping found in {k} dataframe. Source data may not have variants for these participants. Skipping {k} dataframe for integration.")
+            logger.info(f"Not all columns specified in integration mapping found in {k} dataframe. Source data may not have had variants/alterations identified for these participants. Skipping {k} dataframe for integration.")
             
             # skip rest of loop
             continue

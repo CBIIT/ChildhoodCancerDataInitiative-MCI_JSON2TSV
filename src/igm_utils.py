@@ -54,14 +54,13 @@ def rem_single_quotes(value: list):
     else:
         return value
 
-def flatten_igm(json_obj: dict, parent_key="", flatten_dict=None, parse_type=None):
+def flatten_igm(json_obj: dict, parent_key="", flatten_dict=None):
     """Recursive function to un-nest a nested dictionary for WXS and Archer Fusion
 
     Args:
         json_obj (dict): Nested JSON IGM form
         parent_key (str, optional): The inherited key from previous recursive run. Defaults to ''.
         flatten_dict (dict, optional): The inherited 'flattened' JSON from previous recursive run. Defaults to {}.
-        parse_type (str, optional): When specified as 'cnv', for any key == 'disease_associated_gene_content', do not flatten value for that key
 
     Returns:
         dict: Un-nested dict/JSON
@@ -75,38 +74,30 @@ def flatten_igm(json_obj: dict, parent_key="", flatten_dict=None, parse_type=Non
     if isinstance(json_obj, dict):
         for key, value in json_obj.items():
             if key == "disease_associated_gene_content":
-                #if (
-                    #parse_type == "cnv"
-                #):  # preserve gene list as list to iterate thru for results parsing
                 new_key = f"{parent_key}.{key}" if parent_key else key
                 flatten_dict[new_key] = value
-                #else:
-                    #new_key = f"{parent_key}.{key}" if parent_key else key
-                    #flatten_igm(value, new_key, flatten_dict, parse_type)
             if not isinstance(value, dict):
                 if not isinstance(value, list):
                     new_key = f"{parent_key}.{key}" if parent_key else key
                     flatten_dict[new_key] = null_n_strip(value)
-                    flatten_igm(null_n_strip(value), new_key, flatten_dict, parse_type)
+                    flatten_igm(null_n_strip(value), new_key, flatten_dict)
                 else:
                     flatten_igm(
                         value,
                         f"{parent_key}.{key}" if parent_key != "" else key,
                         flatten_dict,
-                        parse_type,
                     )  # Recurse into nested dictionary
             else:
                 flatten_igm(
                     value,
                     f"{parent_key}.{key}" if parent_key != "" else key,
                     flatten_dict,
-                    parse_type,
                 )  # Recurse into nested dictionary
 
     # if value of key: value pair is a list obj
     elif isinstance(json_obj, list):
         if len(json_obj) > 0:
-            if "disease_associated_gene_content" in parent_key: #and parse_type == "cnv":
+            if "disease_associated_gene_content" in parent_key: 
                 pass  # gene list preserved as list in above logic
             else:
                 for i, item in enumerate(json_obj):
@@ -114,14 +105,14 @@ def flatten_igm(json_obj: dict, parent_key="", flatten_dict=None, parse_type=Non
                         if not isinstance(item, list):
                             new_key = f"{parent_key}.{i}" if parent_key else str(i)
                             flatten_dict[new_key] = null_n_strip(item)
-                            flatten_igm(item, new_key, flatten_dict, parse_type)
+                            flatten_igm(item, new_key, flatten_dict)
                         else:
                             flatten_igm(
-                                item, f"{parent_key}.{i}", flatten_dict, parse_type
+                                item, f"{parent_key}.{i}", flatten_dict
                             )  # Recurse into list elements
                     else:
                         flatten_igm(
-                            item, f"{parent_key}.{i}", flatten_dict, parse_type
+                            item, f"{parent_key}.{i}", flatten_dict
                         )  # Recurse into list elements
         else:  # empty list variables
             flatten_dict.update({parent_key: ""})
@@ -346,7 +337,7 @@ def igm_results_variants_parsing(
                             "somatic_cnv_results",
                             "germline_cnv_results",
                         ]:
-                            flatten_temp = flatten_igm(result) #, parse_type="cnv")
+                            flatten_temp = flatten_igm(result)
                             genes = flatten_temp["disease_associated_gene_content"]
                             flatten_temp.pop("disease_associated_gene_content")
                             #for gene in genes:

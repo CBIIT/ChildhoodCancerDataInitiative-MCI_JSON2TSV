@@ -69,11 +69,11 @@ output_path/
 │   ├── COG_form_level_TSVs_<date>_<time>/ # directory of tab-delimited COG form level parsings 
 │   ├── COG_JSON_table_conversion_decoded_<date>_<time>.tsv # Tab-delimited file of COG report parsings
     └── COG_saslabels_<date>_<time>.tsv # Tab-delimited file of descriptive labels for COG fields
-├── COG_IGM_integrated_<date>_<time>.xlsx # integrated XLSX of COG and IGM data; generated if both files types provided in input
+├── COG_IGM_integrated_<date>_<time>.xlsx # Integrated XLSX of COG and IGM data; generated if both files types provided in input
 ├── IGM/ 
 │   ├── IGM_<assay>_JSON_table_conversion_<date>_<time>.tsv # Tab-delimited file of assay parsings from IGM report; a file for each assay will be generated. 
-│   └── IGM_results_level_TSVs_<date>_<time>/ # directory of tab-delimited IGM form variant-level parsings
-└── JSON2TSV_<date>_<time>.log # log file
+│   └── IGM_results_level_TSVs_<date>_<time>/ # Directory of tab-delimited IGM form variant-level parsings
+└── JSON2TSV_<date>_<time>.log # Log file
 ```
 
 ## Questions or Contributions

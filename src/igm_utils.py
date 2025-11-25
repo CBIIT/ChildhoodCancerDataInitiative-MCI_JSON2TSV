@@ -164,6 +164,24 @@ def full_form_convert(flatten_dict: dict):
         logger.error(f"Error converting flattened JSON to pd.DataFrame: {e}")
         return pd.DataFrame()
 
+def process_amendments(notes: list):
+    """Process amendment notes to more human readable
+
+    Args:
+        notes (list): Array of amendment notes
+
+    Returns:
+        str: Formatted amendment notes
+    """
+    if len(notes) == 0:
+        return ""
+
+    formatted_notes = []
+    
+    for note in notes:
+        formatted_notes.append(f"{note['amendReason']} ({note['previousSignoutDt']}): {note['amendComment']}")
+    
+    return ";".join(formatted_notes)
 
 def igm_to_tsv(
     dir_path: str,
@@ -259,6 +277,8 @@ def igm_to_tsv(
     for result_type in op_dict.keys():
         concat_variant_result_df = pd.concat(op_dict[result_type])
         concat_variant_result_df = concat_variant_result_df.map(fix_encoding_issues)
+        
+        concat_variant_result_df['amendments'] = concat_variant_result_df['amendments'].apply(process_amendments)
         
         # for cols with 'disease_associated_gene_content' in name, remove single quotes from list str representation
         for col in concat_variant_result_df.columns:

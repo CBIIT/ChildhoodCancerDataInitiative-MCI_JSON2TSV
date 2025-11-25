@@ -6,6 +6,7 @@ import os
 import argparse
 import logging
 from datetime import datetime
+from cog_utils import fix_encoding_issues
 
 import pandas as pd
 
@@ -231,7 +232,7 @@ def cog_igm_integrate(cog_success_count, igm_success_count, integration_files, o
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    # Construct full path to the TSV file
+    # Construct full path to the dict file
     file_path = os.path.join(script_dir, 'integration_mapping_dict.xlsx')
 
     int_df = pd.read_excel(file_path)
@@ -240,9 +241,9 @@ def cog_igm_integrate(cog_success_count, igm_success_count, integration_files, o
     for k, v in integration_files.items():
         if k == 'COG':
             # data starts at row 2, drop rows missing upi
-            temp_df = pd.read_csv(v, sep="\t", skiprows=[1,2], low_memory=False)
+            temp_df = pd.read_csv(v, sep="\t", skiprows=[1,2], low_memory=False).map(fix_encoding_issues)
         else:
-            temp_df = pd.read_csv(v, sep="\t", low_memory=False)
+            temp_df = pd.read_csv(v, sep="\t", low_memory=False).map(fix_encoding_issues)
             
             # remove all asterisks from data, either single or double (* or **)
             temp_df = temp_df.replace({r'\*{1,2}': ''}, regex=True)
@@ -289,7 +290,7 @@ def cog_igm_integrate(cog_success_count, igm_success_count, integration_files, o
                 # drop the individual cols
                 temp_df = temp_df.drop(columns=mult_cols)
 
-        # replace instances of 2+ , with only one
+        # replace instances of 2+ commas with only one
         temp_df = temp_df.replace({',{2,}': ','}, regex=True)
 
         # remove trailing or lone ',' in dataframe

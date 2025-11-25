@@ -144,6 +144,13 @@ def fix_encoding_issues(text):
         '\u2026': '...',  # ellipsis
         '“': '"',  # left double quote (alternative)
         '”': '"',  # right double quote (alternative)
+        '</p>': '',  # paragraph tags
+        '<p>': '',  # paragraph tags
+        '<strong>': '',  # strong tags
+        '</strong>': '',  # strong tags
+        '<em>': '',  # emphasis tags
+        '</em>': '',  # emphasis tags
+        '\n': ';'
     }
     
     for mangled, correct in encoding_fixes.items():
@@ -233,6 +240,9 @@ def pv_convert_checked_no_collapse(df: pd.DataFrame, sas_labels: pd.DataFrame):
     Args:
         df (pd.DataFrame): DataFrame containing the fields to check
         sas_labels (pd.DataFrame): DataFrame containing the SAS labels for the fields
+        
+    Returns:
+        pd.DataFrame: Updated dataframe with converted checked values
     """
     
     # find all columns in df that have checked or unchecked values in rows

@@ -102,7 +102,21 @@ def collapse_rows_to_wide(df, groupby_cols, agg_cols, delimiter=";"):
     return result
 
 
-def save_to_workbook(workbook_name, df, sheet_name, mode, reorder=None):
+def save_to_workbook(workbook_name: str, df: pd.DataFrame, sheet_name: str, mode: str, reorder=None):
+    """Save DataFrame to Excel workbook.
+
+    Args:
+        workbook_name (str): Name of workbook
+        df (pd.DataFrame): DataFrame to save
+        sheet_name (str): Name of sheet
+        mode (str): Mode to open workbook ('a' for append, 'w' for write)
+        reorder (list, optional): List of columns to reorder. Defaults to None.
+    Raises:
+        ValueError: If mode is not 'a' or 'w'
+    Returns:
+        None
+    """
+    
     # Only save if DataFrame is not empty
     if df.empty:
         logging.warning(f"Sheet '{sheet_name}' not saved because DataFrame is empty.")
@@ -145,6 +159,19 @@ def substudy_sheet(
     logger,
     other=False,
 ):
+    """Create and save substudy-specific integrated COG-IGM sheet.
+
+    Args:
+        substudy (str): Substudy name
+        int_df (pd.DataFrame): Integration DataFrame
+        df_list (list): List of DataFrames
+        igm_merged_df (pd.DataFrame): IGM merged DataFrame
+        workbook_name (str): Name of workbook
+        logger (logging.Logger): Logger instance
+        other (bool, optional): Flag for other. Defaults to False.
+    Returns:
+        None
+    """
 
     if other:
         ss_cols = int_df[int_df["substudy"] == "ALL"]["label"].to_list()
@@ -227,7 +254,7 @@ def substudy_sheet(
 
 ###### IGM COG INTEGRATION ######
 def cog_igm_integrate(
-    cog_success_count, igm_success_count, integration_files, output_path, get_time
+    cog_success_count: int, igm_success_count: int, integration_files: dict, output_path: str, get_time: str
 ):
     """Integrate COG and IGM data.
 

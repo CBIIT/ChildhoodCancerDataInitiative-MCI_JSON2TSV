@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-"""MCI_JSON2TSV.py: Script to transform clinical JSON files to TSV format.
-"""
+"""MCI_JSON2TSV.py: Script to transform clinical JSON files to TSV format."""
 
 ##############
 #
@@ -36,11 +35,10 @@ def refresh_date():
     today = today.strftime("%Y%m%d_%H%M%S")
     return today
 
-import pandas as pd
 
 import pandas as pd
 
-
+import pandas as pd
 
 
 def distinguisher(f_path: str, logger):
@@ -129,7 +127,6 @@ def json2tsv(json_dir_path, output_path):
 
     # init logging
     logger = logging.getLogger("MCI_JSON2TSV")
-    
 
     # logging config
     logging.basicConfig(
@@ -138,14 +135,14 @@ def json2tsv(json_dir_path, output_path):
         filemode="w",
         level=logging.INFO,
         format=">>> %(name)s - %(asctime)s - %(levelname)s - %(message)s\n",
-)
+    )
 
     logger.info("Running MCI_JSON2TSV.py ....")
     get_time = refresh_date()
 
     # tracking for COG IGM integration
     integration_files = {}
-    
+
     # make output_dir path if needed
     if not os.path.exists(output_path):
         os.mkdir(output_path)
@@ -163,8 +160,21 @@ def json2tsv(json_dir_path, output_path):
     json_sorted = distinguish(json_dir_path, logger)
 
     ## if len(cog_jsons) AND len(igm_json) == 0, call error and sysexit
-    #if len(json_sorted["cog"]) == 0 and len(json_sorted["igm"]) == 0:
-    if sum([len(json_sorted[k]) for k in ["cog", "igm.methylation", "igm.archer_fusion", "igm.tumor_normal"]]) == 0:
+    # if len(json_sorted["cog"]) == 0 and len(json_sorted["igm"]) == 0:
+    if (
+        sum(
+            [
+                len(json_sorted[k])
+                for k in [
+                    "cog",
+                    "igm.methylation",
+                    "igm.archer_fusion",
+                    "igm.tumor_normal",
+                ]
+            ]
+        )
+        == 0
+    ):
         sys.exit(
             f"\n\t>>> No COG or IGM JSON files to covert in input directory {json_dir_path}, please check and try again."
         )
@@ -177,11 +187,11 @@ def json2tsv(json_dir_path, output_path):
             os.mkdir(cog_op)
 
         # transform COG JSONs and concatenate
-        df_reshape, cog_flattened_file_name, cog_success_count, cog_error_count = cog_to_tsv(
-            json_dir_path, json_sorted["cog"], cog_op, get_time
+        df_reshape, cog_flattened_file_name, cog_success_count, cog_error_count = (
+            cog_to_tsv(json_dir_path, json_sorted["cog"], cog_op, get_time)
         )
 
-        integration_files['COG'] = cog_flattened_file_name
+        integration_files["COG"] = cog_flattened_file_name
 
         # perform form-level parsing for COG JSONs
         if len(df_reshape) > 0:
@@ -229,16 +239,22 @@ def json2tsv(json_dir_path, output_path):
     else:
         igm_success_count = 0
         igm_error_count = 0
-        
+
     # perform COG and IGM data integration if both COG and IGM JSONs were present
-    integrate = cog_igm_integrate(cog_success_count, igm_success_count, integration_files, output_path, get_time)
-    
+    integrate = cog_igm_integrate(
+        cog_success_count, igm_success_count, integration_files, output_path, get_time
+    )
+
     if integrate:
         print("\n\t>>> COG and IGM data integration complete.")
         logger.info("COG and IGM data integration complete.")
     else:
-        print("\n\t>>> COG and IGM data integration not performed. If expected to be performed, please check log for errors.")
-        logger.info("COG and IGM data integration not performed. If expected to be performed, please check log for errors.")
+        print(
+            "\n\t>>> COG and IGM data integration not performed. If expected to be performed, please check log for errors."
+        )
+        logger.info(
+            "COG and IGM data integration not performed. If expected to be performed, please check log for errors."
+        )
 
     if len(json_sorted["other"]) > 0:
         # save list of others to output dir
@@ -267,9 +283,7 @@ def json2tsv(json_dir_path, output_path):
         )
     else:
         print(f"\t>>> # COG JSON Files NOT Transformed (Errors): {cog_error_count}")
-        logger.info(
-            f"# COG JSON Files NOT Transformed (Errors): {cog_error_count}"
-        )
+        logger.info(f"# COG JSON Files NOT Transformed (Errors): {cog_error_count}")
     print(f"\t>>> # IGM JSON Files Successfully Transformed: {igm_success_count}")
     logger.info(f"# IGM JSON Files Successfully Transformed: {igm_success_count}")
     if igm_error_count > 0:
@@ -281,20 +295,13 @@ def json2tsv(json_dir_path, output_path):
         )
     else:
         print(f"\t>>> # IGM JSON Files NOT Transformed (Errors): {igm_error_count}")
-        logger.info(
-            f"# IGM JSON Files NOT Transformed (Errors): {igm_error_count}"
-        )
-    print(
-        f"\t>>> Check log file JSON2TSV_{get_time}.log for additional information\n"
-    )
-    logger.info(
-        f"Check log file JSON2TSV_{get_time}.log for additional information"
-    )
+        logger.info(f"# IGM JSON Files NOT Transformed (Errors): {igm_error_count}")
+    print(f"\t>>> Check log file JSON2TSV_{get_time}.log for additional information\n")
+    logger.info(f"Check log file JSON2TSV_{get_time}.log for additional information")
 
     # move log file to output dir and shutdown logging
     logging.shutdown()
     shutil.move("JSON2TSV.log", f"{output_path}/JSON2TSV_{get_time}.log")
-
 
 
 if __name__ == "__main__":
@@ -343,5 +350,6 @@ if __name__ == "__main__":
         if os.path.exists(log_file):
             # Use a timestamp for consistency
             from datetime import datetime
+
             get_time = datetime.today().strftime("%Y%m%d_%H%M%S")
             shutil.move(log_file, f"{output_path}/JSON2TSV_{get_time}.log")

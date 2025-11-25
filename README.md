@@ -10,6 +10,8 @@
 
 [Usage](#usage)
 
+[Outputs](#outputs)
+
 [Questions or Contributions](#questions-or-contributions)
 
 ## Introduction
@@ -56,6 +58,23 @@ Required arguments:
 `-d/--directory` : Path to directory containing JSON files to aggregate and transform.
 
 `-o/--output_path` : Path to output directory to direct file outputs. Will throw error if directory already exists, to not overwrite existing directory.
+
+## Outputs
+
+IGM and COG output directories and files are generated when input file types present; if both IGM and COG JSON files present in input, integrated XLSX file will be generated. A log file detailing parsing process is also generated.  
+
+```
+output_path/
+├── COG/
+│   ├── COG_form_level_TSVs_<date>_<time>/ # directory of tab-delimited COG form level parsings 
+│   ├── COG_JSON_table_conversion_decoded_<date>_<time>.tsv # Tab-delimited file of COG report parsings
+    └── COG_saslabels_<date>_<time>.tsv # Tab-delimited file of descriptive labels for COG fields
+├── COG_IGM_integrated_<date>_<time>.xlsx # integrated XLSX of COG and IGM data; generated if both files types provided in input
+├── IGM/ 
+│   ├── IGM_<assay>_JSON_table_conversion_<date>_<time>.tsv # Tab-delimited file of assay parsings from IGM report; a file for each assay will be generated. 
+│   └── IGM_results_level_TSVs_<date>_<time>/ # directory of tab-delimited IGM form variant-level parsings
+└── JSON2TSV_<date>_<time>.log # log file
+```
 
 ## Questions or Contributions
 

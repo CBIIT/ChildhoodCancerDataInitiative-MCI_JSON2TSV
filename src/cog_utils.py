@@ -424,8 +424,8 @@ def cog_to_tsv(dir_path: str, cog_jsons: list, cog_op: str, timestamp: str):
         )
 
         # transpose df_saslabels and then concat to annotated
-
         df_saslabels_T = df_saslabels.T.reset_index().drop("index", axis=1)
+        
         # header is first row
         df_saslabels_T.columns = df_saslabels_T.iloc[0]
         df_saslabels_T = df_saslabels_T[1:].reset_index(drop=True)
@@ -442,38 +442,20 @@ def cog_to_tsv(dir_path: str, cog_jsons: list, cog_op: str, timestamp: str):
         for col in df_reshape_A.select_dtypes(include=["object"]).columns:
             df_reshape_A[col] = df_reshape_A[col].apply(fix_encoding_issues)
 
-        cog_flattened_file_name = (
-            f"{cog_op}/COG_JSON_table_conversion_raw_{timestamp}.tsv"
-        )
-
-        df_reshape_A.to_csv(cog_flattened_file_name, sep="\t", index=False)
-
         decoded_df = pv_checks_convert(df_reshape_A, df_saslabels).reset_index(
             drop=True
         )
-
-        raw_decoded_df = pv_convert_checked_no_collapse(
-            df_reshape_A, df_saslabels
-        ).reset_index(drop=True)
 
         # add cadsr and saslabel
         decoded_df.loc[0, "index_date_type"] = "SAS Label Description"
         decoded_df.loc[1, "index_date_type"] = "caDSR Code"
 
-        # add cadsr and saslabel
-        raw_decoded_df.loc[0, "index_date_type"] = "SAS Label Description"
-        raw_decoded_df.loc[1, "index_date_type"] = "caDSR Code"
 
         decoded_df_file_name = (
             f"{cog_op}/COG_JSON_table_conversion_decoded_{timestamp}.tsv"
         )
-        raw_decoded_df_file_name = (
-            f"{cog_op}/COG_JSON_table_conversion_raw_decoded_{timestamp}.tsv"
-        )
 
         decoded_df.to_csv(decoded_df_file_name, sep="\t", index=False)
-
-        raw_decoded_df.to_csv(raw_decoded_df_file_name, sep="\t", index=False)
 
         return decoded_df, decoded_df_file_name, success_count, error_count
 

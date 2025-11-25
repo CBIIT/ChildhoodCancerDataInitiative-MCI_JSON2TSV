@@ -35,6 +35,12 @@ For developers, unit tests were tested using the following dependencies:
 - pytest 8.3.4
 - pytest-mock 3.14.8
 
+Can run tests with command:
+
+```bash
+python -m pytest 
+```
+
 ## Installation
 
 You can download the python scripts from the `/src` directory or clone the directory using: 
@@ -68,7 +74,7 @@ output_path/
 ├── COG/
 │   ├── COG_form_level_TSVs_<date>_<time>/ # Directory of tab-delimited COG form level parsed data 
 │   ├── COG_JSON_table_conversion_decoded_<date>_<time>.tsv # Tab-delimited file of COG report parsed data
-    └── COG_saslabels_<date>_<time>.tsv # Tab-delimited file of descriptive labels for COG fields
+|   └── COG_saslabels_<date>_<time>.tsv # Tab-delimited file of descriptive labels for COG fields
 ├── COG_IGM_integrated_<date>_<time>.xlsx # Integrated XLSX of COG and IGM data; generated if both files types provided in input
 ├── IGM/ 
 │   ├── IGM_<assay>_JSON_table_conversion_<date>_<time>.tsv # Tab-delimited file of parsed data from IGM reports; a file for each assay will be generated. 

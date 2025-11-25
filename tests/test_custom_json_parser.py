@@ -1,7 +1,7 @@
 import pytest
 from collections import defaultdict
 import json
-from src.MCI_JSON2TSV import custom_json_parser
+from src.cog_utils import custom_json_parser
 
 # Test cases
 def test_single_key_value():

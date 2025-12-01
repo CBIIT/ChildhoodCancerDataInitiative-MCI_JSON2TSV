@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import json
 from unittest import mock
-from src.MCI_JSON2TSV import read_cog_jsons  # Replace with your actual module name
+from src.cog_utils import read_cog_jsons  # Replace with your actual module name
 
 @pytest.fixture
 def mock_filesystem(mocker):
@@ -22,9 +22,10 @@ def test_read_cog_jsons_success(mocker, mock_filesystem):
     # Mock pd.json_normalize to simulate DataFrame creation
     mock_json_normalize = mocker.patch("pandas.json_normalize", return_value=pd.DataFrame({"key1": ["value1"]}))
 
-    # Call the function
+    # Call the function with list of JSON files
     dir_path = "/mocked/dir"
-    result_df, success_count, error_count = read_cog_jsons(dir_path)
+    cog_jsons = ["file1.json", "file2.json"]  # Provide the list of JSON files
+    result_df, success_count, error_count = read_cog_jsons(dir_path, cog_jsons)
 
     # Verify that the JSON loading and DataFrame creation functions were called
     mock_json_loads.assert_called()
@@ -35,7 +36,3 @@ def test_read_cog_jsons_success(mocker, mock_filesystem):
     assert not result_df.empty
     assert success_count == 2
     assert error_count == 0
-
-
-
-

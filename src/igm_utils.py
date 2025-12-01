@@ -1,10 +1,12 @@
-"""Utility functions for transforming and parsin IGM JSON files"""
+"""Utility functions for transforming and parsing IGM JSON files"""
 
 import os
+import re
 import json
 import pandas as pd
 import logging
 from collections import defaultdict
+from cog_utils import fix_encoding_issues
 
 logger = logging.getLogger("igm_utils")
 
@@ -41,14 +43,74 @@ def null_n_strip(value):
         return value
 
 
-def flatten_igm(json_obj: dict, parent_key="", flatten_dict=None, parse_type=None):
+def rem_single_quotes(value: list):
+    """Remove single quotes from array by converting array to comma-separated string without quotes
+
+    Args:
+        value (list): List representation as string from IGM JSON
+    Returns:
+        str: String representation of list with single quotes removed
+    """
+    if isinstance(value, list):
+        if len(value) == 0:
+            return ""
+        return "[" + ", ".join([str(v) for v in value]) + "]"
+    else:
+        return value
+
+
+def gene_names(text: str) -> list:
+    """
+    Extract out gene names from free text field
+
+    Args:
+        text (str): Free text field potentially containing gene names
+    Returns:
+        list: List of gene names extracted from text
+    """
+
+    # Remove former names
+    current = re.sub(r"\(formerly [^)]+\)", "", text)
+
+    # Regex for gene names to extract
+    # Matches gene names where the initial segment consists of 2-6 uppercase letters,
+    # optionally followed by digits, and optionally a hyphen and additional uppercase letters or digits
+    # (e.g., "TP53", "BRCA1", "HLA-DRB1"). The 2-6 uppercase letter constraint applies only to the initial segment.
+    pattern = re.compile(r"\b[A-Z]{2,6}[0-9]*(?:-[A-Z0-9]+)?\b")
+    matches = pattern.findall(current)
+
+    # Remove unwanted matches
+    rem_match = {
+        "I",
+        "II",
+        "III",
+        "IV",
+        "V",
+        "VI",
+        "VII",
+        "VIII",
+        "IX",
+        "X",
+        "LOH",
+        "NONE",
+        "DNA",
+        "NOTE",
+        "IHC",
+        "CNV",
+        "NGS",
+    }
+    genes = [m for m in matches if m not in rem_match]
+
+    return genes
+
+
+def flatten_igm(json_obj: dict, parent_key="", flatten_dict=None):
     """Recursive function to un-nest a nested dictionary for WXS and Archer Fusion
 
     Args:
         json_obj (dict): Nested JSON IGM form
         parent_key (str, optional): The inherited key from previous recursive run. Defaults to ''.
         flatten_dict (dict, optional): The inherited 'flattened' JSON from previous recursive run. Defaults to {}.
-        parse_type (str, optional): When specified as 'cnv', for any key == 'disease_associated_gene_content', do not flatten value for that key
 
     Returns:
         dict: Un-nested dict/JSON
@@ -62,38 +124,30 @@ def flatten_igm(json_obj: dict, parent_key="", flatten_dict=None, parse_type=Non
     if isinstance(json_obj, dict):
         for key, value in json_obj.items():
             if key == "disease_associated_gene_content":
-                if (
-                    parse_type == "cnv"
-                ):  # preserve gene list as list to iterate thru for results parsing
-                    new_key = f"{parent_key}.{key}" if parent_key else key
-                    flatten_dict[new_key] = value
-                else:
-                    new_key = f"{parent_key}.{key}" if parent_key else key
-                    flatten_igm(value, new_key, flatten_dict, parse_type)
+                new_key = f"{parent_key}.{key}" if parent_key else key
+                flatten_dict[new_key] = value
             if not isinstance(value, dict):
                 if not isinstance(value, list):
                     new_key = f"{parent_key}.{key}" if parent_key else key
                     flatten_dict[new_key] = null_n_strip(value)
-                    flatten_igm(null_n_strip(value), new_key, flatten_dict, parse_type)
+                    flatten_igm(null_n_strip(value), new_key, flatten_dict)
                 else:
                     flatten_igm(
                         value,
                         f"{parent_key}.{key}" if parent_key != "" else key,
                         flatten_dict,
-                        parse_type,
                     )  # Recurse into nested dictionary
             else:
                 flatten_igm(
                     value,
                     f"{parent_key}.{key}" if parent_key != "" else key,
                     flatten_dict,
-                    parse_type,
                 )  # Recurse into nested dictionary
 
     # if value of key: value pair is a list obj
     elif isinstance(json_obj, list):
         if len(json_obj) > 0:
-            if "disease_associated_gene_content" in parent_key and parse_type == "cnv":
+            if "disease_associated_gene_content" in parent_key:
                 pass  # gene list preserved as list in above logic
             else:
                 for i, item in enumerate(json_obj):
@@ -101,14 +155,14 @@ def flatten_igm(json_obj: dict, parent_key="", flatten_dict=None, parse_type=Non
                         if not isinstance(item, list):
                             new_key = f"{parent_key}.{i}" if parent_key else str(i)
                             flatten_dict[new_key] = null_n_strip(item)
-                            flatten_igm(item, new_key, flatten_dict, parse_type)
+                            flatten_igm(item, new_key, flatten_dict)
                         else:
                             flatten_igm(
-                                item, f"{parent_key}.{i}", flatten_dict, parse_type
+                                item, f"{parent_key}.{i}", flatten_dict
                             )  # Recurse into list elements
                     else:
                         flatten_igm(
-                            item, f"{parent_key}.{i}", flatten_dict, parse_type
+                            item, f"{parent_key}.{i}", flatten_dict
                         )  # Recurse into list elements
         else:  # empty list variables
             flatten_dict.update({parent_key: ""})
@@ -136,13 +190,34 @@ def full_form_convert(flatten_dict: dict):
         return pd.DataFrame()
 
 
+def process_amendments(notes: list):
+    """Process amendment notes to more human readable
+
+    Args:
+        notes (list): Array of amendment notes
+
+    Returns:
+        str: Formatted amendment notes
+    """
+    if len(notes) == 0:
+        return ""
+
+    formatted_notes = []
+
+    for note in notes:
+        formatted_notes.append(
+            f"{note['amendReason']} ({note['previousSignoutDt']}): {note['amendComment']}"
+        )
+
+    return ";".join(formatted_notes)
+
+
 def igm_to_tsv(
     dir_path: str,
     igm_jsons: list,
     assay_type: str,
     igm_op: str,
     timestamp: str,
-    results_parse: bool,
 ):
     """Function to call the reading in and transformation of IGM JSON files
 
@@ -152,11 +227,9 @@ def igm_to_tsv(
         assay_type (str): Molecular assay type of IGM JSONs (i.e. Archer Fusion, WXS or methylation)
         igm_op (str): Path to directory to output transformed IGM TSV files
         timestamp (str): Date-time of when script run
-        results_parse (bool): If True, parse out results specific sections to separate form in long format TSV
 
     Returns:
-        pd.DataFrame: pandas DataFrame of converted JSON data
-        pd.DataFrame: pandas DataFrame of converted JSON data from results sections to long format TSV(s)
+        dict: dict of results-level parsing types and file path
         int: The count of JSON files successfully processed
         int: The count of JSON files unsuccessfully processed
     """
@@ -167,6 +240,8 @@ def igm_to_tsv(
         raise ValueError(f"assay_type {assay_type} is not one of {valid}.")
 
     df_list = []  # List to hold individual JSON DataFrames
+
+    parsed_results = {}  # dict to hold result files and their types for COG IGM integration
 
     success_count = 0  # count of JSON files successfully processed
     error_count = 0  # count of JSON files not processed
@@ -187,73 +262,104 @@ def igm_to_tsv(
             error_count += 1
             logger.error(f" Error converting IGM JSON to TSV for file {file_path}: {e}")
 
-    if results_parse:
-        # make output dir
-        directory_path = f"{igm_op}/IGM_results_level_TSVs_{timestamp}"
+    # variant results section parse
+    # make output dir
+    directory_path = f"{igm_op}/IGM_results_level_TSVs_{timestamp}"
 
-        if not os.path.exists(directory_path):
-            os.mkdir(directory_path)
+    if not os.path.exists(directory_path):
+        os.mkdir(directory_path)
 
-        if assay_type == "igm.methylation":
-            results_types = ["predicted_classification_classifier_scores", "results"]
-        elif assay_type == "igm.archer_fusion":
-            results_types = [
-                "fusion_tier_one_or_two_result",
-                "fusion_tier_three_result",
-                "single_tier_one_or_two_result",
-                "single_tier_three_result",
-            ]
-        elif assay_type == "igm.tumor_normal":
-            results_types = [
-                "amended_germline_results",
-                "amended_somatic_cnv_results",
-                "amended_somatic_results",
-                "germline_cnv_results",
-                "germline_results",
-                "pertinent_negatives_results",
-                "somatic_cnv_results",
-                "somatic_results",
-            ]
+    if assay_type == "igm.archer_fusion":
+        results_types = [
+            "fusion_tier_one_or_two_result",
+            "fusion_tier_three_result",
+            "single_tier_one_or_two_result",
+            "single_tier_three_result",
+        ]
+    elif assay_type == "igm.tumor_normal":
+        results_types = [
+            "germline_cnv_results",
+            "germline_results",
+            "somatic_cnv_results",
+            "somatic_results",
+            "pertinent_negatives_results",
+        ]
+    elif assay_type == "igm.methylation":
+        results_types = ["final_diagnosis"]
 
-        op_dict = defaultdict(list)
+    op_dict = defaultdict(list)
 
-        for filename in igm_jsons:
-            file_path = os.path.join(dir_path, filename)
-            try:
-                parsed_results = igm_results_variants_parsing(
-                    json.load(open(file_path)), filename, assay_type, results_types
-                )
-
-                for key in parsed_results.keys():
-                    op_dict[key].append(parsed_results[key])
-
-            except Exception as e:
-                logger.error(
-                    f"Could not parse results section from file {file_path}, please check and try again: {e}"
-                )
-        for result_type in op_dict.keys():
-            pd.concat(op_dict[result_type]).to_csv(
-                f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_{result_type}_variant_data_{timestamp}.tsv",
-                sep="\t",
-                index=False,
+    for filename in igm_jsons:
+        file_path = os.path.join(dir_path, filename)
+        try:
+            parsed_results = igm_results_variants_parsing(
+                json.load(open(file_path)), filename, assay_type, results_types
             )
 
-    # concat all processed JSONs together
+            for key in parsed_results.keys():
+                op_dict[key].append(parsed_results[key])
+
+        except Exception as e:
+            logger.error(
+                f"Could not parse results section from file {file_path}, please check and try again: {e}"
+            )
+    for result_type in op_dict.keys():
+        concat_variant_result_df = pd.concat(op_dict[result_type])
+        concat_variant_result_df = concat_variant_result_df.map(fix_encoding_issues)
+
+        concat_variant_result_df["amendments"] = concat_variant_result_df[
+            "amendments"
+        ].apply(process_amendments)
+
+        # for cols with 'disease_associated_gene_content' in name, remove single quotes from list str representation
+        for col in concat_variant_result_df.columns:
+            if (
+                "disease_associated_gene_content" in col
+                or "pertinent_negatives_results" in col
+            ):
+                concat_variant_result_df[col] = concat_variant_result_df[col].apply(
+                    rem_single_quotes
+                )
+
+        concat_variant_result_df_file_name = f"{directory_path}/IGM_{assay_type.replace('igm.', '')}_{result_type}_variant_data_{timestamp}.tsv"
+        concat_variant_result_df.to_csv(
+            concat_variant_result_df_file_name,
+            sep="\t",
+            index=False,
+        )
+        parsed_results[result_type] = concat_variant_result_df_file_name
+
+    # concat all raw, flattened processed JSONs together
     if len(df_list) > 0:
         concatenated_df = pd.concat(df_list, ignore_index=True)
+
+        # fix encoding issues
+        concatenated_df = concatenated_df.map(fix_encoding_issues)
+
+        # order non CORE fields alphanumerically after CORE_FIELDS
+        non_core_cols = [
+            col for col in concatenated_df.columns if col not in CORE_FIELDS
+        ]
+        ordered_cols = CORE_FIELDS + sorted(non_core_cols)
+        concatenated_df = concatenated_df[ordered_cols]
+
+        # for cols with 'disease_associated_gene_content' in name, remove single quotes from list str representation
+        for col in concatenated_df.columns:
+            if "disease_associated_gene_content" in col:
+                concatenated_df[col] = concatenated_df[col].apply(rem_single_quotes)
 
         concatenated_df.to_csv(
             f"{igm_op}/IGM_{assay_type.replace('igm.', '')}_JSON_table_conversion_{timestamp}.tsv",
             sep="\t",
             index=False,
         )
-        return concatenated_df, success_count, error_count
+        return parsed_results, success_count, error_count
     else:
         logger.error(
             f" No valid IGM JSON files found and/or failed to open for assay_type {assay_type}."
         )
         # sys.exit("\n\t>>> Process Exited: No valid JSON files found.")
-        return pd.DataFrame, success_count, error_count
+        return "", success_count, error_count
 
 
 def igm_results_variants_parsing(
@@ -285,74 +391,93 @@ def igm_results_variants_parsing(
         raise ValueError(f"Form is not of type dict.")
 
     all_output = {}  # init dict of dfs of each results section
+
+    def writer(header, fields):
+        return dict(zip(header, fields))
+
+    # init list of genes found with alteration
+    found_genes = []
+
     core_header = ["form_name"] + [field for field in CORE_FIELDS]
     core_fields = [form_name] + [form[field] for field in CORE_FIELDS]
     for results_type in results_types:
         output = []  # init list of dicts to make df of form specific results
-        found = False  # if results/variants section found or not
         if results_type in form.keys():
             if assay_type == "igm.methylation":
                 if len(form[results_type]) > 0:
-                    found = True
-                    for result in form[results_type]:
-                        temp_header = list(result.keys())
-                        temp_fields = [null_n_strip(i) for i in result.values()]
-                        output.append(
-                            dict(
-                                zip(
-                                    core_header + temp_header, core_fields + temp_fields
-                                )
-                            )
+                    output.append(
+                        writer(
+                            core_header + list(form[results_type].keys()),
+                            core_fields
+                            + [null_n_strip(i) for i in form[results_type].values()],
                         )
+                    )
 
             else:  # archer fusion and wxs
                 if (
                     "variants" in form[results_type].keys()
                     and len(form[results_type]["variants"]) > 0
                 ):
-                    found = True
                     for result in form[results_type]["variants"]:
                         if results_type in [
                             "somatic_cnv_results",
-                            "amended_somatic_cnv_results",
                             "germline_cnv_results",
                         ]:
-                            flatten_temp = flatten_igm(result, parse_type="cnv")
-                            genes = flatten_temp["disease_associated_gene_content"]
-                            flatten_temp.pop("disease_associated_gene_content")
-                            for gene in genes:
-                                temp_header = list(flatten_temp.keys()) + ["gene"]
-                                temp_fields = [
-                                    null_n_strip(i) for i in flatten_temp.values()
-                                ] + [gene]
-                                output.append(
-                                    dict(
-                                        zip(
-                                            core_header + temp_header,
-                                            core_fields + temp_fields,
-                                        )
-                                    )
-                                )
-                        else:
                             flatten_temp = flatten_igm(result)
-                            temp_header = list(flatten_temp.keys())
-                            temp_fields = [
-                                null_n_strip(i) for i in flatten_temp.values()
-                            ]
+                            genes = flatten_temp["disease_associated_gene_content"]
+                            found_genes.extend(genes)
+                            flatten_temp.pop("disease_associated_gene_content")
                             output.append(
-                                dict(
-                                    zip(
-                                        core_header + temp_header,
-                                        core_fields + temp_fields,
-                                    )
+                                writer(
+                                    core_header
+                                    + list(flatten_temp.keys())
+                                    + ["disease_associated_gene_content"],
+                                    core_fields
+                                    + [null_n_strip(i) for i in flatten_temp.values()]
+                                    + [genes],
                                 )
                             )
+                        else:
+                            flatten_temp = flatten_igm(result)
+                            found_genes.extend(gene_names(flatten_temp.get("gene", "")))
+
+                            output.append(
+                                writer(
+                                    core_header + list(flatten_temp.keys()),
+                                    core_fields
+                                    + [null_n_strip(i) for i in flatten_temp.values()],
+                                )
+                            )
+                elif results_type == "pertinent_negatives_results":
+                    if len(form[results_type].get("summary", [])) > 0:
+
+                        # extract out gene names from summary section
+                        absent_genes_flat = [
+                            gene
+                            for sublist in [
+                                gene_names(i) for i in form[results_type]["summary"]
+                            ]
+                            for gene in sublist
+                        ]
+
+                        # remove any genes that were found with alterations from absent genes list
+                        pertinent_neg_genes = list(
+                            set(absent_genes_flat) - set(found_genes)
+                        )
+
+                        output.append(
+                            writer(
+                                core_header + ["pertinent_negatives_results_genes"],
+                                core_fields + [pertinent_neg_genes],
+                            )
+                        )
+
+                else:
+                    # no variants found in results section, append df indicating no data for file
+                    output.append(writer(core_header, core_fields))
         else:
-            found = False
-        if (
-            found == False
-        ):  # if never found results section, append df indicating no data for file
-            output.append(dict(zip(core_header, core_fields)))
+            # if never found results section, append df indicating no data for file
+            output.append(writer(core_header, core_fields))
 
         all_output[results_type] = pd.DataFrame(output)
 

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-"""MCI_JSON2TSV.py: Script to transform clinical JSON files to TSV format.
-"""
+"""MCI_JSON2TSV.py: Script to transform clinical JSON files to TSV format."""
 
 ##############
 #
@@ -10,6 +9,7 @@
 ##############
 
 import sys
+import pandas as pd
 import os
 import argparse
 import logging
@@ -19,6 +19,7 @@ import shutil
 # utils
 from cog_utils import cog_to_tsv, form_parser
 from igm_utils import igm_to_tsv
+from cog_igm_integration import cog_igm_integrate
 
 ##############
 #
@@ -114,16 +115,13 @@ def distinguish(dir_path: str, logger):
 
 
 # main function
-
-
-def main():
+def json2tsv(json_dir_path, output_path):
     start_time = datetime.now()
 
     print("\n\t>>> Running MCI_JSON2TSV.py ....")
 
     # init logging
     logger = logging.getLogger("MCI_JSON2TSV")
-    
 
     # logging config
     logging.basicConfig(
@@ -131,65 +129,14 @@ def main():
         encoding="utf-8",
         filemode="w",
         level=logging.INFO,
-        format="%(name)s - %(levelname)s - %(message)s",
-)
+        format=">>> %(name)s - %(asctime)s - %(levelname)s - %(message)s\n",
+    )
 
     logger.info("Running MCI_JSON2TSV.py ....")
     get_time = refresh_date()
 
-    parser = argparse.ArgumentParser(
-        prog="MCI_JSON2TSV.py",
-        description="This script will take a folder of JSON files, \
-        both COG and IGM, for the MCI project and return a TSV data file \
-        and data dictionary. JSON files MUST have suffix .json to be included in conversion.",
-    )
-
-    # remove built in argument group
-    parser._action_groups.pop()
-
-    # create a required arguments group
-    required_arg = parser.add_argument_group("required arguments")
-    optional_arg = parser.add_argument_group("optional arguments")  ##FP
-
-    required_arg.add_argument(
-        "-d",
-        "--directory",
-        type=str,
-        help="A directory of MCI JSON files, COG and/or IGM.",
-        required=True,
-    )
-
-    required_arg.add_argument(
-        "-o",
-        "--output_path",
-        type=str,
-        help="Path to output directory to direct file outputs.",
-        required=True,
-    )
-
-    optional_arg.add_argument(
-        "-f",
-        "--form_parse",
-        help="Flag to indicate if parsing out COG TSVs by form should occur.",
-        default=False,
-        action="store_true",
-    )
-
-    optional_arg.add_argument(
-        "-r",
-        "--results_variants_section_parse",
-        help="Flag to indicate if parsing out IGM variant results sections should occur.",
-        default=False,
-        action="store_true",
-    )
-
-    args = parser.parse_args()
-
-    # pull in args as variables
-    json_dir_path = args.directory
-    output_path = args.output_path
-    form_parse = args.form_parse  ##FP
-    results_parse = args.results_variants_section_parse
+    # tracking for COG IGM integration
+    integration_files = {}
 
     # make output_dir path if needed
     if not os.path.exists(output_path):
@@ -208,8 +155,21 @@ def main():
     json_sorted = distinguish(json_dir_path, logger)
 
     ## if len(cog_jsons) AND len(igm_json) == 0, call error and sysexit
-    #if len(json_sorted["cog"]) == 0 and len(json_sorted["igm"]) == 0:
-    if sum([len(json_sorted[k]) for k in ["cog", "igm.methylation", "igm.archer_fusion", "igm.tumor_normal"]]) == 0:
+    # if len(json_sorted["cog"]) == 0 and len(json_sorted["igm"]) == 0:
+    if (
+        sum(
+            [
+                len(json_sorted[k])
+                for k in [
+                    "cog",
+                    "igm.methylation",
+                    "igm.archer_fusion",
+                    "igm.tumor_normal",
+                ]
+            ]
+        )
+        == 0
+    ):
         sys.exit(
             f"\n\t>>> No COG or IGM JSON files to covert in input directory {json_dir_path}, please check and try again."
         )
@@ -222,18 +182,19 @@ def main():
             os.mkdir(cog_op)
 
         # transform COG JSONs and concatenate
-        df_reshape, cog_success_count, cog_error_count = cog_to_tsv(
-            json_dir_path, json_sorted["cog"], cog_op, get_time
+        df_reshape, cog_flattened_file_name, cog_success_count, cog_error_count = (
+            cog_to_tsv(json_dir_path, json_sorted["cog"], cog_op, get_time)
         )
 
-        # if -f option to parse by form, run form_parser
-        if form_parse:
-            if len(df_reshape) > 0:
-                form_parser(df_reshape, get_time, cog_op)
-            else:
-                logger.error(
-                    "Cannot perform COG form-level parsing, no valid COG JSONs read in."
-                )
+        integration_files["COG"] = cog_flattened_file_name
+
+        # perform form-level parsing for COG JSONs
+        if len(df_reshape) > 0:
+            form_parser(df_reshape, get_time, cog_op)
+        else:
+            logger.error(
+                "Cannot perform COG form-level parsing, no valid COG JSONs read in."
+            )
     else:
         cog_success_count = 0
         cog_error_count = 0
@@ -258,19 +219,37 @@ def main():
         # for each assay type, flatten JSON files and concatenate
         for assay_type in ["igm.tumor_normal", "igm.archer_fusion", "igm.methylation"]:
             if len(json_sorted[assay_type]) > 0:
-                df_reshape, temp_success_count, temp_error_count = igm_to_tsv(
-                    json_dir_path, json_sorted[assay_type], assay_type, igm_op, get_time, results_parse
+                parsed_results_dict, temp_success_count, temp_error_count = igm_to_tsv(
+                    json_dir_path, json_sorted[assay_type], assay_type, igm_op, get_time
                 )
 
                 igm_success_count += temp_success_count
                 igm_error_count += temp_error_count
+                # add to integration files dict
+                for result_type, parsed_results_file in parsed_results_dict.items():
+                    integration_files[result_type] = parsed_results_file
 
             else:
                 print(f"No IGM JSONs of type {assay_type}")
     else:
         igm_success_count = 0
         igm_error_count = 0
-        
+
+    # perform COG and IGM data integration if both COG and IGM JSONs were present
+    integrate = cog_igm_integrate(
+        cog_success_count, igm_success_count, integration_files, output_path, get_time
+    )
+
+    if integrate:
+        print("\n\t>>> COG and IGM data integration complete.")
+        logger.info("COG and IGM data integration complete.")
+    else:
+        print(
+            "\n\t>>> COG and IGM data integration not performed. If expected to be performed, please check log for errors."
+        )
+        logger.info(
+            "COG and IGM data integration not performed. If expected to be performed, please check log for errors."
+        )
 
     if len(json_sorted["other"]) > 0:
         # save list of others to output dir
@@ -289,29 +268,83 @@ def main():
     print(f"\n\t>>> Time to Completion: {time_diff}")
     logger.info(f"Time to Completion: {time_diff}")
     print(f"\t>>> # COG JSON Files Successfully Transformed: {cog_success_count}")
+    logger.info(f"# COG JSON Files Successfully Transformed: {cog_success_count}")
     if cog_error_count > 0:
         print(
             f"\t>>> # COG JSON Files NOT Transformed (Errors): {cog_error_count}, check log file {output_path}/JSON2TSV_{get_time}.log for errors"
         )
+        logger.info(
+            f"# COG JSON Files NOT Transformed (Errors): {cog_error_count}, check log file {output_path}/JSON2TSV_{get_time}.log for errors"
+        )
     else:
         print(f"\t>>> # COG JSON Files NOT Transformed (Errors): {cog_error_count}")
+        logger.info(f"# COG JSON Files NOT Transformed (Errors): {cog_error_count}")
     print(f"\t>>> # IGM JSON Files Successfully Transformed: {igm_success_count}")
+    logger.info(f"# IGM JSON Files Successfully Transformed: {igm_success_count}")
     if igm_error_count > 0:
         print(
             f"\t>>> # IGM JSON Files NOT Transformed (Errors): {igm_error_count}, check log file {output_path}/JSON2TSV_{get_time}.log for errors \n"
         )
+        logger.info(
+            f"# IGM JSON Files NOT Transformed (Errors): {igm_error_count}, check log file {output_path}/JSON2TSV_{get_time}.log for errors"
+        )
     else:
         print(f"\t>>> # IGM JSON Files NOT Transformed (Errors): {igm_error_count}")
-    print(
-        f"\t>>> Check log file JSON2TSV_{get_time}.log for additional information\n"
-    )
+        logger.info(f"# IGM JSON Files NOT Transformed (Errors): {igm_error_count}")
+    print(f"\t>>> Check log file JSON2TSV_{get_time}.log for additional information\n")
+    logger.info(f"Check log file JSON2TSV_{get_time}.log for additional information")
 
     # move log file to output dir and shutdown logging
     logging.shutdown()
     shutil.move("JSON2TSV.log", f"{output_path}/JSON2TSV_{get_time}.log")
 
 
-
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        prog="MCI_JSON2TSV.py",
+        description="This script will take a folder of JSON files, \
+        both COG and IGM, for the MCI project and return a TSV data file \
+        and data dictionary. JSON files MUST have suffix .json to be included in conversion.",
+    )
 
-    main()
+    # remove built in argument group
+    parser._action_groups.pop()
+
+    # create a required arguments group
+    required_arg = parser.add_argument_group("required arguments")
+
+    required_arg.add_argument(
+        "-d",
+        "--directory",
+        type=str,
+        help="A directory of MCI JSON files, COG and/or IGM.",
+        required=True,
+    )
+
+    required_arg.add_argument(
+        "-o",
+        "--output_path",
+        type=str,
+        help="Path to output directory to direct file outputs.",
+        required=True,
+    )
+
+    args = parser.parse_args()
+    json_dir_path = args.directory
+    output_path = args.output_path
+
+    try:
+        json2tsv(json_dir_path, output_path)
+    except Exception as e:
+        logging.error(f"Unhandled exception: {e}", exc_info=True)
+        print(f"Error occurred: {e}")
+    finally:
+        logging.shutdown()
+        # Move log file if it exists
+        log_file = "JSON2TSV.log"
+        if os.path.exists(log_file):
+            # Use a timestamp for consistency
+            from datetime import datetime
+
+            get_time = datetime.today().strftime("%Y%m%d_%H%M%S")
+            shutil.move(log_file, f"{output_path}/JSON2TSV_{get_time}.log")

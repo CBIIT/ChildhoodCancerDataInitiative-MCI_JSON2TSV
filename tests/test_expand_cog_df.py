@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from src.MCI_JSON2TSV import expand_cog_df
+from src.cog_utils import expand_cog_df
 
 
 def test_expand_cog_df_success():
@@ -205,24 +205,24 @@ def test_expand_cog_df_success():
 
     expected_sas_labels = pd.DataFrame(
         [
-            ["DEMOGRAPHY.DM_SEX", "Sex"],
-            ["DEMOGRAPHY.SC_SCORRES_CNTRYRES", "Country of Residence"],
-            ["COG_UPR_DX.ADM_DX_CD_SEQ", "Diagnosis ID"],
+            ["DEMOGRAPHY.DM_SEX", "Sex", 6343385],
+            ["DEMOGRAPHY.SC_SCORRES_CNTRYRES", "Country of Residence", 2006183],
+            ["COG_UPR_DX.ADM_DX_CD_SEQ", "Diagnosis ID", 2413226],
             [
                 "COG_UPR_DX.PRM_TU_DX_TXT",
                 "Is this the diagnosis for which you are enrolling the patient?",
+                2006870,
             ],
-            ["COG_UPR_DX.TOPO_ICDO", "Primary site (TOPOGRAPHY) ICD-O CODE"],
-            ["COG_UPR_DX.TOPO_TEXT", "Primary site (TOPOGRAPHY) ICD-O TERM"],
-            ["COG_UPR_DX.MORPHO_ICDO", "Initial Diagnosis (MORPHOLOGY) ICD-O CODE"],
-            ["COG_UPR_DX.MORPHO_TEXT", "Initial Diagnosis (MORPHOLOGY) ICD-O TERM"],
-            ["COG_UPR_DX.REG_STAGE_CODE_TEXT", "Registry Stage Code"],
+            ["COG_UPR_DX.TOPO_ICDO", "Primary site (TOPOGRAPHY) ICD-O CODE", 3226281],
+            ["COG_UPR_DX.TOPO_TEXT", "Primary site (TOPOGRAPHY) ICD-O TERM", 456692],
+            ["COG_UPR_DX.MORPHO_ICDO", "Initial Diagnosis (MORPHOLOGY) ICD-O CODE", 3226275],
+            ["COG_UPR_DX.MORPHO_TEXT", "Initial Diagnosis (MORPHOLOGY) ICD-O TERM", 4567017],
+            ["COG_UPR_DX.REG_STAGE_CODE_TEXT", "Registry Stage Code", 4567051],
         ],
-        columns=["column_name", "SASLabel"],
+        columns=["column_name", "SASLabel", "cde_id"],
     )
+    expected_sas_labels.cde_id = expected_sas_labels.cde_id.astype(str)
 
     assert expected_sas_labels.equals(observed_sas_labels)
     assert expected_table.equals(observed_table)
 
-
-# test_expand_cog_df_success()

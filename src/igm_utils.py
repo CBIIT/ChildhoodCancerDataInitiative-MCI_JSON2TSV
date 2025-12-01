@@ -73,8 +73,9 @@ def gene_names(text: str) -> list:
     current = re.sub(r"\(formerly [^)]+\)", "", text)
 
     # Regex for gene names to extract
-    # Matches gene names consisting of 2-6 uppercase letters, optionally followed by digits,
-    # and optionally a hyphen and additional uppercase letters or digits (e.g., "TP53", "BRCA1", "HLA-DRB1").
+    # Matches gene names where the initial segment consists of 2-6 uppercase letters,
+    # optionally followed by digits, and optionally a hyphen and additional uppercase letters or digits
+    # (e.g., "TP53", "BRCA1", "HLA-DRB1"). The 2-6 uppercase letter constraint applies only to the initial segment.
     pattern = re.compile(r"\b[A-Z]{2,6}[0-9]*(?:-[A-Z0-9]+)?\b")
     matches = pattern.findall(current)
 

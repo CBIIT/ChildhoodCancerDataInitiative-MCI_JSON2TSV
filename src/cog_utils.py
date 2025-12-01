@@ -1,4 +1,4 @@
-"""Utility functions for transforming and parsin COG JSON files"""
+"""Utility functions for transforming and parsing COG JSON files"""
 
 import os
 import re

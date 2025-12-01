@@ -234,7 +234,7 @@ def pv_checks_convert(df: pd.DataFrame, sas_labels: pd.DataFrame):
             lambda x: ";".join(x.dropna().astype(str)), axis=1
         )
         # strip leading/trailing ';' and replace consecutive ';'
-        new_col = new_col.str.strip(";").str.replace(";;+", ";", regex=True)
+        new_col = new_col.str.strip(";").str.replace(";{2,}", ";", regex=True)
         new_cols[group_name] = new_col
 
     # Concatenate all new columns at once

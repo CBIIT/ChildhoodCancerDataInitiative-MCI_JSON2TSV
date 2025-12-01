@@ -240,9 +240,7 @@ def igm_to_tsv(
 
     df_list = []  # List to hold individual JSON DataFrames
 
-    parsed_results = (
-        []
-    )  # List to hold result files and their types for COG IGM integration
+    parsed_results = {} # dict to hold result files and their types for COG IGM integration
 
     success_count = 0  # count of JSON files successfully processed
     error_count = 0  # count of JSON files not processed

@@ -431,18 +431,18 @@ def cog_to_tsv(dir_path: str, cog_jsons: list, cog_op: str, timestamp: str):
         df_saslabels_T = df_saslabels_T[1:].reset_index(drop=True)
 
         # concat and keep all cols unique to dataframes
-        df_reshape_A = pd.concat([df_saslabels_T, df_reshape.reset_index()])
+        df_reshape_annotated = pd.concat([df_saslabels_T, df_reshape.reset_index()])
 
         # drop index col and put upi and index_date_type at the front
-        df_reshape_A = df_reshape_A[
-            ["upi", "index_date_type"] + df_reshape_A.columns.tolist()[:-3]
+        df_reshape_annotated = df_reshape_annotated[
+            ["upi", "index_date_type"] + df_reshape_annotated.columns.tolist()[:-3]
         ]
 
         # fix encoding issues in all string columns
-        for col in df_reshape_A.select_dtypes(include=["object"]).columns:
-            df_reshape_A[col] = df_reshape_A[col].apply(fix_encoding_issues)
+        for col in df_reshape_annotated.select_dtypes(include=["object"]).columns:
+            df_reshape_annotated[col] = df_reshape_annotated[col].apply(fix_encoding_issues)
 
-        decoded_df = pv_checks_convert(df_reshape_A, df_saslabels).reset_index(
+        decoded_df = pv_checks_convert(df_reshape_annotated, df_saslabels).reset_index(
             drop=True
         )
 

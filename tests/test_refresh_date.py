@@ -2,7 +2,6 @@ import pytest
 from datetime import datetime
 import sys, os
 sys.path.insert(0, 'src/') 
-print(os.path)
 from MCI_JSON2TSV import refresh_date
 
 def test_refresh_date(mocker):

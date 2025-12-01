@@ -8,7 +8,6 @@ import logging
 from datetime import datetime
 from cog_utils import fix_encoding_issues
 
-import pandas as pd
 
 PRIMARY_GROUPS = {
     "CNS": ["Central Nervous System", "Germ Cell Tumor"],

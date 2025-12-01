@@ -36,11 +36,6 @@ def refresh_date():
     return today
 
 
-import pandas as pd
-
-import pandas as pd
-
-
 def distinguisher(f_path: str, logger):
     """Attempt to load json and determine type
 

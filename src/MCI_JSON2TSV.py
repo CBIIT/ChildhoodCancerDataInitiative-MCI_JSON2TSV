@@ -130,6 +130,7 @@ def json2tsv(json_dir_path, output_path):
         filemode="w",
         level=logging.INFO,
         format=">>> %(name)s - %(asctime)s - %(levelname)s - %(message)s\n",
+        force=True,
     )
 
     logger.info("Running MCI_JSON2TSV.py ....")

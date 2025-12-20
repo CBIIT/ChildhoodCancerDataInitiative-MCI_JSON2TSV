@@ -115,22 +115,23 @@ def distinguish(dir_path: str, logger):
 
 
 # main function
-def json2tsv(json_dir_path, output_path):
+def json2tsv(json_dir_path, output_path, logger=None):
     start_time = datetime.now()
 
     print("\n\t>>> Running MCI_JSON2TSV.py ....")
     get_time = refresh_date()
 
-    # logging config
-    log_filename = f"JSON2TSV.log"
-    logger = logging.getLogger("JSON2TSV")
-    logger.setLevel(logging.INFO)
-    # set the file handler
-    file_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
-    mci_file_handler = logging.FileHandler(log_filename, mode="w")
-    mci_file_handler.setFormatter(logging.Formatter(file_FORMAT, "%H:%M:%S"))
-    mci_file_handler.setLevel(logging.INFO)
-    logger.addHandler(mci_file_handler)
+    if not logger:
+        # logging config
+        log_filename = f"JSON2TSV.log"
+        logger = logging.getLogger("JSON2TSV")
+        logger.setLevel(logging.INFO)
+        # set the file handler
+        file_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
+        mci_file_handler = logging.FileHandler(log_filename, mode="w")
+        mci_file_handler.setFormatter(logging.Formatter(file_FORMAT, "%H:%M:%S"))
+        mci_file_handler.setLevel(logging.INFO)
+        logger.addHandler(mci_file_handler)
 
     logger.info("Running MCI_JSON2TSV.py ....")    
 

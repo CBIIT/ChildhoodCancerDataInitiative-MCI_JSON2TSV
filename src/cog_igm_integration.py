@@ -263,6 +263,7 @@ def cog_igm_integrate(
         integration_files (dict): Dictionary of integration file types and paths.
         output_path (str): Path to the output directory.
         get_time (str): Timestamp for the output files.
+        logger (logging.Logger, optional): Logger instance. Defaults to None.
 
     Returns:
         None
@@ -273,9 +274,9 @@ def cog_igm_integrate(
         # init logging
         logger = logging.getLogger("MCI_JSON2TSV_COG_IGM_INTEGRATION")
 
-        logger.info("Performing COG and IGM data integration ...")
+    logger.info("Performing COG and IGM data integration ...")
 
-        logger.info(f"Files to check to integrate: {integration_files}")
+    logger.info(f"Files to check to integrate: {integration_files}")
 
     if (cog_success_count == 0) | (igm_success_count == 0):
         if cog_success_count == 0:

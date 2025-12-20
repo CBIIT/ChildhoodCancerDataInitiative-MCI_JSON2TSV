@@ -295,8 +295,8 @@ def json2tsv(json_dir_path, output_path, logger=None):
     logger.info(f"Check log file JSON2TSV_{get_time}.log for additional information")
 
     # move log file to output dir and shutdown logging
-    logging.shutdown()
-    shutil.move("JSON2TSV.log", f"{output_path}/JSON2TSV_{get_time}.log")
+    #logging.shutdown()
+    #shutil.move("JSON2TSV.log", f"{output_path}/JSON2TSV_{get_time}.log")
 
 
 if __name__ == "__main__":
@@ -338,7 +338,7 @@ if __name__ == "__main__":
     except Exception as e:
         logging.error(f"Unhandled exception: {e}", exc_info=True)
         print(f"Error occurred: {e}")
-    finally:
+    """finally:
         logging.shutdown()
         # Move log file if it exists
         log_file = "JSON2TSV.log"
@@ -347,4 +347,4 @@ if __name__ == "__main__":
             from datetime import datetime
 
             get_time = datetime.today().strftime("%Y%m%d_%H%M%S")
-            shutil.move(log_file, f"{output_path}/JSON2TSV_{get_time}.log")
+            shutil.move(log_file, f"{output_path}/JSON2TSV_{get_time}.log")"""

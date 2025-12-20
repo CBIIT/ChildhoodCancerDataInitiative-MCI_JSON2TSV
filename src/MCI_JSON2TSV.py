@@ -121,17 +121,18 @@ def json2tsv(json_dir_path, output_path):
     print("\n\t>>> Running MCI_JSON2TSV.py ....")
 
     # init logging
-    logger = logging.getLogger("MCI_JSON2TSV")
+    
 
     # logging config
-    logging.basicConfig(
-        filename=f"JSON2TSV.log",
-        encoding="utf-8",
-        filemode="w",
-        level=logging.INFO,
-        format=">>> %(name)s - %(asctime)s - %(levelname)s - %(message)s\n",
-        force=True,
-    )
+    log_filename = f"MCI_JSON2TSV_{dt}.log"
+    logger = logging.getLogger("MCI_JSON2TSV")
+    logger.setLevel(logging.INFO)
+    # set the file handler
+    file_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
+    mci_file_handler = logging.FileHandler(log_filename, mode="w")
+    mci_file_handler.setFormatter(logging.Formatter(file_FORMAT, "%H:%M:%S"))
+    mci_file_handler.setLevel(logging.INFO)
+    logger.addHandler(mci_file_handler)
 
     logger.info("Running MCI_JSON2TSV.py ....")
     get_time = refresh_date()

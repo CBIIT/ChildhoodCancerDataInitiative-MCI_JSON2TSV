@@ -119,7 +119,6 @@ def json2tsv(json_dir_path, output_path, logger=None):
     start_time = datetime.now()
 
     print("\n\t>>> Running MCI_JSON2TSV.py ....")
-    get_time = refresh_date()
 
     if not logger:
         logger = logging.getLogger("MCI_JSON2TSV")
@@ -132,8 +131,9 @@ def json2tsv(json_dir_path, output_path, logger=None):
         format=">>> %(name)s - %(asctime)s - %(levelname)s - %(message)s\n",
         force=True,
     )
-
-    logger.info("Running MCI_JSON2TSV.py ....")    
+    
+    logger.info("Running MCI_JSON2TSV.py ....")
+    get_time = refresh_date()    
 
     # tracking for COG IGM integration
     integration_files = {}

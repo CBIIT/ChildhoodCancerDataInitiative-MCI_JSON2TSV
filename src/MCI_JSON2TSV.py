@@ -122,8 +122,8 @@ def json2tsv(json_dir_path, output_path):
     get_time = refresh_date()
 
     # logging config
-    log_filename = f"MCI_JSON2TSV_{get_time}.log"
-    logger = logging.getLogger("MCI_JSON2TSV")
+    log_filename = f"JSON2TSV.log"
+    logger = logging.getLogger("JSON2TSV")
     logger.setLevel(logging.INFO)
     # set the file handler
     file_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"

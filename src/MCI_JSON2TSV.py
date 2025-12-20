@@ -122,16 +122,16 @@ def json2tsv(json_dir_path, output_path, logger=None):
     get_time = refresh_date()
 
     if not logger:
-        # logging config
-        log_filename = f"JSON2TSV.log"
-        logger = logging.getLogger("JSON2TSV")
-        logger.setLevel(logging.INFO)
-        # set the file handler
-        file_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
-        mci_file_handler = logging.FileHandler(log_filename, mode="w")
-        mci_file_handler.setFormatter(logging.Formatter(file_FORMAT, "%H:%M:%S"))
-        mci_file_handler.setLevel(logging.INFO)
-        logger.addHandler(mci_file_handler)
+        logger = logging.getLogger("MCI_JSON2TSV")
+        
+        logging.basicConfig(
+        filename=f"JSON2TSV.log",
+        encoding="utf-8",
+        filemode="w",
+        level=logging.INFO,
+        format=">>> %(name)s - %(asctime)s - %(levelname)s - %(message)s\n",
+        force=True,
+    )
 
     logger.info("Running MCI_JSON2TSV.py ....")    
 
@@ -237,7 +237,7 @@ def json2tsv(json_dir_path, output_path, logger=None):
 
     # perform COG and IGM data integration if both COG and IGM JSONs were present
     integrate = cog_igm_integrate(
-        cog_success_count, igm_success_count, integration_files, output_path, get_time
+        cog_success_count, igm_success_count, integration_files, output_path, get_time, logger
     )
 
     if integrate:

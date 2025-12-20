@@ -253,7 +253,7 @@ def substudy_sheet(
 
 ###### IGM COG INTEGRATION ######
 def cog_igm_integrate(
-    cog_success_count: int, igm_success_count: int, integration_files: dict, output_path: str, get_time: str
+    cog_success_count: int, igm_success_count: int, integration_files: dict, output_path: str, get_time: str, logger=None
 ):
     """Integrate COG and IGM data.
 
@@ -269,12 +269,13 @@ def cog_igm_integrate(
 
     """
 
-    # init logging
-    logger = logging.getLogger("MCI_JSON2TSV_COG_IGM_INTEGRATION")
+    if logger is None:
+        # init logging
+        logger = logging.getLogger("MCI_JSON2TSV_COG_IGM_INTEGRATION")
 
-    logger.info("Performing COG and IGM data integration ...")
+        logger.info("Performing COG and IGM data integration ...")
 
-    logger.info(f"Files to check to integrate: {integration_files}")
+        logger.info(f"Files to check to integrate: {integration_files}")
 
     if (cog_success_count == 0) | (igm_success_count == 0):
         if cog_success_count == 0:

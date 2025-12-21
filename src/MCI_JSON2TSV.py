@@ -115,21 +115,21 @@ def distinguish(dir_path: str, logger):
 
 
 # main function
-def json2tsv(json_dir_path, output_path):
+def json2tsv(json_dir_path, output_path, logger=None):
     start_time = datetime.now()
 
     print("\n\t>>> Running MCI_JSON2TSV.py ....")
 
-    # init logging
-    logger = logging.getLogger("MCI_JSON2TSV")
-
-    # logging config
-    logging.basicConfig(
+    if not logger:
+        logger = logging.getLogger("MCI_JSON2TSV")
+        
+        logging.basicConfig(
         filename=f"JSON2TSV.log",
         encoding="utf-8",
         filemode="w",
         level=logging.INFO,
         format=">>> %(name)s - %(asctime)s - %(levelname)s - %(message)s\n",
+        force=True,
     )
 
     logger.info("Running MCI_JSON2TSV.py ....")
@@ -237,7 +237,7 @@ def json2tsv(json_dir_path, output_path):
 
     # perform COG and IGM data integration if both COG and IGM JSONs were present
     integrate = cog_igm_integrate(
-        cog_success_count, igm_success_count, integration_files, output_path, get_time
+        cog_success_count, igm_success_count, integration_files, output_path, get_time, logger
     )
 
     if integrate:
@@ -296,7 +296,8 @@ def json2tsv(json_dir_path, output_path):
 
     # move log file to output dir and shutdown logging
     logging.shutdown()
-    shutil.move("JSON2TSV.log", f"{output_path}/JSON2TSV_{get_time}.log")
+    if os.path.exists("JSON2TSV.log"):
+        shutil.move("JSON2TSV.log", f"{output_path}/JSON2TSV_{get_time}.log")
 
 
 if __name__ == "__main__":

@@ -442,7 +442,7 @@ def cog_to_tsv(dir_path: str, cog_jsons: list, cog_op: str, timestamp: str):
         for col in df_reshape_annotated.select_dtypes(include=["object"]).columns:
             df_reshape_annotated[col] = df_reshape_annotated[col].apply(fix_encoding_issues)
 
-        decoded_df = pv_checks_convert(df_reshape_annotated, df_saslabels).reset_index(
+        decoded_df = pv_convert_checked_no_collapse(df_reshape_annotated, df_saslabels).reset_index(
             drop=True
         )
 

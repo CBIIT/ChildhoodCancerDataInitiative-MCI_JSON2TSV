@@ -363,6 +363,9 @@ def cog_igm_integrate(
             )
 
             parse_cols = [col for col in cols if col in temp_df.columns]
+            
+            # update int_df by removing rules for missing cols for COG since these will not be parsed
+            int_df = int_df[~((int_df["source"] == k) & (int_df["data_elements"].isin(missing_cols)))]
 
         # check if IGM file has no data to parse
         elif not all(col in temp_df.columns for col in cols) and k != "COG":

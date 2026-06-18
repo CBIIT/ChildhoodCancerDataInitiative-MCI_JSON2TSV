@@ -10,11 +10,13 @@ from cog_utils import fix_encoding_issues
 
 
 PRIMARY_GROUPS = {
-    "CNS": ["Central Nervous System", "Germ Cell Tumor"],
+    "CNS": ["Central Nervous System"],
     "STS": ["Soft Tissue Sarcoma"],
     "NBL": ["Neuroblastoma"],
     "RARE": ["Rare Tumors"],
-    "EWS": ["Ewing Sarcoma Tumor"],
+    "EWS": ["Ewing Sarcoma"],
+    "GERM": ["Germ Cell Tumor"],
+    "LIVER": ["Liver Tumor"],
 }
 
 

@@ -14,7 +14,7 @@ PRIMARY_GROUPS = {
     "STS": ["Soft Tissue Sarcoma"],
     "NBL": ["Neuroblastoma"],
     "RARE": ["Rare Tumors"],
-    "EWS": ["Ewing Sarcoma Tumor"],
+    "EWS": ["Ewing Sarcoma"],
     "GERM" : ["Germ Cell Tumor"],
     "LIVER" : ["Liver Tumor"]
 }

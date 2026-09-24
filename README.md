@@ -1,4 +1,4 @@
-# ChildhoodCancerDataInitiative-MCI_JSON2TSV
+# ChildhoodCancerDataInitiative MCI JSON2TSV Tool
 
 ## Contents
 
@@ -16,7 +16,7 @@
 
 ## Introduction
 
-The MCI_JSON2TSV tool is a python-based script takes an input directory of COG and/or IGM formatted **Clinical Report** JSON files and transforms them into a set of parsed and flattened TSV files. Additionally, presence of both COG and IGM Clinical Report JSON files outputs an XLSX file that integrates data from both source types for given participants together for viewing. Please note that this script is not intended for the transformation of IGM molecular assay JSONs. Additionally, please consult the source files for additional clinical context. Parsed data are taken from clinician-interpreted forms that contain human written free-text and may contain typos or other human errors.
+The MCI JSON2TSV tool is a python-based script takes an input directory of COG and/or IGM formatted **Clinical Report** JSON files and transforms them into a set of parsed and flattened TSV files. Additionally, presence of both COG and IGM Clinical Report JSON files outputs an XLSX file that integrates data from both source types for given participants together for viewing. Please note that this script is not intended for the transformation of IGM molecular assay JSONs. Additionally, please consult the source files for additional clinical context. Parsed data are taken from clinician-interpreted forms that contain human written free-text and may contain typos or other human errors.
 
 ## Requirements
 

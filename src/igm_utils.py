@@ -395,6 +395,9 @@ def igm_results_variants_parsing(
     def writer(header, fields):
         return dict(zip(header, fields))
 
+    # concatenate all final_diagnosis fields together into one string
+    final_diagnosis_concat = ";".join([null_n_strip(i) for i in form.get("final_diagnosis", [])])
+
     # init list of genes found with alteration
     found_genes = []
 
@@ -431,10 +434,10 @@ def igm_results_variants_parsing(
                                 writer(
                                     core_header
                                     + list(flatten_temp.keys())
-                                    + ["disease_associated_gene_content"],
+                                    + ["disease_associated_gene_content", "final_diagnosis"],
                                     core_fields
                                     + [null_n_strip(i) for i in flatten_temp.values()]
-                                    + [genes],
+                                    + [genes, final_diagnosis_concat],
                                 )
                             )
                         else:
@@ -443,9 +446,10 @@ def igm_results_variants_parsing(
 
                             output.append(
                                 writer(
-                                    core_header + list(flatten_temp.keys()),
+                                    core_header + list(flatten_temp.keys()) + ["final_diagnosis"],
                                     core_fields
-                                    + [null_n_strip(i) for i in flatten_temp.values()],
+                                    + [null_n_strip(i) for i in flatten_temp.values()]
+                                    + [final_diagnosis_concat],
                                 )
                             )
                 elif results_type == "pertinent_negatives_results":
@@ -474,10 +478,10 @@ def igm_results_variants_parsing(
 
                 else:
                     # no variants found in results section, append df indicating no data for file
-                    output.append(writer(core_header, core_fields))
+                    output.append(writer(core_header + ['final_diagnosis'], core_fields + [final_diagnosis_concat]))
         else:
             # if never found results section, append df indicating no data for file
-            output.append(writer(core_header, core_fields))
+            output.append(writer(core_header + ['final_diagnosis'], core_fields + [final_diagnosis_concat]))
 
         all_output[results_type] = pd.DataFrame(output)
 
